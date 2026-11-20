@@ -10,7 +10,7 @@ layout: base.njk
     <p class="lead">{{ ingress }}</p>
     <div class="hero-actions">
       <a href="#kontakt" class="btn">Begär offert</a>
-      <a href="tel:{{ site.telefon | tel }}" class="btn btn-ghost">Ring {{ site.telefon }}</a>
+      <a href="mailto:{{ site.epost }}" class="btn btn-ghost">Mejla oss</a>
     </div>
   </div>
 </section>
@@ -23,14 +23,14 @@ layout: base.njk
       <h2>Det här kan vi hjälpa till med</h2>
       <ul class="ticks">{% for p in punkter %}<li>{{ p }}</li>{% endfor %}</ul>
       <a href="#kontakt" class="btn">Begär offert</a>
-      <p class="small">Eller ring <a href="tel:{{ site.telefon | tel }}">{{ site.telefon }}</a></p>
+      <p class="small">Eller mejla <a href="mailto:{{ site.epost }}">{{ site.epost }}</a></p>
     </aside>
     {%- endif %}
   </div>
 </section>
 
 {%- set relmenyer = collections.menyer | medKategori(menykategori) %}
-{%- if relmenyer.length %}
+{%- if synlighet.menyer and relmenyer.length %}
 <section class="section section-alt">
   <div class="wrap">
     <div class="section-head"><p class="eyebrow">Menyförslag</p><h2>Exempel på menyer</h2></div>
@@ -48,8 +48,9 @@ layout: base.njk
 </section>
 {%- endif %}
 
+{%- set visaMenyer = synlighet.menyer and relmenyer.length %}
 {%- if fragor.length %}
-<section class="section{% if not relmenyer.length %} section-alt{% endif %}">
+<section class="section{% if not visaMenyer %} section-alt{% endif %}">
   <div class="wrap narrow">
     <div class="section-head"><p class="eyebrow">Vanliga frågor</p><h2>Frågor om {{ kort_namn | lower }}</h2></div>
     <div class="faq">
@@ -66,10 +67,10 @@ layout: base.njk
     <div>
       <p class="eyebrow">Kontakt</p>
       <h2>Berätta vad ni planerar</h2>
-      <p>Skicka en förfrågan så återkommer vi med förslag och pris{% if site.svarstid %} – {{ site.svarstid }}{% endif %}. Ni kan också ringa eller mejla direkt.</p>
+      <p>Mejla oss gärna på <a href="mailto:{{ site.epost }}">{{ site.epost }}</a> eller skicka en förfrågan här. Det är enklast för oss, eftersom vi ofta står i köket. Vi återkommer med förslag och pris{% if site.svarstid %} – {{ site.svarstid }}{% endif %}.</p>
       <ul class="contact-list">
-        <li><span>Telefon</span><a href="tel:{{ site.telefon | tel }}">{{ site.telefon }}</a></li>
         <li><span>E-post</span><a href="mailto:{{ site.epost }}">{{ site.epost }}</a></li>
+        <li><span>Telefon</span><a href="tel:{{ site.telefon | tel }}">{{ site.telefon }}</a></li>
         <li><span>Adress</span>{{ site.gatuadress }}, {{ site.postnummer }} {{ site.ort }}</li>
       </ul>
       <h3 class="other-title">Andra tjänster</h3>

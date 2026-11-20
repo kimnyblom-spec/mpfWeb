@@ -10,6 +10,8 @@ bildtext: Ugnsrostade morötter på ett stort silverfat
 menykategori: Fest
 fokus: false
 formval: Catering – fest
+visa: true
+meny_namn: "Catering"
 ordning: 4
 punkter:
   - Buffé och plockmat till fest
@@ -19,7 +21,7 @@ punkter:
   - Upphämtning, leverans eller personal på plats
 fragor:
   - fraga: Hur beställer jag catering?
-    svar: Skicka en förfrågan via formuläret, mejla eller ring. Berätta datum, antal gäster och vad ni vill ha, så återkommer vi med förslag och pris.
+    svar: Mejla oss på info@matpafat.se eller skicka en förfrågan via formuläret. Berätta datum, antal gäster och vad ni vill ha, så återkommer vi med förslag och pris.
   - fraga: Kan jag hämta maten själv?
     svar: Ja. Maten kan hämtas hos oss i Rollsbo i Kungälv. Vi kan också leverera eller komma med personal.
   - fraga: Lägger ni upp maten fint?

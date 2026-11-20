@@ -97,3 +97,15 @@ privat kock och lokalen. De är gjorda för att synas när någon googlar t.ex. 
   bröllop under vintern. Nämn gärna orter och platser.
 - **Google-recensioner:** be nöjda kunder om en recension och svara på dem. Det påverkar mycket
   hur högt ni syns i kartan.
+
+## Visa eller dölja delar av hemsidan
+
+Under **Priser, kontakt och texter → Visa på hemsidan** finns ett reglage för varje del av
+startsidan: prislista, menyförslag, leverans, nyheter, Instagram, butik, kundomdömen, vanliga
+frågor, privat kock och lokalen. Stäng av en del så syns den inte, men innehållet ligger kvar i
+admin. Då kan du förbereda till exempel priser och menyer i lugn och ro och slå på dem när de är klara.
+
+Varje tjänstesida har också ett reglage, **Visa sidan på hemsidan**. En avstängd sida försvinner
+helt: från menyn, länkarna och Google. **Namn i huvudmenyn** styr om sidan syns i menyn högst upp.
+
+Från start är **prislista, menyförslag, leverans och kundomdömen avstängda**.

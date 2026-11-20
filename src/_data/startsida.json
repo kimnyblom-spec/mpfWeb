@@ -16,15 +16,15 @@
       "text": "I Rollsbo, Kungälv"
     },
     {
-      "rubrik": "Fullständiga rättigheter",
-      "text": "Vi serverar vin, öl & drinkar"
+      "rubrik": "Öl och vin i lokalen",
+      "text": "Vid event och bokningar hos oss"
     },
     {
       "rubrik": "Upphämtning eller leverans",
       "text": "Eller med kock på plats"
     }
   ],
-  "catering_rubrik": "Vi gör det mesta inom mat – och vi gör det fint",
+  "catering_rubrik": "Vacker, rustik och smakrik mat",
   "catering_intro": "Maten läggs upp på palmbladsfat med vaxat papper, eller på porslin om ni vill. Vill ni ha full service fixar vi kockar och serveringspersonal på plats.",
   "catering_bild": "/img/catering.jpg",
   "tjanster": [
@@ -45,12 +45,12 @@
     },
     {
       "rubrik": "Minnesstund",
-      "text": "Vi dukar med vita dukar, ljus och blommor, serverar, plockar undan och diskar – så att ni kan vara närvarande i stunden. Vill ni bara få maten levererad går det också bra.",
+      "text": "Allt från landgång och smörgåstårta till varm tallriksservering. Vi lägger på dukar, sätter ljus och blommor på borden, serverar, plockar undan och diskar – så att ni kan vara närvarande i stunden.",
       "lank": "/minnesstund-catering/"
     },
     {
       "rubrik": "Snittar & plockmat",
-      "text": "Snittar, wontontacos, hemmagjorda krustader, munsbitar och plocklådor – till fördrink, brudskål eller som en hel mingelmåltid.",
+      "text": "Något gott till välkomstskålen eller ett helt mingelbord? Vi gör vackra, smakrika snittar och plockrätter till bröllop, fester och företagsevent. Från några små munsbitar före middagen till ett matigare plockbord som räcker som måltid.",
       "lank": "/catering-kungalv/"
     },
     {
@@ -68,7 +68,7 @@
   ],
   "kock_bild": "/img/kock.jpg",
   "lokal_rubrik": "Vår lokal i Rollsbo",
-  "lokal_text": "Lokalen har plats för upp till 45 personer och passar perfekt för privata fester, företagsevent och aktiviteter. Vi har fullständiga rättigheter för servering av alkohol.\n\nVi har också återkommande kreativa event som du kan boka in dig på. De annonseras först på Instagram.",
+  "lokal_text": "Lokalen har plats för upp till 45 personer och passar perfekt för privata fester, företagsevent och aktiviteter. Vid event och bokningar i vår lokal kan ni köpa öl och vin.\n\nVi har också återkommande kreativa event som du kan boka in dig på. De annonseras först på Instagram.",
   "lokal_bild": "/img/deli.jpg",
   "event_bild": "/img/event.jpg",
   "butik_rubrik": "Ost, keramik och gå-bort-presenter",

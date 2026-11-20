@@ -35,7 +35,7 @@ export default function (eleventyConfig) {
   );
   // Tjänstesidor i vald ordning
   eleventyConfig.addCollection("tjanst", (api) =>
-    api.getFilteredByGlob("src/tjanster/*.md").sort((a, b) => (a.data.ordning ?? 99) - (b.data.ordning ?? 99))
+    api.getFilteredByGlob("src/tjanster/*.md").filter((p) => p.data.visa !== false).sort((a, b) => (a.data.ordning ?? 99) - (b.data.ordning ?? 99))
   );
   // Menyer i vald ordning
   eleventyConfig.addCollection("menyer", (api) =>
@@ -51,6 +51,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("tel", (s) => "+46" + String(s || "").replace(/\D/g, "").replace(/^0/, ""));
   eleventyConfig.addFilter("synliga", (rows) => (rows || []).filter((r) => r && String(r.pris || "").trim() !== ""));
   eleventyConfig.addFilter("medKategori", (menyer, kat) => (menyer || []).filter((m) => m.data.kategori === kat));
+  // Finns sidan med den här adressen (dvs. är den inte dold)?
+  eleventyConfig.addFilter("harUrl", (sidor, url) => !!url && (sidor || []).some((p) => p.url === url));
   eleventyConfig.addFilter("first", (arr, n) => (arr || []).slice(0, n));
 
   return {

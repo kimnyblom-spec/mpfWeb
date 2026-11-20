@@ -103,6 +103,8 @@ collections:
         label: Förvalt val i offertformuläret
         widget: select
         options: ["Catering – fest", "Catering – företag", "Företagsevent i er lokal", "Bröllop", "Minnesstund", "Tårta / efterrätt", "Privat kock", "Hyra lokalen / event", "Presentkorg", "Annat"]
+      - { name: visa, label: Visa sidan på hemsidan, widget: boolean, default: true, hint: "Stäng av för att dölja sidan helt, också för Google. Innehållet sparas." }
+      - { name: meny_namn, label: Namn i huvudmenyn, widget: string, required: false, hint: "Fyll i för att visa sidan i menyn högst upp, t.ex. Bröllop. Lämna tomt för att inte visa den där." }
       - { name: fokus, label: Visa som stort kort på startsidan, widget: boolean, default: false, required: false }
       - { name: ordning, label: Ordning, widget: number, value_type: int, default: 10, hint: "Lägre nummer visas först." }
       - name: fragor
@@ -121,6 +123,21 @@ collections:
     label: Priser, kontakt och texter
     editor: { preview: false }
     files:
+      - name: synlighet
+        label: Visa på hemsidan
+        file: src/_data/synlighet.json
+        fields:
+          - { name: priser, label: Prislista, widget: boolean, required: false, hint: "Prislistan under Catering. Visas bara om minst en rad har ett pris." }
+          - { name: menyer, label: Menyförslag, widget: boolean, required: false, hint: "Exempelmenyerna på startsidan och tjänstesidorna." }
+          - { name: leverans, label: Leverans och upphämtning, widget: boolean, required: false, hint: "Rutan med leveransområden, leveransinfo och framförhållning." }
+          - { name: nyheter, label: Nyheter, widget: boolean, required: false, hint: "Nyheterna på startsidan, menyvalet Nyheter och alla nyhetssidor." }
+          - { name: instagram, label: Instagram, widget: boolean, required: false, hint: "Instagram-sektionen på startsidan." }
+          - { name: butik, label: Butik och deli, widget: boolean, required: false }
+          - { name: omdomen, label: Kundomdömen, widget: boolean, required: false, hint: "Visas bara om det finns minst ett omdöme." }
+          - { name: fragor, label: Vanliga frågor på startsidan, widget: boolean, required: false }
+          - { name: privat_kock, label: Privat kock på startsidan, widget: boolean, required: false, hint: "Själva tjänstesidan döljs under Tjänstesidor." }
+          - { name: lokal, label: Lokalen på startsidan, widget: boolean, required: false, hint: "Själva tjänstesidan döljs under Tjänstesidor." }
+
       - name: priser
         label: Priser
         file: src/_data/priser.json

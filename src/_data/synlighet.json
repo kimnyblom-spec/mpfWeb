@@ -1,0 +1,12 @@
+{
+  "priser": false,
+  "menyer": false,
+  "leverans": false,
+  "nyheter": true,
+  "instagram": true,
+  "butik": true,
+  "omdomen": false,
+  "fragor": true,
+  "privat_kock": true,
+  "lokal": true
+}

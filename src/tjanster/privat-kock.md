@@ -10,6 +10,7 @@ bildtext: Dessert med äpple, maräng och ätbara blommor
 menykategori: Privat kock
 fokus: false
 formval: Privat kock
+visa: true
 ordning: 5
 punkter:
   - Middag hemma hos er, lagad och serverad på plats

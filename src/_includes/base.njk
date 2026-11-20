@@ -42,11 +42,12 @@
       <span></span><span></span><span></span>
     </button>
     <nav id="nav" class="nav" aria-label="Huvudmeny">
-      <a href="/catering-kungalv/">Catering</a>
-      <a href="/brollopscatering/">Bröllop</a>
-      <a href="/minnesstund-catering/">Minnesstund</a>
-      <a href="/foretagscatering/">Företag &amp; event</a>
+      {%- for t in collections.tjanst %}{% if t.data.meny_namn %}
+      <a href="{{ t.url }}">{{ t.data.meny_namn }}</a>
+      {%- endif %}{% endfor %}
+      {%- if synlighet.nyheter %}
       <a href="/nyheter/">Nyheter</a>
+      {%- endif %}
       <a href="/#om-oss">Om oss</a>
       <a href="{{ "#kontakt" if harKontakt else "/#kontakt" }}" class="btn btn-small">Begär offert</a>
     </nav>
@@ -74,7 +75,7 @@
     <div>
       <h2>Kontakt</h2>
       <p>{{ site.gatuadress }}<br>{{ site.postnummer }} {{ site.ort }}</p>
-      <p><a href="tel:{{ site.telefon | tel }}">{{ site.telefon }}</a><br><a href="mailto:{{ site.epost }}">{{ site.epost }}</a><br>
+      <p><a href="mailto:{{ site.epost }}">{{ site.epost }}</a><br><a href="tel:{{ site.telefon | tel }}">{{ site.telefon }}</a><br>
         <a href="https://www.instagram.com/{{ site.instagram_anvandare }}/" target="_blank" rel="noopener">Instagram</a></p>
     </div>
   </div>

@@ -1,7 +1,8 @@
 export default {
   layout: "nyhet.njk",
-  permalink: (data) => (data.page.fileSlug === "nyheter" ? data.permalink : `/nyheter/${data.page.fileSlug}/`),
   eleventyComputed: {
+    // Är nyheterna avstängda i admin byggs inga nyhetssidor
+    permalink: (data) => (data.synlighet.nyheter === false ? false : data.page.fileSlug === "nyheter" ? "/nyheter/" : `/nyheter/${data.page.fileSlug}/`),
     ogtyp: (data) => (data.page.fileSlug === "nyheter" ? "website" : "article"),
     ogbild: (data) => data.bild,
     seo_titel: (data) => (data.title ? `${data.title} | Mat på Fat` : data.seo_titel),

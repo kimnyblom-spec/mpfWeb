@@ -52,11 +52,11 @@ harKontakt: true
     </div>
     <div class="services">
       {%- for t in s.tjanster %}
-      <article><h3>{% if t.lank %}<a href="{{ t.lank }}">{{ t.rubrik }}</a>{% else %}{{ t.rubrik }}{% endif %}</h3><p>{{ t.text }}</p>{% if t.lank %}<a class="link" href="{{ t.lank }}">Läs mer →</a>{% endif %}</article>
+      <article><h3>{% set ok = collections.tjanst | harUrl(t.lank) %}{% if ok %}<a href="{{ t.lank }}">{{ t.rubrik }}</a>{% else %}{{ t.rubrik }}{% endif %}</h3><p>{{ t.text }}</p>{% if ok %}<a class="link" href="{{ t.lank }}">Läs mer →</a>{% endif %}</article>
       {%- endfor %}
     </div>
 
-    {%- if prisrader.length %}
+    {%- if synlighet.priser and prisrader.length %}
     <div class="prices" id="priser">
       <div>
         <h3>{{ priser.rubrik }}</h3>
@@ -74,7 +74,7 @@ harKontakt: true
     </div>
     {%- endif %}
 
-    {%- if collections.menyer.length %}
+    {%- if synlighet.menyer and collections.menyer.length %}
     <div class="menus" id="menyer">
       <h3>Menyförslag</h3>
       <div class="menu-grid">
@@ -91,7 +91,7 @@ harKontakt: true
     </div>
     {%- endif %}
 
-    {%- if site.leverans_info or site.leverans_omraden.length or site.framforhallning %}
+    {%- if synlighet.leverans and (site.leverans_info or site.leverans_omraden.length or site.framforhallning) %}
     <div class="delivery">
       <h3>Leverans och upphämtning</h3>
       {% if site.leverans_satt.length %}<ul class="tags">{% for x in site.leverans_satt %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
@@ -108,6 +108,7 @@ harKontakt: true
   </div>
 </section>
 
+{%- if synlighet.privat_kock %}
 <section class="section" id="privat-kock">
   <div class="wrap split">
     <img src="{{ s.kock_bild }}" alt="Rätt lagad av privat kock">
@@ -116,11 +117,13 @@ harKontakt: true
       <h2>{{ s.kock_rubrik }}</h2>
       {{ s.kock_text | md | safe }}
       {% if s.kock_punkter.length %}<ul class="ticks">{% for p in s.kock_punkter %}<li>{{ p }}</li>{% endfor %}</ul>{% endif %}
-      <div class="hero-actions"><a href="#kontakt" class="btn">Be om exempelmenyer</a><a href="/privat-kock/" class="btn btn-ghost-dark">Läs mer om privat kock</a></div>
+      <div class="hero-actions"><a href="#kontakt" class="btn">Be om exempelmenyer</a>{% if collections.tjanst | harUrl("/privat-kock/") %}<a href="/privat-kock/" class="btn btn-ghost-dark">Läs mer om privat kock</a>{% endif %}</div>
     </div>
   </div>
 </section>
+{%- endif %}
 
+{%- if synlighet.lokal %}
 <section class="section section-dark" id="lokalen">
   <div class="wrap split split-reverse">
     <img src="{{ s.lokal_bild }}" alt="Dukat bord med höstmiddag">
@@ -129,14 +132,15 @@ harKontakt: true
       <h2>{{ s.lokal_rubrik }}</h2>
       {{ s.lokal_text | md | safe }}
       <div class="hero-actions">
-        <a href="/lokal-kungalv/" class="btn btn-light">Läs mer om lokalen</a>
-        <a href="#instagram" class="btn btn-ghost">Kommande event</a>
+        {% if collections.tjanst | harUrl("/lokal-kungalv/") %}<a href="/lokal-kungalv/" class="btn btn-light">Läs mer om lokalen</a>{% else %}<a href="#kontakt" class="btn btn-light">Fråga om lokalen</a>{% endif %}
+        {% if synlighet.instagram %}<a href="#instagram" class="btn btn-ghost">Kommande event</a>{% endif %}
       </div>
     </div>
   </div>
 </section>
+{%- endif %}
 
-{%- if collections.nyheter.length %}
+{%- if synlighet.nyheter and collections.nyheter.length %}
 <section class="section" id="nyheter">
   <div class="wrap">
     <div class="section-head section-head-row">
@@ -152,6 +156,7 @@ harKontakt: true
 </section>
 {%- endif %}
 
+{%- if synlighet.instagram %}
 <section class="section section-alt" id="instagram">
   <div class="wrap">
     <div class="section-head section-head-row">
@@ -172,7 +177,9 @@ harKontakt: true
     {%- endif %}
   </div>
 </section>
+{%- endif %}
 
+{%- if synlighet.butik %}
 <section class="section" id="butik">
   <div class="wrap narrow center">
     <p class="eyebrow">Butik &amp; deli</p>
@@ -181,8 +188,9 @@ harKontakt: true
     <a href="#kontakt" class="btn">Beställ en presentkorg</a>
   </div>
 </section>
+{%- endif %}
 
-{%- if s.omdomen.length %}
+{%- if synlighet.omdomen and s.omdomen.length %}
 <section class="section section-alt" id="omdomen">
   <div class="wrap">
     <div class="section-head"><p class="eyebrow">Kunderna om oss</p><h2>Det säger de vi lagat mat åt</h2></div>
@@ -210,7 +218,7 @@ harKontakt: true
   </div>
 </section>
 
-{%- if faq.fragor.length %}
+{%- if synlighet.fragor and faq.fragor.length %}
 <section class="section" id="fragor">
   <div class="wrap narrow">
     <div class="section-head"><p class="eyebrow">Frågor och svar</p><h2>{{ faq.rubrik }}</h2></div>
@@ -228,10 +236,10 @@ harKontakt: true
     <div>
       <p class="eyebrow">Kontakt</p>
       <h2>Berätta vad ni planerar</h2>
-      <p>Fyll i formuläret så återkommer vi med förslag och offert{% if site.svarstid %} – {{ site.svarstid }}{% endif %}. Ni kan också ringa eller mejla direkt.</p>
+      <p>Mejla oss gärna på <a href="mailto:{{ site.epost }}">{{ site.epost }}</a> eller skicka en förfrågan här. Det är enklast för oss, eftersom vi ofta står i köket. Vi återkommer med förslag och offert{% if site.svarstid %} – {{ site.svarstid }}{% endif %}.</p>
       <ul class="contact-list">
-        <li><span>Telefon</span><a href="tel:{{ site.telefon | tel }}">{{ site.telefon }}</a></li>
         <li><span>E-post</span><a href="mailto:{{ site.epost }}">{{ site.epost }}</a></li>
+        <li><span>Telefon</span><a href="tel:{{ site.telefon | tel }}">{{ site.telefon }}</a></li>
         <li><span>Adress</span>{{ site.gatuadress }}, {{ site.postnummer }} {{ site.ort }}</li>
         <li><span>Instagram</span><a href="https://www.instagram.com/{{ site.instagram_anvandare }}/" target="_blank" rel="noopener">@{{ site.instagram_anvandare }}</a></li>
       </ul>

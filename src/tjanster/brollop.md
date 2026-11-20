@@ -10,10 +10,12 @@ bildtext: Långbord utomhus dukat med smårätter, ost och vindruvor
 menykategori: Bröllop
 fokus: true
 formval: Bröllop
+visa: true
+meny_namn: "Bröllop"
 ordning: 1
 punkter:
   - Buffé, sharing eller serverad trerättersmeny
-  - Fördrink, snittar och plockmat till brudskålen
+  - Snittar och plockmat till välkomstskålen
   - Bröllopstårta och desserter
   - Kockar och serveringspersonal på plats
   - Uppläggning på palmbladsfat eller porslin
@@ -29,7 +31,7 @@ fragor:
   - fraga: Var gör ni bröllop?
     svar: Vi utgår från Kungälv och gör bröllop på många platser i regionen. Berätta var ert bröllop ska vara när ni hör av er, så berättar vi hur vi kan lösa det.
   - fraga: Kan ni ta hänsyn till allergier och specialkost?
-    svar: Berätta om allergier och specialkost när ni skickar er förfrågan, så tar vi med det i menyförslaget.
+    svar: Ja. Vi anpassar maten efter gästernas behov av specialkost och vid allergier. Berätta om det när ni hör av er.
 ---
 ## Mat som gör dagen
 
@@ -43,7 +45,7 @@ Vi gör många bröllop på olika platser i regionen, från stora festlokaler ti
 - **Sharing** – stora fat som delas vid borden. Socialt och festligt.
 - **Trerättersmeny** – serverad middag för en mer högtidlig känsla.
 
-Det går också bra att blanda, till exempel snittar till fördrinken, sharing till varmrätten och dessertbuffé till kaffet.
+Det går också bra att blanda, till exempel snittar till välkomstskålen, sharing till varmrätten och dessertbuffé till kaffet.
 
 ## Så går det till
 
