@@ -1,7 +1,10 @@
 # Så uppdaterar du hemsidan
 
-Allt görs på **www.matpafat.se/admin**. Logga in med ditt GitHub-konto.
+Allt görs på **www.matpafat.se/admin**. Logga in med **Logga in med GitHub**.
+Det finns också en illustrerad manual som PDF: [docs/Mat-pa-Fat-hemsidan-manual.pdf](docs/Mat-pa-Fat-hemsidan-manual.pdf).
 Ändringar syns på hemsidan **1–2 minuter** efter att du sparat.
+
+> Admin visas på samma språk som webbläsaren. Står det Save, New och Delete i stället för Spara, Ny och Radera är webbläsaren inställd på engelska.
 
 > Gör du fel är det ingen fara. Varje ändring sparas i en historik och kan ångras.
 
@@ -12,16 +15,16 @@ Allt görs på **www.matpafat.se/admin**. Logga in med ditt GitHub-konto.
 1. Gå till **Priser, kontakt och texter → Priser**.
 2. Klicka på raden du vill ändra, till exempel *Buffé*.
 3. Skriv priset i fältet **Pris**, till exempel `295`, `fr. 295` eller `250–350`.
-4. Klicka **Spara** (Save) uppe till höger.
+4. Klicka **Spara** uppe till höger.
 
 - **Dölja en rad:** töm fältet *Pris*. Rader utan pris syns inte på hemsidan.
-- **Ny rad:** klicka **Lägg till** (Add) längst ner i listan.
+- **Ny rad:** klicka **Lägg till Prisrad** längst ner i listan.
 - **Fotnot:** under listan finns plats för t.ex. "Alla priser inkl. moms".
 - Har ingen rad något pris visas inte prisrutan alls, och kunderna ser bara "Begär offert".
 
 ## Lägga upp en exempelmeny
 
-1. Gå till **Menyförslag → Ny meny** (New).
+1. Gå till **Menyförslag** och klicka **Ny**.
 2. Fyll i namn, kategori och gärna en kort beskrivning, t.ex. *"Från 295 kr/person, minst 15 personer"*.
 3. Antingen:
    - **ladda upp en PDF** under *Meny som PDF*, eller
@@ -29,11 +32,11 @@ Allt görs på **www.matpafat.se/admin**. Logga in med ditt GitHub-konto.
 4. **Ordning** styr vilken meny som visas först (lägst nummer först).
 5. Klicka **Spara**.
 
-Ta bort en gammal meny: öppna den och välj **Ta bort** (Delete) i menyn uppe till höger.
+Ta bort en gammal meny: öppna den och välj **Radera** i menyn (tre prickar) uppe till höger.
 
 ## Publicera en nyhet
 
-1. Gå till **Nyheter → Ny nyhet** (New).
+1. Gå till **Nyheter** och klicka **Ny**.
 2. Skriv **rubrik**, välj **datum** och skriv en **kort sammanfattning** (den syns på nyhetskortet).
 3. Ladda upp en **bild**. Mobilbilder går bra, de görs mindre automatiskt. Skriv några ord i
    **Bildbeskrivning**, t.ex. "Julbord med skinka och sill".
