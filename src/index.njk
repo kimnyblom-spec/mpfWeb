@@ -160,8 +160,8 @@ harKontakt: true
 <section class="section section-alt" id="instagram">
   <div class="wrap">
     <div class="section-head section-head-row">
-      <div><p class="eyebrow">Instagram</p><h2>Följ oss på @{{ site.instagram_anvandare }}</h2>
-        <p class="intro">Här visar vi kommande event, veckans bakverk och bilder från uppdragen.</p></div>
+      <div><p class="eyebrow">Instagram · @{{ site.instagram_anvandare }}</p><h2>{{ s.instagram_rubrik or "Följ oss på Instagram" }}</h2>
+        {% if s.instagram_text %}<p class="intro">{{ s.instagram_text }}</p>{% endif %}</div>
       <a href="https://www.instagram.com/{{ site.instagram_anvandare }}/" class="btn" target="_blank" rel="noopener">Följ på Instagram</a>
     </div>
     {%- if site.instagram_behold_id %}

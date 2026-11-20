@@ -240,6 +240,8 @@ collections:
           - { name: event_bild, label: "Event: bild på kortet", widget: image }
           - { name: butik_rubrik, label: "Butik: rubrik", widget: string }
           - { name: butik_text, label: "Butik: text", widget: text }
+          - { name: instagram_rubrik, label: "Instagram: rubrik", widget: string, required: false }
+          - { name: instagram_text, label: "Instagram: text", widget: text, required: false }
           - name: omdomen
             label: Kundomdömen
             label_singular: Omdöme
