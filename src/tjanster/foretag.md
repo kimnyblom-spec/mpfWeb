@@ -19,12 +19,11 @@ punkter:
   - Mingel med snittar och plockmat
   - Matlagningsaktiviteter och inspirationskvällar
   - Egen eventlokal för upp till 45 personer
-  - Öl och vin att köpa vid event i vår lokal
 fragor:
   - fraga: Vad kostar företagscatering?
     svar: Det beror på vad ni vill ha och hur många ni är. Skicka en förfrågan med datum, antal personer och vad det gäller, så får ni ett menyförslag och en offert.
   - fraga: Kan vi ha vårt event i er lokal?
-    svar: Ja. Vår lokal i Rollsbo i Kungälv har plats för upp till 45 personer, och vid event kan ni köpa öl och vin. Den passar bra för kundkvällar, kickoffer och avslutningar.
+    svar: Ja. Vår lokal i Rollsbo i Kungälv har plats för upp till 45 personer och passar bra för kundkvällar, kickoffer och avslutningar.
   - fraga: Kan ni ordna en matlagningsaktivitet för kollegor?
     svar: Ja. Vi ordnar matlagningsaktiviteter och inspirationskvällar för kollegor och vänner. Berätta hur många ni är och vad ni vill uppnå, så föreslår vi ett upplägg.
   - fraga: Kan ni servera på plats hos oss?
@@ -38,7 +37,7 @@ Bra mat gör skillnad, både på ett möte en vanlig tisdag och på årets vikti
 
 ## Kundkväll, kickoff eller avslutning
 
-I vår lokal i Rollsbo i Kungälv får ni plats med upp till 45 personer. Vid event och bokningar i lokalen kan ni köpa öl och vin, så ni kan ordna allt från mingel till middag på ett och samma ställe.
+I vår lokal i Rollsbo i Kungälv får ni plats med upp till 45 personer. Där kan ni ordna allt från mingel till middag på ett och samma ställe.
 
 Vi kan också komma till er med mat, kockar och serveringspersonal.
 
