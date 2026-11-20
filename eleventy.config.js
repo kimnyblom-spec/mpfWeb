@@ -7,7 +7,7 @@ export default function (eleventyConfig) {
   // Filer som kopieras rakt av
   eleventyConfig.addPassthroughCopy("src/style.css");
   eleventyConfig.addPassthroughCopy("src/uploads");
-  eleventyConfig.addPassthroughCopy({ "src/img/logo.png": "img/logo.png" });
+  eleventyConfig.addPassthroughCopy({ "src/img/logo.png": "img/logo.png", "src/img/logo-header.png": "img/logo-header.png" });
   eleventyConfig.addPassthroughCopy("src/admin/config.yml");
   // Admin-gränssnittet (Sveltia CMS) hämtas från npm-paketet
   eleventyConfig.addPassthroughCopy({ "node_modules/@sveltia/cms/dist": "admin/cms" });
