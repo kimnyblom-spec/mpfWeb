@@ -1,0 +1,20 @@
+---
+layout: base.njk
+permalink: /nyheter/
+titel: Nyheter – Mat på Fat
+beskrivning: Nyheter, event och säsongens menyer från Mat på Fat i Kungälv.
+---
+<section class="section page-top">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">Nyheter</p><h1 class="page-title">Senaste nytt från Mat på Fat</h1></div>
+    {%- if collections.nyheter.length %}
+    <div class="news-grid">
+      {%- for n in collections.nyheter %}
+      {% include "nyhetskort.njk" %}
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p>Inga nyheter ännu. Följ oss på <a href="https://www.instagram.com/{{ site.instagram_anvandare }}/">Instagram</a> under tiden.</p>
+    {%- endif %}
+  </div>
+</section>

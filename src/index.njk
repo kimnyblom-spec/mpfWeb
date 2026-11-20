@@ -1,0 +1,263 @@
+---
+layout: base.njk
+---
+{%- set s = startsida -%}
+{%- set prisrader = priser.rader | synliga -%}
+<section class="hero">
+  <img class="hero-img" src="{{ s.hero_bild }}" alt="{{ s.hero_bild_text }}" loading="eager" fetchpriority="high" sizes="100vw">
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-content">
+    <p class="eyebrow">{{ s.hero_etikett }}</p>
+    <h1>{{ s.hero_rubrik }}</h1>
+    <p class="lead">{{ s.hero_text }}</p>
+    <div class="hero-actions">
+      <a href="#kontakt" class="btn">Begär offert</a>
+      <a href="#catering" class="btn btn-ghost">Se vad vi gör</a>
+    </div>
+  </div>
+</section>
+
+<section class="usps" aria-label="Det här erbjuder vi">
+  <div class="wrap usp-grid">
+    {%- for f in s.fordelar %}
+    <div><strong>{{ f.rubrik }}</strong><span>{{ f.text }}</span></div>
+    {%- endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Vad kan vi hjälpa till med?</p>
+      <h2>Tre sätt att äta gott med oss</h2>
+    </div>
+    <div class="cards">
+      <a class="card" href="#catering">
+        <img src="{{ s.catering_bild }}" alt="Catering från Mat på Fat" sizes="(max-width: 900px) 100vw, 33vw">
+        <div class="card-body"><h3>Catering</h3><p>Buffé, plockmat, tårtor och luncher – till fest, kontor, bröllop och minnesstund.</p><span class="link">Läs mer →</span></div>
+      </a>
+      <a class="card" href="#privat-kock">
+        <img src="{{ s.kock_bild }}" alt="Rätt lagad av privat kock" sizes="(max-width: 900px) 100vw, 33vw">
+        <div class="card-body"><h3>Privat kock</h3><p>Vi kommer hem till er, lagar och serverar – en lyxig middag utan disk.</p><span class="link">Läs mer →</span></div>
+      </a>
+      <a class="card" href="#lokalen">
+        <img src="{{ s.event_bild }}" alt="Servering vid ett dukat bord" sizes="(max-width: 900px) 100vw, 33vw">
+        <div class="card-body"><h3>Lokal &amp; event</h3><p>Hyr vår lokal för upp till 45 personer, eller boka in dig på något av våra kreativa event.</p><span class="link">Läs mer →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="catering">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Catering</p>
+      <h2>{{ s.catering_rubrik }}</h2>
+      <p class="intro">{{ s.catering_intro }}</p>
+    </div>
+    <div class="services">
+      {%- for t in s.tjanster %}
+      <article><h3>{{ t.rubrik }}</h3><p>{{ t.text }}</p></article>
+      {%- endfor %}
+    </div>
+
+    {%- if prisrader.length %}
+    <div class="prices" id="priser">
+      <div>
+        <h3>{{ priser.rubrik }}</h3>
+        {% if priser.intro %}<p>{{ priser.intro }}</p>{% endif %}
+      </div>
+      <dl class="price-list">
+        {%- for r in prisrader %}
+        <div>
+          <dt>{{ r.namn }}{% if r.kommentar %}<small>{{ r.kommentar }}</small>{% endif %}</dt>
+          <dd>{{ r.pris }} <span>{{ r.enhet }}</span></dd>
+        </div>
+        {%- endfor %}
+      </dl>
+      {% if priser.fotnot %}<p class="small">{{ priser.fotnot }}</p>{% endif %}
+    </div>
+    {%- endif %}
+
+    {%- if collections.menyer.length %}
+    <div class="menus" id="menyer">
+      <h3>Menyförslag</h3>
+      <div class="menu-grid">
+        {%- for m in collections.menyer %}
+        <article class="menu-card">
+          {% if m.data.kategori %}<p class="eyebrow">{{ m.data.kategori }}</p>{% endif %}
+          <h4>{{ m.data.title }}</h4>
+          {% if m.data.beskrivning %}<p class="menu-desc">{{ m.data.beskrivning }}</p>{% endif %}
+          {% if m.content | striptags | trim %}<div class="menu-body">{{ m.content | safe }}</div>{% endif %}
+          {% if m.data.pdf %}<a class="link" href="{{ m.data.pdf }}" target="_blank" rel="noopener">Öppna menyn (PDF) ↗</a>{% endif %}
+        </article>
+        {%- endfor %}
+      </div>
+    </div>
+    {%- endif %}
+
+    {%- if site.leverans_info or site.leverans_omraden.length or site.framforhallning %}
+    <div class="delivery">
+      <h3>Leverans och upphämtning</h3>
+      {% if site.leverans_satt.length %}<ul class="tags">{% for x in site.leverans_satt %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+      {% if site.leverans_omraden.length %}<p><strong>Vi levererar till:</strong> {{ site.leverans_omraden | join(", ") }}</p>{% endif %}
+      {% if site.leverans_info %}{{ site.leverans_info | md | safe }}{% endif %}
+      {% if site.framforhallning %}<p><strong>Beställ i god tid:</strong> {{ site.framforhallning }}</p>{% endif %}
+    </div>
+    {%- endif %}
+
+    <div class="note">
+      <p><strong>Vad kostar det?</strong> Varje beställning sätts ihop efter era önskemål. Skicka en förfrågan med datum och antal gäster så får ni menyförslag och offert.</p>
+      <a href="#kontakt" class="btn">Begär offert</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="privat-kock">
+  <div class="wrap split">
+    <img src="{{ s.kock_bild }}" alt="Rätt lagad av privat kock">
+    <div>
+      <p class="eyebrow">Privat kock</p>
+      <h2>{{ s.kock_rubrik }}</h2>
+      {{ s.kock_text | md | safe }}
+      {% if s.kock_punkter.length %}<ul class="ticks">{% for p in s.kock_punkter %}<li>{{ p }}</li>{% endfor %}</ul>{% endif %}
+      <a href="#kontakt" class="btn">Be om exempelmenyer</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="lokalen">
+  <div class="wrap split split-reverse">
+    <img src="{{ s.lokal_bild }}" alt="Dukat bord med höstmiddag">
+    <div>
+      <p class="eyebrow">Lokal &amp; event</p>
+      <h2>{{ s.lokal_rubrik }}</h2>
+      {{ s.lokal_text | md | safe }}
+      <div class="hero-actions">
+        <a href="#kontakt" class="btn btn-light">Fråga om lokalen</a>
+        <a href="#instagram" class="btn btn-ghost">Kommande event</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- if collections.nyheter.length %}
+<section class="section" id="nyheter">
+  <div class="wrap">
+    <div class="section-head section-head-row">
+      <div><p class="eyebrow">Nyheter</p><h2>Senaste nytt</h2></div>
+      <a href="/nyheter/" class="link">Alla nyheter →</a>
+    </div>
+    <div class="news-grid">
+      {%- for n in collections.nyheter | first(3) %}
+      {% include "nyhetskort.njk" %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section section-alt" id="instagram">
+  <div class="wrap">
+    <div class="section-head section-head-row">
+      <div><p class="eyebrow">Instagram</p><h2>Följ oss på @{{ site.instagram_anvandare }}</h2>
+        <p class="intro">Här visar vi kommande event, veckans bakverk och bilder från uppdragen.</p></div>
+      <a href="https://www.instagram.com/{{ site.instagram_anvandare }}/" class="btn" target="_blank" rel="noopener">Följ på Instagram</a>
+    </div>
+    {%- if site.instagram_behold_id %}
+    <script type="module" src="https://w.behold.so/widget.js"></script>
+    <behold-widget feed-id="{{ site.instagram_behold_id }}"></behold-widget>
+    {%- elif site.instagram_inlagg.length %}
+    <div class="ig-grid">
+      {%- for i in site.instagram_inlagg %}
+      <blockquote class="instagram-media" data-instgrm-permalink="{{ i.url or i }}" data-instgrm-version="14"><a href="{{ i.url or i }}">Visa inlägget på Instagram</a></blockquote>
+      {%- endfor %}
+    </div>
+    <script async src="https://www.instagram.com/embed.js"></script>
+    {%- endif %}
+  </div>
+</section>
+
+<section class="section" id="butik">
+  <div class="wrap narrow center">
+    <p class="eyebrow">Butik &amp; deli</p>
+    <h2>{{ s.butik_rubrik }}</h2>
+    <p>{{ s.butik_text }}</p>
+    <a href="#kontakt" class="btn">Beställ en presentkorg</a>
+  </div>
+</section>
+
+{%- if s.omdomen.length %}
+<section class="section section-alt" id="omdomen">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">Kunderna om oss</p><h2>Det säger de vi lagat mat åt</h2></div>
+    <div class="quotes">
+      {%- for o in s.omdomen %}
+      <figure><blockquote>{{ o.citat }}</blockquote><figcaption>{{ o.vem }}</figcaption></figure>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section" id="om-oss">
+  <div class="wrap split">
+    <img src="{{ s.om_bild }}" alt="{{ s.om_rubrik }}">
+    <div>
+      <p class="eyebrow">Om oss</p>
+      <h2>{{ s.om_rubrik }}</h2>
+      <p>{{ s.om_intro }}</p>
+      {%- for p in s.personer %}
+      <h3>{{ p.namn }}</h3>
+      <p>{{ p.text }}</p>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="kontakt">
+  <div class="wrap contact">
+    <div>
+      <p class="eyebrow">Kontakt</p>
+      <h2>Berätta vad ni planerar</h2>
+      <p>Fyll i formuläret så återkommer vi med förslag och offert{% if site.svarstid %} – {{ site.svarstid }}{% endif %}. Ni kan också ringa eller mejla direkt.</p>
+      <ul class="contact-list">
+        <li><span>Telefon</span><a href="tel:{{ site.telefon | tel }}">{{ site.telefon }}</a></li>
+        <li><span>E-post</span><a href="mailto:{{ site.epost }}">{{ site.epost }}</a></li>
+        <li><span>Adress</span>{{ site.gatuadress }}, {{ site.postnummer }} {{ site.ort }}</li>
+        <li><span>Instagram</span><a href="https://www.instagram.com/{{ site.instagram_anvandare }}/" target="_blank" rel="noopener">@{{ site.instagram_anvandare }}</a></li>
+      </ul>
+      <iframe class="map" title="Karta till {{ site.gatuadress }}, {{ site.ort }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q={{ (site.gatuadress + ', ' + site.postnummer + ' ' + site.ort) | urlencode }}&z=15&output=embed"></iframe>
+    </div>
+    <form class="form" name="offert" method="POST" action="/tack/" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="offert">
+      <p class="hidden-field"><label>Fyll inte i detta fält: <input name="bot-field"></label></p>
+      <h3>Offertförfrågan</h3>
+      <label>Vad gäller det?
+        <select name="typ">
+          <option>Catering – fest</option>
+          <option>Catering – företag</option>
+          <option>Bröllop</option>
+          <option>Minnesstund</option>
+          <option>Tårta / efterrätt</option>
+          <option>Privat kock</option>
+          <option>Hyra lokalen / event</option>
+          <option>Presentkorg</option>
+          <option>Annat</option>
+        </select>
+      </label>
+      <div class="row">
+        <label>Datum<input type="date" name="datum"></label>
+        <label>Antal gäster<input type="number" name="antal" min="1" inputmode="numeric"></label>
+      </div>
+      <label>Namn<input type="text" name="namn" autocomplete="name" required></label>
+      <div class="row">
+        <label>E-post<input type="email" name="epost" autocomplete="email" required></label>
+        <label>Telefon<input type="tel" name="telefon" autocomplete="tel"></label>
+      </div>
+      <label>Berätta mer<textarea name="meddelande" rows="4" placeholder="Plats, önskemål, allergier, budget …"></textarea></label>
+      <button type="submit" class="btn">Skicka förfrågan</button>
+    </form>
+  </div>
+</section>
