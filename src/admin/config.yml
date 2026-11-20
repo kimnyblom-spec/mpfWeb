@@ -13,7 +13,6 @@ backend:
 
 site_url: https://www.matpafat.se
 display_url: https://www.matpafat.se
-locale: sv
 media_folder: src/uploads
 public_folder: /uploads
 
@@ -69,13 +68,13 @@ collections:
       - name: priser
         label: Priser
         file: src/_data/priser.json
-        description: "Bara rader där du fyllt i ett pris visas på hemsidan. Töm priset för att dölja en rad."
         fields:
           - { name: rubrik, label: Rubrik, widget: string }
           - { name: intro, label: Text ovanför priserna, widget: text, required: false }
           - name: rader
             label: Prisrader
             label_singular: Prisrad
+            hint: "Bara rader där du fyllt i ett pris visas på hemsidan. Töm priset för att dölja en rad."
             widget: list
             summary: "{{namn}}: {{pris}} {{enhet}}"
             fields:
