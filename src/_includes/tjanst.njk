@@ -9,7 +9,7 @@ layout: base.njk
     <h1>{{ title }}</h1>
     <p class="lead">{{ ingress }}</p>
     <div class="hero-actions">
-      <a href="#kontakt" class="btn">Begär offert</a>
+      <a href="#offertformular" class="btn">Begär offert</a>
       <a href="mailto:{{ site.epost }}" class="btn btn-ghost">Mejla oss</a>
     </div>
   </div>
@@ -22,7 +22,7 @@ layout: base.njk
     <aside class="service-card">
       <h2>Det här kan vi hjälpa till med</h2>
       <ul class="ticks">{% for p in punkter %}<li>{{ p }}</li>{% endfor %}</ul>
-      <a href="#kontakt" class="btn">Begär offert</a>
+      <a href="#offertformular" class="btn">Begär offert</a>
       <p class="small">Eller mejla <a href="mailto:{{ site.epost }}">{{ site.epost }}</a></p>
     </aside>
     {%- endif %}

@@ -12,7 +12,7 @@ harKontakt: true
     <h1>{{ s.hero_rubrik }}</h1>
     <p class="lead">{{ s.hero_text }}</p>
     <div class="hero-actions">
-      <a href="#kontakt" class="btn">Begär offert</a>
+      <a href="#offertformular" class="btn">Begär offert</a>
       <a href="#catering" class="btn btn-ghost">Se vad vi gör</a>
     </div>
   </div>
@@ -103,7 +103,7 @@ harKontakt: true
 
     <div class="note">
       <p><strong>Vad kostar det?</strong> Varje beställning sätts ihop efter era önskemål. Skicka en förfrågan med datum och antal gäster så får ni menyförslag och offert.</p>
-      <a href="#kontakt" class="btn">Begär offert</a>
+      <a href="#offertformular" class="btn">Begär offert</a>
     </div>
   </div>
 </section>
@@ -117,7 +117,7 @@ harKontakt: true
       <h2>{{ s.kock_rubrik }}</h2>
       {{ s.kock_text | md | safe }}
       {% if s.kock_punkter.length %}<ul class="ticks">{% for p in s.kock_punkter %}<li>{{ p }}</li>{% endfor %}</ul>{% endif %}
-      <div class="hero-actions"><a href="#kontakt" class="btn">Be om exempelmenyer</a>{% if collections.tjanst | harUrl("/privat-kock/") %}<a href="/privat-kock/" class="btn btn-ghost-dark">Läs mer om privat kock</a>{% endif %}</div>
+      <div class="hero-actions"><a href="#offertformular" class="btn">Be om exempelmenyer</a>{% if collections.tjanst | harUrl("/privat-kock/") %}<a href="/privat-kock/" class="btn btn-ghost-dark">Läs mer om privat kock</a>{% endif %}</div>
     </div>
   </div>
 </section>
@@ -132,7 +132,7 @@ harKontakt: true
       <h2>{{ s.lokal_rubrik }}</h2>
       {{ s.lokal_text | md | safe }}
       <div class="hero-actions">
-        {% if collections.tjanst | harUrl("/lokal-kungalv/") %}<a href="/lokal-kungalv/" class="btn btn-light">Läs mer om lokalen</a>{% else %}<a href="#kontakt" class="btn btn-light">Fråga om lokalen</a>{% endif %}
+        {% if collections.tjanst | harUrl("/lokal-kungalv/") %}<a href="/lokal-kungalv/" class="btn btn-light">Läs mer om lokalen</a>{% else %}<a href="#offertformular" class="btn btn-light">Fråga om lokalen</a>{% endif %}
         {% if synlighet.instagram %}<a href="#instagram" class="btn btn-ghost">Kommande event</a>{% endif %}
       </div>
     </div>
@@ -185,7 +185,7 @@ harKontakt: true
     <p class="eyebrow">Butik &amp; deli</p>
     <h2>{{ s.butik_rubrik }}</h2>
     <p>{{ s.butik_text }}</p>
-    <a href="#kontakt" class="btn">Beställ en presentkorg</a>
+    <a href="#offertformular" class="btn">Beställ en presentkorg</a>
   </div>
 </section>
 {%- endif %}

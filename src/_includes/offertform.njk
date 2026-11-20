@@ -1,4 +1,4 @@
-<form class="form" name="offert" method="POST" action="/tack/" data-netlify="true" netlify-honeypot="bot-field">
+<form class="form" id="offertformular" name="offert" method="POST" action="/tack/" data-netlify="true" netlify-honeypot="bot-field">
   <input type="hidden" name="form-name" value="offert">
   <p class="hidden-field"><label>Fyll inte i detta fält: <input name="bot-field"></label></p>
   <h3>Offertförfrågan</h3>
@@ -19,6 +19,6 @@
     <label>E-post<input type="email" name="epost" autocomplete="email" required></label>
     <label>Telefon<input type="tel" name="telefon" autocomplete="tel"></label>
   </div>
-  <label>Berätta mer<textarea name="meddelande" rows="4" placeholder="Plats, önskemål, allergier, budget …"></textarea></label>
+  <label>Berätta mer<textarea name="meddelande" rows="3" placeholder="Plats, önskemål, allergier, budget …"></textarea></label>
   <button type="submit" class="btn">Skicka förfrågan</button>
 </form>

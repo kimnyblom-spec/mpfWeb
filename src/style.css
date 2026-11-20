@@ -172,7 +172,6 @@ p { margin: 0 0 1em; }
   .nav .btn { margin-top: 16px; text-align: center; }
   .hero { min-height: 78vh; }
   .hero-content { padding-block: 48px; }
-  .form .row { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
   .contact-list li { grid-template-columns: 90px 1fr; }
 }
@@ -287,4 +286,15 @@ behold-widget { display: block; }
   .service-body { grid-template-columns: 1fr; }
   .service-card { position: static; }
   .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* Offertformuläret: kompaktare i mobilen så att det får plats på skärmen */
+.form .row > label, .form input, .form select, .form textarea { min-width: 0; }
+@media (max-width: 600px) {
+  html { scroll-padding-top: 88px; }
+  .form { gap: 10px; padding: 18px 18px 20px; }
+  .form h3 { font-size: 1.35rem; }
+  .form .row { gap: 10px; }
+  .form input, .form select, .form textarea { padding: 9px 10px; }
+  .form textarea { min-height: 72px; }
 }

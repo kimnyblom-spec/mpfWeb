@@ -49,7 +49,7 @@
       <a href="/nyheter/">Nyheter</a>
       {%- endif %}
       <a href="/#om-oss">Om oss</a>
-      <a href="{{ "#kontakt" if harKontakt else "/#kontakt" }}" class="btn btn-small">Begär offert</a>
+      <a href="{{ "#offertformular" if harKontakt else "/#offertformular" }}" class="btn btn-small">Begär offert</a>
     </nav>
   </div>
 </header>
@@ -88,6 +88,27 @@
     const open = nav.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open);
   });
+  // Hoppa till offertformuläret och håll det kvar i bild om sidan ovanför ändrar höjd
+  // (t.ex. när Instagram-flödet laddas in efter hoppet)
+  function tillFormular(smooth) {
+    const f = document.getElementById('offertformular');
+    if (!f) return false;
+    f.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' });
+    const ro = new ResizeObserver(() => f.scrollIntoView());
+    ro.observe(document.body);
+    const sluta = () => { ro.disconnect(); ['wheel', 'touchstart', 'keydown'].forEach(t => removeEventListener(t, sluta)); };
+    ['wheel', 'touchstart', 'keydown'].forEach(t => addEventListener(t, sluta, { passive: true }));
+    setTimeout(sluta, 3000);
+    return true;
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href$="#offertformular"]');
+    if (a && a.pathname === location.pathname && tillFormular(true)) {
+      e.preventDefault();
+      history.replaceState(null, '', '#offertformular');
+    }
+  });
+  if (location.hash === '#offertformular') addEventListener('load', () => tillFormular(false));
   nav.addEventListener('click', e => {
     if (e.target.tagName === 'A') { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', false); }
   });
