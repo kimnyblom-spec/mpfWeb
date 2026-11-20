@@ -30,27 +30,33 @@
   "tjanster": [
     {
       "rubrik": "Fest",
-      "text": "Bufféer och plockrätter som räcker till många. Har ni en vision eller ett tema? Hör av er, så sätter vi ihop något skoj."
+      "text": "Bufféer och plockrätter som räcker till många. Har ni en vision eller ett tema? Hör av er, så sätter vi ihop något skoj.",
+      "lank": "/catering-kungalv/"
     },
     {
       "rubrik": "Företag",
-      "text": "Frukost eller lunch till kontoret, mat till konferensen, kundkvällen eller eventet – vi fixar det."
+      "text": "Frukost eller lunch till kontoret, mat till konferensen, kundkvällen eller eventet – vi fixar det.",
+      "lank": "/foretagscatering/"
     },
     {
       "rubrik": "Bröllop",
-      "text": "Buffé, sharing eller trerätters – eller en mix. Vi gör många bröllop i regionen, och tårtan också. Sommardatumen går åt snabbt, så hör av er i god tid."
+      "text": "Buffé, sharing eller trerätters – eller en mix. Vi gör många bröllop i regionen, och tårtan också. Sommardatumen går åt snabbt, så hör av er i god tid.",
+      "lank": "/brollopscatering/"
     },
     {
       "rubrik": "Minnesstund",
-      "text": "Vi dukar med vita dukar, ljus och blommor, serverar, plockar undan och diskar – så att ni kan vara närvarande i stunden. Vill ni bara få maten levererad går det också bra."
+      "text": "Vi dukar med vita dukar, ljus och blommor, serverar, plockar undan och diskar – så att ni kan vara närvarande i stunden. Vill ni bara få maten levererad går det också bra.",
+      "lank": "/minnesstund-catering/"
     },
     {
       "rubrik": "Snittar & plockmat",
-      "text": "Snittar, wontontacos, hemmagjorda krustader, munsbitar och plocklådor – till fördrink, brudskål eller som en hel mingelmåltid."
+      "text": "Snittar, wontontacos, hemmagjorda krustader, munsbitar och plocklådor – till fördrink, brudskål eller som en hel mingelmåltid.",
+      "lank": "/catering-kungalv/"
     },
     {
       "rubrik": "Tårtor & efterrätter",
-      "text": "Tårtor, cupcakes, fika och portionsefterrätter för leverans. Berätta vad ni önskar så återkommer vi med förslag."
+      "text": "Tårtor, cupcakes, fika och portionsefterrätter för leverans. Berätta vad ni önskar så återkommer vi med förslag.",
+      "lank": "/catering-kungalv/"
     }
   ],
   "kock_rubrik": "Låt någon annan stå i köket i kväll",
@@ -80,5 +86,6 @@
       "text": "Utbildad kostekonom från Hälsingland, med erfarenhet från lunch-, à la carte- och förskolekök. Hon har en fantastisk \"hur svårt kan det vara\"-gen och löser det mesta galant. Hon har skrivit många recept men kan i stort sett inte följa ett – det brukar också lösa sig."
     }
   ],
-  "omdomen": []
+  "omdomen": [],
+  "tjanster_rubrik": "Bröllop, minnesstunder och företagsevent"
 }

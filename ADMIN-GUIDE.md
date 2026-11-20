@@ -75,3 +75,25 @@ inlägg under **Utvalda Instagram-inlägg**.
 
 Formuläret på hemsidan skickas till Netlify, som mejlar förfrågan till info@matpafat.se. Ni kan
 också se alla förfrågningar i Netlify under **Forms**.
+
+## Tjänstesidor (viktiga för Google)
+
+Under **Tjänstesidor** finns egna sidor för bröllop, minnesstund, företag och event, catering,
+privat kock och lokalen. De är gjorda för att synas när någon googlar t.ex. "bröllopscatering Kungälv".
+
+- **Rubrik på sidan**, **Titel i Google** och **Beskrivning i Google** ska nämna vad ni gör och var,
+  t.ex. "Bröllopscatering i Kungälv". Titeln bör vara högst ca 60 tecken.
+- **Vanliga frågor** visas på sidan och kan dyka upp direkt i Googles sökresultat. Lägg gärna till
+  frågor som kunder ofta ställer.
+- **Ändra inte Webbadress** på en befintlig sida, då slutar länkar från Google att fungera.
+- **Visa som stort kort på startsidan** styr vilka tjänster som syns överst på startsidan.
+
+## Tips för att synas bättre på Google
+
+- **Bildbeskrivning:** fyll alltid i den. Google läser den.
+- **Filnamn:** uppladdade bilder får automatiskt ett filnamn efter originalnamnet. Döp gärna bilden
+  innan du laddar upp den, t.ex. `brollop-marstrand-buffe.jpg` i stället för `IMG_5307.jpg`.
+- **Nyheter med säsongens sökord:** skriv om julbord i oktober, studentmottagning i april och
+  bröllop under vintern. Nämn gärna orter och platser.
+- **Google-recensioner:** be nöjda kunder om en recension och svara på dem. Det påverkar mycket
+  hur högt ni syns i kartan.

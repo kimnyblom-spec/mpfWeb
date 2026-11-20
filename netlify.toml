@@ -8,11 +8,11 @@
 # Gamla Webnode-adresser skickas till rätt ställe på nya sidan
 [[redirects]]
   from = "/catering/"
-  to = "/#catering"
+  to = "/catering-kungalv/"
   status = 301
 [[redirects]]
   from = "/kock-pa-plats/"
-  to = "/#privat-kock"
+  to = "/privat-kock/"
   status = 301
 [[redirects]]
   from = "/delikatesser/"

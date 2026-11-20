@@ -7,7 +7,13 @@ export default function (eleventyConfig) {
   // Filer som kopieras rakt av
   eleventyConfig.addPassthroughCopy("src/style.css");
   eleventyConfig.addPassthroughCopy("src/uploads");
-  eleventyConfig.addPassthroughCopy({ "src/img/logo.png": "img/logo.png", "src/img/logo-header.png": "img/logo-header.png" });
+  // Originalbilderna kopieras också, så att de kan användas som delningsbild i sociala medier
+  eleventyConfig.addPassthroughCopy("src/img");
+  // Typsnitten ligger på egen server (snabbare, och inga besökaruppgifter skickas till Google)
+  for (const f of ["jost-latin-300-normal", "jost-latin-400-normal", "jost-latin-500-normal"])
+    eleventyConfig.addPassthroughCopy({ [`node_modules/@fontsource/jost/files/${f}.woff2`]: `fonts/${f}.woff2` });
+  for (const f of ["cormorant-garamond-latin-500-normal", "cormorant-garamond-latin-600-normal", "cormorant-garamond-latin-500-italic"])
+    eleventyConfig.addPassthroughCopy({ [`node_modules/@fontsource/cormorant-garamond/files/${f}.woff2`]: `fonts/${f}.woff2` });
   eleventyConfig.addPassthroughCopy("src/admin/config.yml");
   // Admin-gränssnittet (Sveltia CMS) hämtas från npm-paketet
   eleventyConfig.addPassthroughCopy({ "node_modules/@sveltia/cms/dist": "admin/cms" });
@@ -27,6 +33,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("nyheter", (api) =>
     api.getFilteredByGlob("src/nyheter/*.md").filter((p) => !p.data.utkast).sort((a, b) => b.date - a.date)
   );
+  // Tjänstesidor i vald ordning
+  eleventyConfig.addCollection("tjanst", (api) =>
+    api.getFilteredByGlob("src/tjanster/*.md").sort((a, b) => (a.data.ordning ?? 99) - (b.data.ordning ?? 99))
+  );
   // Menyer i vald ordning
   eleventyConfig.addCollection("menyer", (api) =>
     api.getFilteredByGlob("src/menyer/*.md").sort((a, b) => (a.data.ordning ?? 99) - (b.data.ordning ?? 99))
@@ -40,6 +50,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("isodatum", (d) => new Date(d).toISOString().slice(0, 10));
   eleventyConfig.addFilter("tel", (s) => "+46" + String(s || "").replace(/\D/g, "").replace(/^0/, ""));
   eleventyConfig.addFilter("synliga", (rows) => (rows || []).filter((r) => r && String(r.pris || "").trim() !== ""));
+  eleventyConfig.addFilter("medKategori", (menyer, kat) => (menyer || []).filter((m) => m.data.kategori === kat));
   eleventyConfig.addFilter("first", (arr, n) => (arr || []).slice(0, n));
 
   return {

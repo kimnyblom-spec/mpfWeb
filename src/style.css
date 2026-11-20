@@ -1,3 +1,11 @@
+/* Typsnitt från egen server */
+@font-face { font-family: "Jost"; font-weight: 300; font-display: swap; src: url(/fonts/jost-latin-300-normal.woff2) format("woff2"); }
+@font-face { font-family: "Jost"; font-weight: 400; font-display: swap; src: url(/fonts/jost-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Jost"; font-weight: 500; font-display: swap; src: url(/fonts/jost-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 500; font-display: swap; src: url(/fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 600; font-display: swap; src: url(/fonts/cormorant-garamond-latin-600-normal.woff2) format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 500; font-style: italic; font-display: swap; src: url(/fonts/cormorant-garamond-latin-500-italic.woff2) format("woff2"); }
+
 :root {
   --cream: #f7f2ea;
   --sand: #efe6d8;
@@ -60,7 +68,7 @@ p { margin: 0 0 1em; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 84px; }
 .brand { display: flex; flex-direction: column; text-decoration: none; line-height: 1; }
 .brand img { height: 50px; width: auto; }
-@media (max-width: 960px) { .brand img { height: 40px; } }
+@media (max-width: 1100px) { .brand img { height: 40px; } }
 .nav { display: flex; align-items: center; gap: 1.8rem; }
 .nav a:not(.btn) { text-decoration: none; font-size: .95rem; font-weight: 400; }
 .nav a:not(.btn):hover { color: var(--terracotta); }
@@ -153,7 +161,7 @@ p { margin: 0 0 1em; }
   .split-reverse img { order: 0; }
   .note { flex-direction: column; align-items: flex-start; }
 }
-@media (max-width: 960px) {
+@media (max-width: 1100px) {
   .nav-toggle { display: block; }
   .nav {
     position: absolute; top: 84px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
@@ -228,4 +236,55 @@ behold-widget { display: block; }
 
 @media (max-width: 900px) {
   .prices { grid-template-columns: 1fr; }
+}
+
+/* ---------- Tjänstesidor, FAQ och sidfot ---------- */
+.service-hero { position: relative; min-height: min(70vh, 620px); display: flex; align-items: flex-end; color: #fff; }
+.service-hero .hero-content { padding-block: 56px; }
+.service-hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+.crumbs { font-size: .85rem; opacity: .85; margin-bottom: 14px; }
+.crumbs a { color: #fff; }
+.btn-ghost-dark { background: transparent; color: var(--olive-dark); border-color: var(--olive-dark); }
+.btn-ghost-dark:hover { background: var(--sand); color: var(--olive-dark); border-color: var(--olive-dark); }
+
+.service-body { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 72px); align-items: start; }
+.prose { max-width: 680px; font-size: 1.05rem; }
+.prose h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); margin-top: 1.4em; }
+.prose h2:first-child { margin-top: 0; }
+.prose ul, .prose ol { padding-left: 1.2em; }
+.prose li { margin-bottom: .4em; }
+.service-card { position: sticky; top: 110px; background: var(--sand); padding: 28px; border-radius: var(--radius); display: grid; gap: 12px; }
+.service-card h2 { font-size: 1.6rem; margin: 0; }
+.service-card .ticks { margin: 0 0 8px; }
+.service-card .btn { justify-self: start; }
+.service-card .small { margin: 0; }
+
+.faq { display: grid; gap: 10px; }
+.faq details { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 0 22px; }
+.section-alt .faq details { background: #fff; }
+.faq summary { cursor: pointer; padding: 18px 28px 18px 0; font-weight: 400; font-size: 1.05rem; list-style: none; position: relative; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 1.4rem; color: var(--terracotta); }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { margin: 0 0 18px; color: var(--muted); }
+
+.services h3 a { text-decoration: none; }
+.services h3 a:hover { color: var(--terracotta); }
+.services .link { font-size: .88rem; }
+.other-title { margin-top: 28px; font-size: 1.3rem; }
+.other-services { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.other-services a { display: inline-block; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: #fff; text-decoration: none; font-size: .92rem; }
+.other-services a:hover { border-color: var(--olive); }
+
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; align-items: start; }
+.footer-brand img { height: 110px; width: auto; filter: invert(1) brightness(1.6); opacity: .85; margin-bottom: 12px; }
+.footer-brand p { max-width: 34ch; opacity: .85; font-size: .95rem; }
+.site-footer h2 { font-family: var(--sans); font-size: .78rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; margin: 8px 0 12px; opacity: .8; }
+.site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.site-footer p { margin: 0 0 10px; font-size: .95rem; }
+
+@media (max-width: 900px) {
+  .service-body { grid-template-columns: 1fr; }
+  .service-card { position: static; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
 }

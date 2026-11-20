@@ -1,5 +1,6 @@
 ---
 layout: base.njk
+harKontakt: true
 ---
 {%- set s = startsida -%}
 {%- set prisrader = priser.rader | synliga -%}
@@ -29,21 +30,15 @@ layout: base.njk
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow">Vad kan vi hjälpa till med?</p>
-      <h2>Tre sätt att äta gott med oss</h2>
+      <h2>{{ s.tjanster_rubrik or "Det här gör vi oftast" }}</h2>
     </div>
     <div class="cards">
-      <a class="card" href="#catering">
-        <img src="{{ s.catering_bild }}" alt="Catering från Mat på Fat" sizes="(max-width: 900px) 100vw, 33vw">
-        <div class="card-body"><h3>Catering</h3><p>Buffé, plockmat, tårtor och luncher – till fest, kontor, bröllop och minnesstund.</p><span class="link">Läs mer →</span></div>
+      {%- for t in collections.tjanst %}{% if t.data.fokus %}
+      <a class="card" href="{{ t.url }}">
+        <img src="{{ t.data.bild }}" alt="{{ t.data.bildtext }}" sizes="(max-width: 900px) 100vw, 33vw">
+        <div class="card-body"><h3>{{ t.data.kort_namn }}</h3><p>{{ t.data.ingress }}</p><span class="link">Läs mer om {{ t.data.kort_namn | lower }} →</span></div>
       </a>
-      <a class="card" href="#privat-kock">
-        <img src="{{ s.kock_bild }}" alt="Rätt lagad av privat kock" sizes="(max-width: 900px) 100vw, 33vw">
-        <div class="card-body"><h3>Privat kock</h3><p>Vi kommer hem till er, lagar och serverar – en lyxig middag utan disk.</p><span class="link">Läs mer →</span></div>
-      </a>
-      <a class="card" href="#lokalen">
-        <img src="{{ s.event_bild }}" alt="Servering vid ett dukat bord" sizes="(max-width: 900px) 100vw, 33vw">
-        <div class="card-body"><h3>Lokal &amp; event</h3><p>Hyr vår lokal för upp till 45 personer, eller boka in dig på något av våra kreativa event.</p><span class="link">Läs mer →</span></div>
-      </a>
+      {%- endif %}{% endfor %}
     </div>
   </div>
 </section>
@@ -57,7 +52,7 @@ layout: base.njk
     </div>
     <div class="services">
       {%- for t in s.tjanster %}
-      <article><h3>{{ t.rubrik }}</h3><p>{{ t.text }}</p></article>
+      <article><h3>{% if t.lank %}<a href="{{ t.lank }}">{{ t.rubrik }}</a>{% else %}{{ t.rubrik }}{% endif %}</h3><p>{{ t.text }}</p>{% if t.lank %}<a class="link" href="{{ t.lank }}">Läs mer →</a>{% endif %}</article>
       {%- endfor %}
     </div>
 
@@ -121,7 +116,7 @@ layout: base.njk
       <h2>{{ s.kock_rubrik }}</h2>
       {{ s.kock_text | md | safe }}
       {% if s.kock_punkter.length %}<ul class="ticks">{% for p in s.kock_punkter %}<li>{{ p }}</li>{% endfor %}</ul>{% endif %}
-      <a href="#kontakt" class="btn">Be om exempelmenyer</a>
+      <div class="hero-actions"><a href="#kontakt" class="btn">Be om exempelmenyer</a><a href="/privat-kock/" class="btn btn-ghost-dark">Läs mer om privat kock</a></div>
     </div>
   </div>
 </section>
@@ -134,7 +129,7 @@ layout: base.njk
       <h2>{{ s.lokal_rubrik }}</h2>
       {{ s.lokal_text | md | safe }}
       <div class="hero-actions">
-        <a href="#kontakt" class="btn btn-light">Fråga om lokalen</a>
+        <a href="/lokal-kungalv/" class="btn btn-light">Läs mer om lokalen</a>
         <a href="#instagram" class="btn btn-ghost">Kommande event</a>
       </div>
     </div>
@@ -215,6 +210,19 @@ layout: base.njk
   </div>
 </section>
 
+{%- if faq.fragor.length %}
+<section class="section" id="fragor">
+  <div class="wrap narrow">
+    <div class="section-head"><p class="eyebrow">Frågor och svar</p><h2>{{ faq.rubrik }}</h2></div>
+    <div class="faq">
+      {%- for f in faq.fragor %}
+      <details{% if loop.first %} open{% endif %}><summary>{{ f.fraga }}</summary><p>{{ f.svar }}</p></details>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
 <section class="section section-alt" id="kontakt">
   <div class="wrap contact">
     <div>
@@ -230,34 +238,6 @@ layout: base.njk
       <iframe class="map" title="Karta till {{ site.gatuadress }}, {{ site.ort }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
         src="https://maps.google.com/maps?q={{ (site.gatuadress + ', ' + site.postnummer + ' ' + site.ort) | urlencode }}&z=15&output=embed"></iframe>
     </div>
-    <form class="form" name="offert" method="POST" action="/tack/" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="offert">
-      <p class="hidden-field"><label>Fyll inte i detta fält: <input name="bot-field"></label></p>
-      <h3>Offertförfrågan</h3>
-      <label>Vad gäller det?
-        <select name="typ">
-          <option>Catering – fest</option>
-          <option>Catering – företag</option>
-          <option>Bröllop</option>
-          <option>Minnesstund</option>
-          <option>Tårta / efterrätt</option>
-          <option>Privat kock</option>
-          <option>Hyra lokalen / event</option>
-          <option>Presentkorg</option>
-          <option>Annat</option>
-        </select>
-      </label>
-      <div class="row">
-        <label>Datum<input type="date" name="datum"></label>
-        <label>Antal gäster<input type="number" name="antal" min="1" inputmode="numeric"></label>
-      </div>
-      <label>Namn<input type="text" name="namn" autocomplete="name" required></label>
-      <div class="row">
-        <label>E-post<input type="email" name="epost" autocomplete="email" required></label>
-        <label>Telefon<input type="tel" name="telefon" autocomplete="tel"></label>
-      </div>
-      <label>Berätta mer<textarea name="meddelande" rows="4" placeholder="Plats, önskemål, allergier, budget …"></textarea></label>
-      <button type="submit" class="btn">Skicka förfrågan</button>
-    </form>
+    {% set valt = "Catering – fest" %}{% include "offertform.njk" %}
   </div>
 </section>

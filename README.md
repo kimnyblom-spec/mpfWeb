@@ -16,6 +16,9 @@ Hemsida för Mat på Fat: catering, privat kock och eventlokal i Kungälv.
 | `src/_data/priser.json` | Prislistan |
 | `src/_data/site.json` | Kontaktuppgifter, leverans, Instagram |
 | `src/_data/startsida.json` | Texter och bilder på startsidan |
+| `src/tjanster/*.md` | Tjänstesidor (bröllop, minnesstund, företag …) |
+| `src/_data/faq.json` | Vanliga frågor på startsidan |
+| `src/_data/schema.js` | Strukturerad data till Google (schema.org) |
 | `src/nyheter/*.md` | Nyheter (en fil per nyhet) |
 | `src/menyer/*.md` | Exempelmenyer |
 | `src/uploads/` | Bilder och PDF:er som laddas upp i admin |
@@ -50,3 +53,12 @@ npm run build    # bygger till _site/
    Simply.com. **Rör inte MX-posterna**, annars slutar mejlen fungera. HTTPS ordnas automatiskt.
 6. Säg upp Webnode när allt fungerar. De gamla Webnode-adresserna skickas vidare till rätt del av
    nya sidan (se `netlify.toml`).
+
+## Efter lansering: Google
+
+1. **Google Search Console** (search.google.com/search-console): lägg till `https://www.matpafat.se`,
+   verifiera via DNS-post (TXT) hos Simply.com och skicka in `https://www.matpafat.se/sitemap.xml`.
+2. **Google Företagsprofil** (business.google.com): kontrollera att adress, telefon och webbadress är
+   exakt samma som på hemsidan, och länka till tjänstesidorna under "Tjänster".
+3. **Bing Webmaster Tools:** importera från Search Console (ett klick).
+4. Testa sidorna i Googles test för rika resultat (search.google.com/test/rich-results).

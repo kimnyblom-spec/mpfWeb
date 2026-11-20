@@ -10,8 +10,13 @@
   "instagram_anvandare": "matpafat_catering",
   "instagram_behold_id": "",
   "instagram_inlagg": [],
-  "leverans_satt": ["Upphämtning i Rollsbo", "Leverans", "Kock och personal på plats"],
+  "leverans_satt": [
+    "Upphämtning i Rollsbo",
+    "Leverans",
+    "Kock och personal på plats"
+  ],
   "leverans_omraden": [],
   "leverans_info": "",
-  "framforhallning": ""
+  "framforhallning": "",
+  "beskrivning": "Catering, bröllop, minnesstunder, företagsevent och privat kock. Egen eventlokal för upp till 45 personer i Rollsbo, Kungälv."
 }
