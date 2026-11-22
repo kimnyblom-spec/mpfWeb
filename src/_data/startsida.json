@@ -27,6 +27,7 @@
   "catering_rubrik": "Vacker, rustik och smakrik mat",
   "catering_intro": "Maten läggs upp på palmbladsfat med vaxat papper, eller på porslin om ni vill. Vill ni ha full service fixar vi kockar och serveringspersonal på plats.",
   "catering_bild": "/img/catering.jpg",
+  "tjanster_rubrik": "Bröllop, minnesstunder och företagsevent",
   "tjanster": [
     {
       "rubrik": "Fest",
@@ -73,6 +74,26 @@
   "event_bild": "/img/event.jpg",
   "butik_rubrik": "Ost, keramik och gå-bort-presenter",
   "butik_text": "Vi har ett litet utbud av våra favoritprodukter och porslin. Hör av dig, så sätter vi ihop en fin presentkorg efter din budget.",
+  "instagram_rubrik": "Följ oss på Instagram",
+  "instagram_text": "Här visar vi kommande event i lokalen, veckans bakverk och bilder från bröllop, fester och minnesstunder.",
+  "google_betyg": "5.0",
+  "google_antal": "35",
+  "google_lank": "https://search.google.com/local/reviews?placeid=ChIJd5rmlbZhRUYRsWg4yPbLxQ4",
+  "google_recension_lank": "https://search.google.com/local/writereview?placeid=ChIJd5rmlbZhRUYRsWg4yPbLxQ4",
+  "omdomen": [
+    {
+      "citat": "Efter två fantastiska matupplevelser på våra företagsevent via Mat på fat kan vi varmt rekommendera er att boka dessa både trevliga, skickliga och flexibla kreatörer! Så många som lovordade maten som höll samma klass både vid större och mindre sällskap.",
+      "vem": "Fanny",
+      "kalla": "Företagsevent Göteborg",
+      "tjanst": "Företag och event"
+    },
+    {
+      "citat": "Vi anlitade Mat på fat till vårt bröllop och kunde verkligen inte ha varit mer nöjda!  Vi fick skapa vår egen meny, och de var fantastiska på att lyssna in våra önskemål och göra dem till verklighet. Maten blev över förväntan och flera av våra gäster sa att det var den bästa bröllopsmaten de någonsin ätit.\n\nMat på fat har varit så enkla, lyhörda och härliga att ha att göra med hela vägen. Personliga, engagerade och med fantastiskt god mat – precis det man önskar sig när man planerar en så viktig dag. Vi rekommenderar dem varmt!  10/5 stjärnor!!",
+      "vem": "Matilda",
+      "kalla": "Bröllop Jonsered 2026",
+      "tjanst": "Bröllop"
+    }
+  ],
   "om_rubrik": "Linnea & Matilda",
   "om_intro": "Personerna bakom Mat på Fat är svägerskor som älskar mat i alla former.",
   "om_bild": "/img/om-oss.jpg",
@@ -85,13 +106,5 @@
       "namn": "Matilda",
       "text": "Utbildad kostekonom från Hälsingland, med erfarenhet från lunch-, à la carte- och förskolekök. Hon har en fantastisk \"hur svårt kan det vara\"-gen och löser det mesta galant. Hon har skrivit många recept men kan i stort sett inte följa ett – det brukar också lösa sig."
     }
-  ],
-  "omdomen": [],
-  "tjanster_rubrik": "Bröllop, minnesstunder och företagsevent",
-  "instagram_rubrik": "Följ oss på Instagram",
-  "instagram_text": "Här visar vi kommande event i lokalen, veckans bakverk och bilder från bröllop, fester och minnesstunder.",
-  "google_betyg": "",
-  "google_antal": "",
-  "google_lank": "",
-  "google_recension_lank": ""
+  ]
 }
