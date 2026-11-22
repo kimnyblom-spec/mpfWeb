@@ -9,6 +9,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/uploads");
   // Originalbilderna kopieras också, så att de kan användas som delningsbild i sociala medier
   eleventyConfig.addPassthroughCopy("src/img");
+  eleventyConfig.addPassthroughCopy("src/favicon.ico");
+  eleventyConfig.addPassthroughCopy("src/site.webmanifest");
   // Typsnitten ligger på egen server (snabbare, och inga besökaruppgifter skickas till Google)
   for (const f of ["fraunces-latin-300-normal", "fraunces-latin-400-normal", "fraunces-latin-500-normal", "fraunces-latin-300-italic", "fraunces-latin-400-italic"])
     eleventyConfig.addPassthroughCopy({ [`node_modules/@fontsource/fraunces/files/${f}.woff2`]: `fonts/${f}.woff2` });
