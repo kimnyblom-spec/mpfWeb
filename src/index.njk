@@ -190,15 +190,11 @@ harKontakt: true
 </section>
 {%- endif %}
 
-{%- if synlighet.omdomen and s.omdomen.length %}
+{%- if synlighet.omdomen and (s.omdomen.length or (s.google_betyg | betyg)) %}
 <section class="section section-alt" id="omdomen">
   <div class="wrap">
-    <div class="section-head"><p class="eyebrow">Kunderna om oss</p><h2>Det säger de vi lagat mat åt</h2></div>
-    <div class="quotes">
-      {%- for o in s.omdomen %}
-      <figure><blockquote>{{ o.citat }}</blockquote><figcaption>{{ o.vem }}</figcaption></figure>
-      {%- endfor %}
-    </div>
+    {%- set omdomenLista = s.omdomen %}{% set rubrik = "Det säger de vi lagat mat åt" %}
+    {% include "omdomen.njk" %}
   </div>
 </section>
 {%- endif %}

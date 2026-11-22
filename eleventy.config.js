@@ -51,6 +51,13 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("medKategori", (menyer, kat) => (menyer || []).filter((m) => m.data.kategori === kat));
   // Finns sidan med den här adressen (dvs. är den inte dold)?
   eleventyConfig.addFilter("harUrl", (sidor, url) => !!url && (sidor || []).some((p) => p.url === url));
+  // Google-betyg som tal ("4,9" -> 4.9), eller 0 om det saknas
+  eleventyConfig.addFilter("betyg", (v) => {
+    const n = parseFloat(String(v || "").replace(",", "."));
+    return n > 0 && n <= 5 ? n : 0;
+  });
+  // Omdömen som hör till en viss tjänstesida
+  eleventyConfig.addFilter("forTjanst", (lista, namn) => (lista || []).filter((o) => o && o.tjanst && o.tjanst === namn));
   eleventyConfig.addFilter("first", (arr, n) => (arr || []).slice(0, n));
 
   return {

@@ -48,6 +48,16 @@ layout: base.njk
 </section>
 {%- endif %}
 
+{%- set s = startsida %}
+{%- set mina = s.omdomen | forTjanst(kort_namn) %}
+{%- if synlighet.omdomen and mina.length %}
+<section class="section">
+  <div class="wrap">
+    {%- set omdomenLista = mina %}{% set rubrik = "Det säger våra kunder om " + (kort_namn | lower) %}
+    {% include "omdomen.njk" %}
+  </div>
+</section>
+{%- endif %}
 {%- set visaMenyer = synlighet.menyer and relmenyer.length %}
 {%- if fragor.length %}
 <section class="section{% if not visaMenyer %} section-alt{% endif %}">

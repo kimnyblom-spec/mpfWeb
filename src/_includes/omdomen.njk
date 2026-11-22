@@ -1,0 +1,32 @@
+{#- Kundomdömen med Google-betyg. Används på startsidan och på tjänstesidorna.
+    Förväntar sig: omdomenLista (lista), rubrik, s (startsida-data) -#}
+{%- set g = s.google_betyg | betyg %}
+<div class="section-head section-head-row">
+  <div>
+    <p class="eyebrow">Kunderna om oss</p>
+    <h2>{{ rubrik }}</h2>
+  </div>
+  {%- if g %}
+  <a class="rating"{% if s.google_lank %} href="{{ s.google_lank }}" target="_blank" rel="noopener"{% endif %} aria-label="{{ s.google_betyg }} av 5 i betyg på Google">
+    <span class="stars" style="--fill: {{ (g / 5 * 100) | round(1) }}%" aria-hidden="true"><span>★★★★★</span></span>
+    <span class="rating-text"><strong>{{ s.google_betyg }}</strong> av 5{% if s.google_antal %} · {{ s.google_antal }} recensioner{% endif %} på Google</span>
+  </a>
+  {%- endif %}
+</div>
+{%- if omdomenLista.length %}
+<div class="quotes">
+  {%- for o in omdomenLista %}
+  <figure>
+    <div class="quote-stars" aria-label="5 av 5" role="img">★★★★★</div>
+    <blockquote>{{ o.citat }}</blockquote>
+    <figcaption>{{ o.vem }}{% if o.kalla %} · {{ o.kalla }}{% endif %}</figcaption>
+  </figure>
+  {%- endfor %}
+</div>
+{%- endif %}
+{%- if s.google_lank or s.google_recension_lank %}
+<div class="review-actions">
+  {% if s.google_lank %}<a class="btn btn-ghost-dark" href="{{ s.google_lank }}" target="_blank" rel="noopener">Läs alla recensioner på Google</a>{% endif %}
+  {% if s.google_recension_lank %}<a class="btn" href="{{ s.google_recension_lank }}" target="_blank" rel="noopener">Lämna en recension</a>{% endif %}
+</div>
+{%- endif %}

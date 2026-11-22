@@ -310,3 +310,17 @@ h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); }
 .btn { font-weight: 400; letter-spacing: .01em; }
 .nav a:not(.btn) { font-weight: 300; }
 .quotes blockquote, .faq summary { font-weight: 300; }
+
+/* ---------- Kundomdömen och Google-betyg ---------- */
+.rating { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; background: var(--cream); border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px; }
+.section-alt .rating { background: #fff; }
+a.rating:hover { border-color: var(--olive); }
+.stars { position: relative; display: inline-block; font-size: 1.15rem; line-height: 1; letter-spacing: 2px; color: var(--line); }
+.stars > span { position: absolute; inset: 0; width: var(--fill); overflow: hidden; color: #c98a2b; white-space: nowrap; }
+.stars::before { content: "★★★★★"; }
+.rating-text { font-size: .95rem; }
+.rating-text strong { font-weight: 500; }
+.quote-stars { color: #c98a2b; letter-spacing: 2px; font-size: .95rem; }
+.quotes figure { display: grid; gap: 10px; align-content: start; }
+.review-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.section:not(.section-alt) .quotes figure { background: #fff; }

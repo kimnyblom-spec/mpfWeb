@@ -242,15 +242,30 @@ collections:
           - { name: butik_text, label: "Butik: text", widget: text }
           - { name: instagram_rubrik, label: "Instagram: rubrik", widget: string, required: false }
           - { name: instagram_text, label: "Instagram: text", widget: text, required: false }
+          - { name: google_betyg, label: "Google: betyg", widget: string, required: false, hint: "Betyget från er Google-profil, t.ex. 4,9. Lämna tomt för att inte visa något betyg." }
+          - { name: google_antal, label: "Google: antal recensioner", widget: string, required: false, hint: "T.ex. 32" }
+          - { name: google_lank, label: "Google: länk till recensionerna", widget: string, required: false, hint: "Sök på Mat på Fat i Google, klicka på recensionerna och kopiera adressen." }
+          - { name: google_recension_lank, label: "Google: länk för att lämna en recension", widget: string, required: false, hint: "Google Företagsprofil → Be om recensioner → kopiera länken." }
           - name: omdomen
             label: Kundomdömen
             label_singular: Omdöme
             widget: list
             required: false
-            summary: "{{vem}}"
+            summary: "{{vem}} – {{tjanst}}"
+            hint: "Kopiera gärna era bästa Google-recensioner hit."
             fields:
               - { name: citat, label: Citat, widget: text }
-              - { name: vem, label: Vem, widget: string, hint: "T.ex. Anna, bröllop i Marstrand" }
+              - { name: vem, label: Vem, widget: string, hint: "T.ex. Anna, eller Anna och Erik" }
+              - { name: kalla, label: Var omdömet kommer ifrån, widget: string, required: false, hint: "T.ex. Google, eller Bröllop i Marstrand 2025" }
+              - name: tjanst
+                label: Visa även på tjänstesidan
+                widget: relation
+                collection: tjanster
+                value_field: kort_namn
+                search_fields: [kort_namn]
+                display_fields: [kort_namn]
+                required: false
+                hint: "Välj t.ex. Bröllop så visas omdömet också på bröllopssidan."
           - { name: om_rubrik, label: "Om oss: rubrik", widget: string }
           - { name: om_intro, label: "Om oss: inledning", widget: text }
           - { name: om_bild, label: "Om oss: bild", widget: image }
