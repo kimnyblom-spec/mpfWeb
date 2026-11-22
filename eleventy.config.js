@@ -10,10 +10,8 @@ export default function (eleventyConfig) {
   // Originalbilderna kopieras också, så att de kan användas som delningsbild i sociala medier
   eleventyConfig.addPassthroughCopy("src/img");
   // Typsnitten ligger på egen server (snabbare, och inga besökaruppgifter skickas till Google)
-  for (const f of ["jost-latin-300-normal", "jost-latin-400-normal", "jost-latin-500-normal"])
-    eleventyConfig.addPassthroughCopy({ [`node_modules/@fontsource/jost/files/${f}.woff2`]: `fonts/${f}.woff2` });
-  for (const f of ["cormorant-garamond-latin-500-normal", "cormorant-garamond-latin-600-normal", "cormorant-garamond-latin-500-italic"])
-    eleventyConfig.addPassthroughCopy({ [`node_modules/@fontsource/cormorant-garamond/files/${f}.woff2`]: `fonts/${f}.woff2` });
+  for (const f of ["fraunces-latin-300-normal", "fraunces-latin-400-normal", "fraunces-latin-500-normal", "fraunces-latin-300-italic", "fraunces-latin-400-italic"])
+    eleventyConfig.addPassthroughCopy({ [`node_modules/@fontsource/fraunces/files/${f}.woff2`]: `fonts/${f}.woff2` });
   eleventyConfig.addPassthroughCopy("src/admin/config.yml");
   // Admin-gränssnittet (Sveltia CMS) hämtas från npm-paketet
   eleventyConfig.addPassthroughCopy({ "node_modules/@sveltia/cms/dist": "admin/cms" });

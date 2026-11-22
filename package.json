@@ -13,8 +13,7 @@
   "devDependencies": {
     "@11ty/eleventy": "3.1.8",
     "@11ty/eleventy-img": "7.1.1",
-    "@fontsource/cormorant-garamond": "5.2.11",
-    "@fontsource/jost": "5.2.8",
+    "@fontsource/fraunces": "5.2.9",
     "@sveltia/cms": "0.256.1",
     "markdown-it": "14.3.3"
   }

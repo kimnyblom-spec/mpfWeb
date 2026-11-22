@@ -1,10 +1,9 @@
-/* Typsnitt från egen server */
-@font-face { font-family: "Jost"; font-weight: 300; font-display: swap; src: url(/fonts/jost-latin-300-normal.woff2) format("woff2"); }
-@font-face { font-family: "Jost"; font-weight: 400; font-display: swap; src: url(/fonts/jost-latin-400-normal.woff2) format("woff2"); }
-@font-face { font-family: "Jost"; font-weight: 500; font-display: swap; src: url(/fonts/jost-latin-500-normal.woff2) format("woff2"); }
-@font-face { font-family: "Cormorant Garamond"; font-weight: 500; font-display: swap; src: url(/fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2"); }
-@font-face { font-family: "Cormorant Garamond"; font-weight: 600; font-display: swap; src: url(/fonts/cormorant-garamond-latin-600-normal.woff2) format("woff2"); }
-@font-face { font-family: "Cormorant Garamond"; font-weight: 500; font-style: italic; font-display: swap; src: url(/fonts/cormorant-garamond-latin-500-italic.woff2) format("woff2"); }
+/* Typsnitt från egen server: Fraunces (fritt typsnitt, likt TT Ramillas) */
+@font-face { font-family: "Fraunces"; font-weight: 300; font-display: swap; src: url(/fonts/fraunces-latin-300-normal.woff2) format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 400; font-display: swap; src: url(/fonts/fraunces-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 500; font-display: swap; src: url(/fonts/fraunces-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 300; font-style: italic; font-display: swap; src: url(/fonts/fraunces-latin-300-italic.woff2) format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 400; font-style: italic; font-display: swap; src: url(/fonts/fraunces-latin-400-italic.woff2) format("woff2"); }
 
 :root {
   --cream: #f7f2ea;
@@ -15,8 +14,8 @@
   --olive-dark: #343f2c;
   --terracotta: #b0603a;
   --line: #ddd2bf;
-  --serif: "Cormorant Garamond", Georgia, serif;
-  --sans: "Jost", system-ui, sans-serif;
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Fraunces", Georgia, serif;
   --radius: 4px;
 }
 
@@ -298,3 +297,16 @@ behold-widget { display: block; }
   .form input, .form select, .form textarea { padding: 9px 10px; }
   .form textarea { min-height: 72px; }
 }
+
+/* ---------- Typografi för Fraunces ---------- */
+body { font-weight: 300; letter-spacing: -.003em; }
+h1, h2, h3, h4 { font-weight: 300; letter-spacing: -.015em; }
+h1 { font-size: clamp(2.3rem, 5.4vw, 3.9rem); }
+h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); }
+.service-hero h1 { font-size: clamp(2.1rem, 4.6vw, 3.3rem); }
+.page-title { font-size: clamp(2rem, 4.4vw, 2.9rem); }
+.usp-grid strong, .menu-card h4, .price-list dd { font-weight: 400; }
+.eyebrow, time, .site-footer h2, .contact-list span { font-weight: 400; letter-spacing: .14em; font-size: .74rem; }
+.btn { font-weight: 400; letter-spacing: .01em; }
+.nav a:not(.btn) { font-weight: 300; }
+.quotes blockquote, .faq summary { font-weight: 300; }
