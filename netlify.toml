@@ -1,0 +1,29 @@
+[build]
+  command = "npm run build"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Gamla Webnode-adresser skickas till rätt ställe på nya sidan
+[[redirects]]
+  from = "/catering/"
+  to = "/catering-kungalv/"
+  status = 301
+[[redirects]]
+  from = "/kock-pa-plats/"
+  to = "/privat-kock/"
+  status = 301
+[[redirects]]
+  from = "/delikatesser/"
+  to = "/#butik"
+  status = 301
+[[redirects]]
+  from = "/kontakt/"
+  to = "/#kontakt"
+  status = 301
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

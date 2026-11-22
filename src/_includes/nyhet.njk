@@ -1,0 +1,14 @@
+---
+layout: base.njk
+---
+<article class="section page-top">
+  <div class="wrap narrow article">
+    <a href="/nyheter/" class="link">← Alla nyheter</a>
+    <time datetime="{{ page.date | isodatum }}">{{ page.date | datum }}</time>
+    <h1 class="page-title">{{ title }}</h1>
+    {% if ingress %}<p class="intro">{{ ingress }}</p>{% endif %}
+    {% if bild %}<img class="article-img" src="{{ bild }}" alt="{{ bildtext or title }}" sizes="(max-width: 760px) 100vw, 720px">{% endif %}
+    <div class="article-body">{{ content | safe }}</div>
+    <div class="note"><p>Vill du veta mer eller boka?</p><a href="/#offertformular" class="btn">Kontakta oss</a></div>
+  </div>
+</article>

@@ -1,0 +1,29 @@
+{
+  "rubrik": "Vanliga frågor",
+  "fragor": [
+    {
+      "fraga": "Hur beställer jag catering?",
+      "svar": "Mejla oss på info@matpafat.se eller skicka en förfrågan via formuläret längre ner. Berätta datum, antal gäster och vad det gäller, så återkommer vi med förslag och pris."
+    },
+    {
+      "fraga": "Vad kostar catering per person?",
+      "svar": "Det beror på meny, antal gäster och om ni vill ha personal på plats. Vi sätter ihop ett förslag efter era önskemål och er budget – hör av er så får ni en offert."
+    },
+    {
+      "fraga": "Hur långt i förväg behöver man boka?",
+      "svar": "Ju tidigare desto bättre. Bröllop under sommaren bokas ofta långt i förväg, medan enklare beställningar går att ordna snabbare. Hör av er så berättar vi vad vi hinner."
+    },
+    {
+      "fraga": "Kan man hämta maten själv?",
+      "svar": "Ja. Maten kan hämtas hos oss i Rollsbo i Kungälv. Vi kan också leverera eller komma med kockar och serveringspersonal."
+    },
+    {
+      "fraga": "Kan man hyra er lokal?",
+      "svar": "Ja. Lokalen i Rollsbo har plats för upp till 45 personer och passar för fester, minnesstunder, kundkvällar och workshops."
+    },
+    {
+      "fraga": "Tar ni hänsyn till allergier och specialkost?",
+      "svar": "Ja. Vi anpassar maten efter gästernas behov av specialkost och vid allergier. Berätta om det när ni hör av er."
+    }
+  ]
+}

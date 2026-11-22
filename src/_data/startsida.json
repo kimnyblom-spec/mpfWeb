@@ -1,0 +1,93 @@
+{
+  "seo_titel": "Mat på Fat – Catering, tårtor & privat kock i Kungälv",
+  "seo_beskrivning": "Mat och bakverk – från frukost till vickning, för både vardag och fest. Catering, bröllop, minnesstunder, tårtor och privat kock. Egen eventlokal för upp till 45 personer i Rollsbo, Kungälv.",
+  "hero_etikett": "Catering · Privat kock · Eventlokal i Kungälv",
+  "hero_rubrik": "Mat och bakverk – från frukost till vickning",
+  "hero_text": "För både vardag och fest. Hämta själv, få det levererat eller låt oss laga maten hos er.",
+  "hero_bild": "/img/hero.jpg",
+  "hero_bild_text": "Dukat långbord med smårätter, bröd, oliver och citroner",
+  "fordelar": [
+    {
+      "rubrik": "Från frukost till trerätters",
+      "text": "Brunch, lunch, buffé, mingel & middag"
+    },
+    {
+      "rubrik": "Egen lokal för 45 gäster",
+      "text": "I Rollsbo, Kungälv"
+    },
+    {
+      "rubrik": "Tårtor och desserter",
+      "text": "Till bröllop, fest och fika"
+    },
+    {
+      "rubrik": "Upphämtning eller leverans",
+      "text": "Eller med kock på plats"
+    }
+  ],
+  "catering_rubrik": "Vacker, rustik och smakrik mat",
+  "catering_intro": "Maten läggs upp på palmbladsfat med vaxat papper, eller på porslin om ni vill. Vill ni ha full service fixar vi kockar och serveringspersonal på plats.",
+  "catering_bild": "/img/catering.jpg",
+  "tjanster": [
+    {
+      "rubrik": "Fest",
+      "text": "Bufféer och plockrätter som räcker till många. Har ni en vision eller ett tema? Hör av er, så sätter vi ihop något skoj.",
+      "lank": "/catering-kungalv/"
+    },
+    {
+      "rubrik": "Företag",
+      "text": "Frukost eller lunch till kontoret, mat till konferensen, kundkvällen eller eventet – vi fixar det.",
+      "lank": "/foretagscatering/"
+    },
+    {
+      "rubrik": "Bröllop",
+      "text": "Buffé, sharing eller trerätters – eller en mix. Vi gör många bröllop i regionen, och tårtan också. Sommardatumen går åt snabbt, så hör av er i god tid.",
+      "lank": "/brollopscatering/"
+    },
+    {
+      "rubrik": "Minnesstund",
+      "text": "Allt från landgång och smörgåstårta till varm tallriksservering. Vi lägger på dukar, sätter ljus och blommor på borden, serverar, plockar undan och diskar – så att ni kan vara närvarande i stunden.",
+      "lank": "/minnesstund-catering/"
+    },
+    {
+      "rubrik": "Snittar & plockmat",
+      "text": "Något gott till välkomstskålen eller ett helt mingelbord? Vi gör vackra, smakrika snittar och plockrätter till bröllop, fester och företagsevent. Från några små munsbitar före middagen till ett matigare plockbord som räcker som måltid.",
+      "lank": "/catering-kungalv/"
+    },
+    {
+      "rubrik": "Tårtor & efterrätter",
+      "text": "Tårtor, cupcakes, fika och portionsefterrätter för leverans. Berätta vad ni önskar så återkommer vi med förslag.",
+      "lank": "/catering-kungalv/"
+    }
+  ],
+  "kock_rubrik": "Låt någon annan stå i köket i kväll",
+  "kock_text": "Det är få saker som känns så lyxigt som en egen kock som skämmer bort en. Oavsett om det är bröllop, fest, konferens eller \"bara\" en lyxig familjemiddag kommer vi gärna till er och lagar och serverar maten på plats.\n\nMenyerna sätts efter säsong och önskemål. Vi kan också ordna serverings- och diskpersonal.",
+  "kock_punkter": [
+    "Menyförslag efter säsong",
+    "Vi lagar, serverar och diskar",
+    "Matlagningskvällar för kollegor eller vänner"
+  ],
+  "kock_bild": "/img/kock.jpg",
+  "lokal_rubrik": "Vår lokal i Rollsbo",
+  "lokal_text": "Lokalen har plats för upp till 45 personer och passar perfekt för privata fester, företagsevent och aktiviteter. Vi har alkoholtillstånd.\n\nVi har också återkommande kreativa event som du kan boka in dig på. De annonseras först på Instagram.",
+  "lokal_bild": "/img/deli.jpg",
+  "event_bild": "/img/event.jpg",
+  "butik_rubrik": "Ost, keramik och gå-bort-presenter",
+  "butik_text": "Vi har ett litet utbud av våra favoritprodukter och porslin. Hör av dig, så sätter vi ihop en fin presentkorg efter din budget.",
+  "om_rubrik": "Linnea & Matilda",
+  "om_intro": "Personerna bakom Mat på Fat är svägerskor som älskar mat i alla former.",
+  "om_bild": "/img/om-oss.jpg",
+  "personer": [
+    {
+      "namn": "Linnea",
+      "text": "En dalkulla med servicen i blodet efter 14 år som flygvärdinna på Skandinaviens största charterbolag, alltid med delikatesser och ny inspiration hem i väskan. Ryktet säger att hon drev sitt första café som 16-åring, och sedan dess har hon jobbat på flera restauranger."
+    },
+    {
+      "namn": "Matilda",
+      "text": "Utbildad kostekonom från Hälsingland, med erfarenhet från lunch-, à la carte- och förskolekök. Hon har en fantastisk \"hur svårt kan det vara\"-gen och löser det mesta galant. Hon har skrivit många recept men kan i stort sett inte följa ett – det brukar också lösa sig."
+    }
+  ],
+  "omdomen": [],
+  "tjanster_rubrik": "Bröllop, minnesstunder och företagsevent",
+  "instagram_rubrik": "Följ oss på Instagram",
+  "instagram_text": "Här visar vi kommande event i lokalen, veckans bakverk och bilder från bröllop, fester och minnesstunder."
+}

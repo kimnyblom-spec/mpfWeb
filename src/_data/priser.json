@@ -1,0 +1,14 @@
+{
+  "rubrik": "Priser",
+  "intro": "Varje beställning sätts ihop efter era önskemål. Här är några riktpriser – skicka en förfrågan så får ni ett exakt förslag.",
+  "fotnot": "",
+  "rader": [
+    { "namn": "Buffé", "pris": "", "enhet": "kr/person", "kommentar": "" },
+    { "namn": "Snittar och plockmat", "pris": "", "enhet": "kr/person", "kommentar": "" },
+    { "namn": "Frukost eller fika till kontoret", "pris": "", "enhet": "kr/person", "kommentar": "" },
+    { "namn": "Lunch eller förpackad sallad", "pris": "", "enhet": "kr/st", "kommentar": "" },
+    { "namn": "Tårta", "pris": "", "enhet": "kr", "kommentar": "" },
+    { "namn": "Privat kock, trerätters", "pris": "", "enhet": "kr/person", "kommentar": "" },
+    { "namn": "Serverings- eller diskpersonal", "pris": "", "enhet": "kr/timme", "kommentar": "" }
+  ]
+}

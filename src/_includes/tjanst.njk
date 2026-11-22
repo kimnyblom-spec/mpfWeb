@@ -1,0 +1,85 @@
+---
+layout: base.njk
+---
+<section class="service-hero">
+  <img class="hero-img" src="{{ bild }}" alt="{{ bildtext }}" loading="eager" fetchpriority="high" sizes="100vw">
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-content">
+    <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Start</a> <span aria-hidden="true">/</span> {{ kort_namn }}</nav>
+    <h1>{{ title }}</h1>
+    <p class="lead">{{ ingress }}</p>
+    <div class="hero-actions">
+      <a href="#offertformular" class="btn">Begär offert</a>
+      <a href="mailto:{{ site.epost }}" class="btn btn-ghost">Mejla oss</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap service-body">
+    <div class="prose">{{ content | safe }}</div>
+    {%- if punkter.length %}
+    <aside class="service-card">
+      <h2>Det här kan vi hjälpa till med</h2>
+      <ul class="ticks">{% for p in punkter %}<li>{{ p }}</li>{% endfor %}</ul>
+      <a href="#offertformular" class="btn">Begär offert</a>
+      <p class="small">Eller mejla <a href="mailto:{{ site.epost }}">{{ site.epost }}</a></p>
+    </aside>
+    {%- endif %}
+  </div>
+</section>
+
+{%- set relmenyer = collections.menyer | medKategori(menykategori) %}
+{%- if synlighet.menyer and relmenyer.length %}
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">Menyförslag</p><h2>Exempel på menyer</h2></div>
+    <div class="menu-grid">
+      {%- for m in relmenyer %}
+      <article class="menu-card">
+        <h3>{{ m.data.title }}</h3>
+        {% if m.data.beskrivning %}<p class="menu-desc">{{ m.data.beskrivning }}</p>{% endif %}
+        {% if m.content | striptags | trim %}<div class="menu-body">{{ m.content | safe }}</div>{% endif %}
+        {% if m.data.pdf %}<a class="link" href="{{ m.data.pdf }}" target="_blank" rel="noopener">Öppna menyn (PDF) ↗</a>{% endif %}
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{%- set visaMenyer = synlighet.menyer and relmenyer.length %}
+{%- if fragor.length %}
+<section class="section{% if not visaMenyer %} section-alt{% endif %}">
+  <div class="wrap narrow">
+    <div class="section-head"><p class="eyebrow">Vanliga frågor</p><h2>Frågor om {{ kort_namn | lower }}</h2></div>
+    <div class="faq">
+      {%- for f in fragor %}
+      <details{% if loop.first %} open{% endif %}><summary>{{ f.fraga }}</summary><p>{{ f.svar }}</p></details>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section section-alt" id="kontakt">
+  <div class="wrap contact">
+    <div>
+      <p class="eyebrow">Kontakt</p>
+      <h2>Berätta vad ni planerar</h2>
+      <p>Mejla oss gärna på <a href="mailto:{{ site.epost }}">{{ site.epost }}</a> eller skicka en förfrågan här. Det är enklast för oss, eftersom vi ofta står i köket. Vi återkommer med förslag och pris{% if site.svarstid %} – {{ site.svarstid }}{% endif %}.</p>
+      <ul class="contact-list">
+        <li><span>E-post</span><a href="mailto:{{ site.epost }}">{{ site.epost }}</a></li>
+        <li><span>Telefon</span><a href="tel:{{ site.telefon | tel }}">{{ site.telefon }}</a></li>
+        <li><span>Adress</span>{{ site.gatuadress }}, {{ site.postnummer }} {{ site.ort }}</li>
+      </ul>
+      <h3 class="other-title">Andra tjänster</h3>
+      <ul class="other-services">
+        {%- for t in collections.tjanst %}{% if t.url != page.url %}
+        <li><a href="{{ t.url }}">{{ t.data.kort_namn }}</a></li>
+        {%- endif %}{% endfor %}
+      </ul>
+    </div>
+    {% set valt = formval %}{% include "offertform.njk" %}
+  </div>
+</section>

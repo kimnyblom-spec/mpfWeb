@@ -1,0 +1,263 @@
+# Admin-gränssnitt för matpafat.se (Sveltia CMS).
+# Ändringar som görs i admin sparas i GitHub-repot och publiceras automatiskt av Netlify.
+backend:
+  name: github
+  repo: kimnyblom-spec/mpfWeb
+  branch: main
+  commit_messages:
+    create: "Ny {{collection}}: {{slug}}"
+    update: "Uppdatera {{collection}}: {{slug}}"
+    delete: "Ta bort {{collection}}: {{slug}}"
+    uploadMedia: "Ladda upp {{path}}"
+    deleteMedia: "Ta bort {{path}}"
+
+site_url: https://www.matpafat.se
+display_url: https://www.matpafat.se
+media_folder: src/uploads
+public_folder: /uploads
+
+# Uppladdade bilder får ett beskrivande filnamn och görs om till webp i rimlig storlek
+media_libraries:
+  default:
+    config:
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 2400
+          height: 2400
+
+collections:
+  # ---------------- NYHETER ----------------
+  - name: nyheter
+    label: Nyheter
+    label_singular: Nyhet
+    description: Nyheter som visas på startsidan (de tre senaste) och på sidan Nyheter.
+    folder: src/nyheter
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: [date, title]
+    summary: "{{title}} – {{date | date('YYYY-MM-DD')}}"
+    fields:
+      - { name: title, label: Rubrik, widget: string }
+      - { name: date, label: Datum, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
+      - { name: ingress, label: Kort sammanfattning, hint: "En eller två meningar som visas på nyhetskortet.", widget: text, required: false }
+      - { name: bild, label: Bild, widget: image, required: false }
+      - { name: bildtext, label: Bildbeskrivning, hint: "Beskriv kort vad bilden visar (hjälper Google och synskadade).", widget: string, required: false }
+      - { name: utkast, label: Utkast (visas inte på sidan), widget: boolean, default: false, required: false }
+      - { name: body, label: Text, widget: markdown }
+
+  # ---------------- MENYER ----------------
+  - name: menyer
+    label: Menyförslag
+    label_singular: Meny
+    description: Exempelmenyer som visas under Catering. Ladda upp en PDF och/eller skriv menyn direkt.
+    folder: src/menyer
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{kategori}} – {{title}}"
+    fields:
+      - { name: title, label: Namn på menyn, widget: string, hint: "T.ex. Sommarbuffé 2027" }
+      - name: kategori
+        label: Kategori
+        widget: select
+        options: [Fest, Företag, Bröllop, Minnesstund, Privat kock, Tårtor & fika, Övrigt]
+      - { name: beskrivning, label: Kort beskrivning, widget: string, required: false, hint: "T.ex. Från 295 kr/person, minst 15 personer" }
+      - { name: pdf, label: Meny som PDF, widget: file, required: false }
+      - { name: ordning, label: Ordning, widget: number, value_type: int, default: 10, required: false, hint: "Lägre nummer visas först." }
+      - { name: body, label: Menyn som text, widget: markdown, required: false }
+
+  # ---------------- TJÄNSTESIDOR ----------------
+  - name: tjanster
+    label: Tjänstesidor
+    label_singular: Tjänstesida
+    description: Egna sidor för varje tjänst, t.ex. bröllop och minnesstund. Viktiga för att synas på Google.
+    folder: src/tjanster
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{kort_namn}} – /{{adress}}/"
+    sortable_fields: [ordning, kort_namn]
+    fields:
+      - { name: kort_namn, label: Kort namn, widget: string, hint: "Visas i menyer och länkar, t.ex. Bröllop" }
+      - { name: title, label: Rubrik på sidan, widget: string, hint: "Ta gärna med vad och var, t.ex. Bröllopscatering i Kungälv och Göteborgsregionen" }
+      - { name: adress, label: Webbadress, widget: string, hint: "Bara små bokstäver och bindestreck, t.ex. brollopscatering. Ändra inte på befintliga sidor – då slutar gamla länkar att fungera." }
+      - { name: seo_titel, label: Titel i Google, widget: string, hint: "Max ca 60 tecken. Börja med det folk söker på." }
+      - { name: seo_beskrivning, label: Beskrivning i Google, widget: text, hint: "Ca 150–160 tecken. Visas under titeln i sökresultatet." }
+      - { name: ingress, label: Inledning, widget: text }
+      - { name: bild, label: Bild, widget: image }
+      - { name: bildtext, label: Bildbeskrivning, widget: string }
+      - { name: punkter, label: Det här kan vi hjälpa till med, widget: list }
+      - name: menykategori
+        label: Visa menyer i kategorin
+        widget: select
+        required: false
+        options: [Fest, Företag, Bröllop, Minnesstund, Privat kock, Tårtor & fika, Övrigt]
+      - name: formval
+        label: Förvalt val i offertformuläret
+        widget: select
+        options: ["Catering – fest", "Catering – företag", "Företagsevent i er lokal", "Bröllop", "Minnesstund", "Tårta / efterrätt", "Privat kock", "Hyra lokalen / event", "Presentkorg", "Annat"]
+      - { name: visa, label: Visa sidan på hemsidan, widget: boolean, default: true, hint: "Stäng av för att dölja sidan helt, också för Google. Innehållet sparas." }
+      - { name: meny_namn, label: Namn i huvudmenyn, widget: string, required: false, hint: "Fyll i för att visa sidan i menyn högst upp, t.ex. Bröllop. Lämna tomt för att inte visa den där." }
+      - { name: fokus, label: Visa som stort kort på startsidan, widget: boolean, default: false, required: false }
+      - { name: ordning, label: Ordning, widget: number, value_type: int, default: 10, hint: "Lägre nummer visas först." }
+      - name: fragor
+        label: Vanliga frågor
+        label_singular: Fråga
+        widget: list
+        required: false
+        summary: "{{fraga}}"
+        fields:
+          - { name: fraga, label: Fråga, widget: string }
+          - { name: svar, label: Svar, widget: text }
+      - { name: body, label: Text, widget: markdown }
+
+  # ---------------- INSTÄLLNINGAR ----------------
+  - name: installningar
+    label: Priser, kontakt och texter
+    editor: { preview: false }
+    files:
+      - name: synlighet
+        label: Visa på hemsidan
+        file: src/_data/synlighet.json
+        fields:
+          - { name: priser, label: Prislista, widget: boolean, required: false, hint: "Prislistan under Catering. Visas bara om minst en rad har ett pris." }
+          - { name: menyer, label: Menyförslag, widget: boolean, required: false, hint: "Exempelmenyerna på startsidan och tjänstesidorna." }
+          - { name: leverans, label: Leverans och upphämtning, widget: boolean, required: false, hint: "Rutan med leveransområden, leveransinfo och framförhållning." }
+          - { name: nyheter, label: Nyheter, widget: boolean, required: false, hint: "Nyheterna på startsidan, menyvalet Nyheter och alla nyhetssidor." }
+          - { name: instagram, label: Instagram, widget: boolean, required: false, hint: "Instagram-sektionen på startsidan." }
+          - { name: butik, label: Butik och deli, widget: boolean, required: false }
+          - { name: omdomen, label: Kundomdömen, widget: boolean, required: false, hint: "Visas bara om det finns minst ett omdöme." }
+          - { name: fragor, label: Vanliga frågor på startsidan, widget: boolean, required: false }
+          - { name: privat_kock, label: Privat kock på startsidan, widget: boolean, required: false, hint: "Själva tjänstesidan döljs under Tjänstesidor." }
+          - { name: lokal, label: Lokalen på startsidan, widget: boolean, required: false, hint: "Själva tjänstesidan döljs under Tjänstesidor." }
+
+      - name: priser
+        label: Priser
+        file: src/_data/priser.json
+        fields:
+          - { name: rubrik, label: Rubrik, widget: string }
+          - { name: intro, label: Text ovanför priserna, widget: text, required: false }
+          - name: rader
+            label: Prisrader
+            label_singular: Prisrad
+            hint: "Bara rader där du fyllt i ett pris visas på hemsidan. Töm priset för att dölja en rad."
+            widget: list
+            summary: "{{namn}}: {{pris}} {{enhet}}"
+            fields:
+              - { name: namn, label: Vad, widget: string }
+              - { name: pris, label: Pris, widget: string, required: false, hint: "T.ex. 295, fr. 295 eller 250–350. Lämna tomt för att dölja raden." }
+              - { name: enhet, label: Enhet, widget: string, required: false, hint: "T.ex. kr/person" }
+              - { name: kommentar, label: Kommentar, widget: string, required: false, hint: "T.ex. minst 10 personer" }
+          - { name: fotnot, label: Fotnot, widget: string, required: false, hint: "T.ex. Alla priser inkl. moms." }
+
+      - name: kontakt
+        label: Kontakt, leverans och Instagram
+        file: src/_data/site.json
+        fields:
+          - { name: namn, label: Företagsnamn, widget: string }
+          - { name: beskrivning, label: Kort beskrivning av företaget, widget: text, hint: "Visas i sidfoten och i informationen till Google." }
+          - { name: url, label: Webbadress, widget: hidden }
+          - { name: telefon, label: Telefon, widget: string }
+          - { name: epost, label: E-post, widget: string }
+          - { name: gatuadress, label: Gatuadress, widget: string }
+          - { name: postnummer, label: Postnummer, widget: string }
+          - { name: ort, label: Ort, widget: string }
+          - { name: svarstid, label: Svarstid, widget: string, required: false, hint: "T.ex. oftast inom ett dygn på vardagar" }
+          - { name: leverans_satt, label: Sätt att få maten, widget: list, required: false, hint: "T.ex. Upphämtning i Rollsbo, Leverans" }
+          - { name: leverans_omraden, label: Leveransområden, widget: list, required: false, hint: "En ort per rad" }
+          - { name: leverans_info, label: Leveransinfo, widget: markdown, required: false, hint: "Avgifter, tider för upphämtning, retur av fat …" }
+          - { name: framforhallning, label: Framförhållning, widget: string, required: false, hint: "T.ex. minst 3 arbetsdagar, tårtor 1 vecka" }
+          - { name: instagram_anvandare, label: Instagram-användarnamn, widget: string, hint: "Utan @" }
+          - { name: instagram_behold_id, label: Instagram-flöde (Behold feed-id), widget: string, required: false, hint: "Visar de senaste inläggen automatiskt. Se instruktionen för hur du får ett id." }
+          - name: instagram_inlagg
+            label: Utvalda Instagram-inlägg
+            label_singular: Inlägg
+            hint: "Används bara om inget Behold-id är ifyllt. Klistra in länken till ett inlägg."
+            widget: list
+            required: false
+            fields:
+              - { name: url, label: Länk till inlägget, widget: string }
+
+      - name: faq
+        label: Vanliga frågor (startsidan)
+        file: src/_data/faq.json
+        fields:
+          - { name: rubrik, label: Rubrik, widget: string }
+          - name: fragor
+            label: Frågor
+            label_singular: Fråga
+            widget: list
+            summary: "{{fraga}}"
+            fields:
+              - { name: fraga, label: Fråga, widget: string }
+              - { name: svar, label: Svar, widget: text }
+
+      - name: startsida
+        label: Texter på startsidan
+        file: src/_data/startsida.json
+        fields:
+          - { name: seo_titel, label: Titel i Google, widget: string }
+          - { name: seo_beskrivning, label: Beskrivning i Google, widget: text }
+          - { name: hero_etikett, label: "Toppbild: liten rad ovanför rubriken", widget: string }
+          - { name: hero_rubrik, label: "Toppbild: rubrik", widget: string }
+          - { name: hero_text, label: "Toppbild: text", widget: text }
+          - { name: hero_bild, label: "Toppbild: bild", widget: image }
+          - { name: hero_bild_text, label: "Toppbild: bildbeskrivning", widget: string }
+          - name: fordelar
+            label: Gröna raden (fyra fördelar)
+            widget: list
+            summary: "{{rubrik}}"
+            fields:
+              - { name: rubrik, label: Rubrik, widget: string }
+              - { name: text, label: Text, widget: string }
+          - { name: catering_rubrik, label: "Catering: rubrik", widget: string }
+          - { name: catering_intro, label: "Catering: inledning", widget: text }
+          - { name: catering_bild, label: "Catering: bild på kortet", widget: image }
+          - { name: tjanster_rubrik, label: "Rubrik ovanför de stora korten", widget: string, required: false }
+          - name: tjanster
+            label: "Catering: tjänster"
+            label_singular: Tjänst
+            widget: list
+            summary: "{{rubrik}}"
+            fields:
+              - { name: rubrik, label: Rubrik, widget: string }
+              - { name: text, label: Text, widget: text }
+              - { name: lank, label: Länk till tjänstesida, widget: string, required: false, hint: "T.ex. /brollopscatering/" }
+          - { name: kock_rubrik, label: "Privat kock: rubrik", widget: string }
+          - { name: kock_text, label: "Privat kock: text", widget: markdown }
+          - { name: kock_punkter, label: "Privat kock: punktlista", widget: list }
+          - { name: kock_bild, label: "Privat kock: bild", widget: image }
+          - { name: lokal_rubrik, label: "Lokalen: rubrik", widget: string }
+          - { name: lokal_text, label: "Lokalen: text", widget: markdown }
+          - { name: lokal_bild, label: "Lokalen: bild", widget: image }
+          - { name: event_bild, label: "Event: bild på kortet", widget: image }
+          - { name: butik_rubrik, label: "Butik: rubrik", widget: string }
+          - { name: butik_text, label: "Butik: text", widget: text }
+          - { name: instagram_rubrik, label: "Instagram: rubrik", widget: string, required: false }
+          - { name: instagram_text, label: "Instagram: text", widget: text, required: false }
+          - name: omdomen
+            label: Kundomdömen
+            label_singular: Omdöme
+            widget: list
+            required: false
+            summary: "{{vem}}"
+            fields:
+              - { name: citat, label: Citat, widget: text }
+              - { name: vem, label: Vem, widget: string, hint: "T.ex. Anna, bröllop i Marstrand" }
+          - { name: om_rubrik, label: "Om oss: rubrik", widget: string }
+          - { name: om_intro, label: "Om oss: inledning", widget: text }
+          - { name: om_bild, label: "Om oss: bild", widget: image }
+          - name: personer
+            label: "Om oss: personer"
+            widget: list
+            summary: "{{namn}}"
+            fields:
+              - { name: namn, label: Namn, widget: string }
+              - { name: text, label: Text, widget: text }

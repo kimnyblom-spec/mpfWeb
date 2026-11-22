@@ -1,0 +1,11 @@
+<article class="news-card">
+  <a href="{{ n.url }}">
+    {% if n.data.bild %}<img src="{{ n.data.bild }}" alt="{{ n.data.bildtext or n.data.title }}" sizes="(max-width: 900px) 100vw, 33vw">{% endif %}
+    <div class="news-body">
+      <time datetime="{{ n.date | isodatum }}">{{ n.date | datum }}</time>
+      <h3>{{ n.data.title }}</h3>
+      {% if n.data.ingress %}<p>{{ n.data.ingress }}</p>{% endif %}
+      <span class="link">Läs mer →</span>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,251 @@
+---
+layout: base.njk
+harKontakt: true
+---
+{%- set s = startsida -%}
+{%- set prisrader = priser.rader | synliga -%}
+<section class="hero">
+  <img class="hero-img" src="{{ s.hero_bild }}" alt="{{ s.hero_bild_text }}" loading="eager" fetchpriority="high" sizes="100vw">
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-content">
+    <p class="eyebrow">{{ s.hero_etikett }}</p>
+    <h1>{{ s.hero_rubrik }}</h1>
+    <p class="lead">{{ s.hero_text }}</p>
+    <div class="hero-actions">
+      <a href="#offertformular" class="btn">Begär offert</a>
+      <a href="#catering" class="btn btn-ghost">Se vad vi gör</a>
+    </div>
+  </div>
+</section>
+
+<section class="usps" aria-label="Det här erbjuder vi">
+  <div class="wrap usp-grid">
+    {%- for f in s.fordelar %}
+    <div><strong>{{ f.rubrik }}</strong><span>{{ f.text }}</span></div>
+    {%- endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Vad kan vi hjälpa till med?</p>
+      <h2>{{ s.tjanster_rubrik or "Det här gör vi oftast" }}</h2>
+    </div>
+    <div class="cards">
+      {%- for t in collections.tjanst %}{% if t.data.fokus %}
+      <a class="card" href="{{ t.url }}">
+        <img src="{{ t.data.bild }}" alt="{{ t.data.bildtext }}" sizes="(max-width: 900px) 100vw, 33vw">
+        <div class="card-body"><h3>{{ t.data.kort_namn }}</h3><p>{{ t.data.ingress }}</p><span class="link">Läs mer om {{ t.data.kort_namn | lower }} →</span></div>
+      </a>
+      {%- endif %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="catering">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Catering</p>
+      <h2>{{ s.catering_rubrik }}</h2>
+      <p class="intro">{{ s.catering_intro }}</p>
+    </div>
+    <div class="services">
+      {%- for t in s.tjanster %}
+      <article><h3>{% set ok = collections.tjanst | harUrl(t.lank) %}{% if ok %}<a href="{{ t.lank }}">{{ t.rubrik }}</a>{% else %}{{ t.rubrik }}{% endif %}</h3><p>{{ t.text }}</p>{% if ok %}<a class="link" href="{{ t.lank }}">Läs mer →</a>{% endif %}</article>
+      {%- endfor %}
+    </div>
+
+    {%- if synlighet.priser and prisrader.length %}
+    <div class="prices" id="priser">
+      <div>
+        <h3>{{ priser.rubrik }}</h3>
+        {% if priser.intro %}<p>{{ priser.intro }}</p>{% endif %}
+      </div>
+      <dl class="price-list">
+        {%- for r in prisrader %}
+        <div>
+          <dt>{{ r.namn }}{% if r.kommentar %}<small>{{ r.kommentar }}</small>{% endif %}</dt>
+          <dd>{{ r.pris }} <span>{{ r.enhet }}</span></dd>
+        </div>
+        {%- endfor %}
+      </dl>
+      {% if priser.fotnot %}<p class="small">{{ priser.fotnot }}</p>{% endif %}
+    </div>
+    {%- endif %}
+
+    {%- if synlighet.menyer and collections.menyer.length %}
+    <div class="menus" id="menyer">
+      <h3>Menyförslag</h3>
+      <div class="menu-grid">
+        {%- for m in collections.menyer %}
+        <article class="menu-card">
+          {% if m.data.kategori %}<p class="eyebrow">{{ m.data.kategori }}</p>{% endif %}
+          <h4>{{ m.data.title }}</h4>
+          {% if m.data.beskrivning %}<p class="menu-desc">{{ m.data.beskrivning }}</p>{% endif %}
+          {% if m.content | striptags | trim %}<div class="menu-body">{{ m.content | safe }}</div>{% endif %}
+          {% if m.data.pdf %}<a class="link" href="{{ m.data.pdf }}" target="_blank" rel="noopener">Öppna menyn (PDF) ↗</a>{% endif %}
+        </article>
+        {%- endfor %}
+      </div>
+    </div>
+    {%- endif %}
+
+    {%- if synlighet.leverans and (site.leverans_info or site.leverans_omraden.length or site.framforhallning) %}
+    <div class="delivery">
+      <h3>Leverans och upphämtning</h3>
+      {% if site.leverans_satt.length %}<ul class="tags">{% for x in site.leverans_satt %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+      {% if site.leverans_omraden.length %}<p><strong>Vi levererar till:</strong> {{ site.leverans_omraden | join(", ") }}</p>{% endif %}
+      {% if site.leverans_info %}{{ site.leverans_info | md | safe }}{% endif %}
+      {% if site.framforhallning %}<p><strong>Beställ i god tid:</strong> {{ site.framforhallning }}</p>{% endif %}
+    </div>
+    {%- endif %}
+
+    <div class="note">
+      <p><strong>Vad kostar det?</strong> Varje beställning sätts ihop efter era önskemål. Skicka en förfrågan med datum och antal gäster så får ni menyförslag och offert.</p>
+      <a href="#offertformular" class="btn">Begär offert</a>
+    </div>
+  </div>
+</section>
+
+{%- if synlighet.privat_kock %}
+<section class="section" id="privat-kock">
+  <div class="wrap split">
+    <img src="{{ s.kock_bild }}" alt="Rätt lagad av privat kock">
+    <div>
+      <p class="eyebrow">Privat kock</p>
+      <h2>{{ s.kock_rubrik }}</h2>
+      {{ s.kock_text | md | safe }}
+      {% if s.kock_punkter.length %}<ul class="ticks">{% for p in s.kock_punkter %}<li>{{ p }}</li>{% endfor %}</ul>{% endif %}
+      <div class="hero-actions"><a href="#offertformular" class="btn">Be om exempelmenyer</a>{% if collections.tjanst | harUrl("/privat-kock/") %}<a href="/privat-kock/" class="btn btn-ghost-dark">Läs mer om privat kock</a>{% endif %}</div>
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{%- if synlighet.lokal %}
+<section class="section section-dark" id="lokalen">
+  <div class="wrap split split-reverse">
+    <img src="{{ s.lokal_bild }}" alt="Dukat bord med höstmiddag">
+    <div>
+      <p class="eyebrow">Lokal &amp; event</p>
+      <h2>{{ s.lokal_rubrik }}</h2>
+      {{ s.lokal_text | md | safe }}
+      <div class="hero-actions">
+        {% if collections.tjanst | harUrl("/lokal-kungalv/") %}<a href="/lokal-kungalv/" class="btn btn-light">Läs mer om lokalen</a>{% else %}<a href="#offertformular" class="btn btn-light">Fråga om lokalen</a>{% endif %}
+        {% if synlighet.instagram %}<a href="#instagram" class="btn btn-ghost">Kommande event</a>{% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{%- if synlighet.nyheter and collections.nyheter.length %}
+<section class="section" id="nyheter">
+  <div class="wrap">
+    <div class="section-head section-head-row">
+      <div><p class="eyebrow">Nyheter</p><h2>Senaste nytt</h2></div>
+      <a href="/nyheter/" class="link">Alla nyheter →</a>
+    </div>
+    <div class="news-grid">
+      {%- for n in collections.nyheter | first(3) %}
+      {% include "nyhetskort.njk" %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{%- if synlighet.instagram %}
+<section class="section section-alt" id="instagram">
+  <div class="wrap">
+    <div class="section-head section-head-row">
+      <div><p class="eyebrow">Instagram · @{{ site.instagram_anvandare }}</p><h2>{{ s.instagram_rubrik or "Följ oss på Instagram" }}</h2>
+        {% if s.instagram_text %}<p class="intro">{{ s.instagram_text }}</p>{% endif %}</div>
+      <a href="https://www.instagram.com/{{ site.instagram_anvandare }}/" class="btn" target="_blank" rel="noopener">Följ på Instagram</a>
+    </div>
+    {%- if site.instagram_behold_id %}
+    <script type="module" src="https://w.behold.so/widget.js"></script>
+    <behold-widget feed-id="{{ site.instagram_behold_id }}"></behold-widget>
+    {%- elif site.instagram_inlagg.length %}
+    <div class="ig-grid">
+      {%- for i in site.instagram_inlagg %}
+      <blockquote class="instagram-media" data-instgrm-permalink="{{ i.url or i }}" data-instgrm-version="14"><a href="{{ i.url or i }}">Visa inlägget på Instagram</a></blockquote>
+      {%- endfor %}
+    </div>
+    <script async src="https://www.instagram.com/embed.js"></script>
+    {%- endif %}
+  </div>
+</section>
+{%- endif %}
+
+{%- if synlighet.butik %}
+<section class="section" id="butik">
+  <div class="wrap narrow center">
+    <p class="eyebrow">Butik &amp; deli</p>
+    <h2>{{ s.butik_rubrik }}</h2>
+    <p>{{ s.butik_text }}</p>
+    <a href="#offertformular" class="btn">Beställ en presentkorg</a>
+  </div>
+</section>
+{%- endif %}
+
+{%- if synlighet.omdomen and s.omdomen.length %}
+<section class="section section-alt" id="omdomen">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">Kunderna om oss</p><h2>Det säger de vi lagat mat åt</h2></div>
+    <div class="quotes">
+      {%- for o in s.omdomen %}
+      <figure><blockquote>{{ o.citat }}</blockquote><figcaption>{{ o.vem }}</figcaption></figure>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section" id="om-oss">
+  <div class="wrap split">
+    <img src="{{ s.om_bild }}" alt="{{ s.om_rubrik }}">
+    <div>
+      <p class="eyebrow">Om oss</p>
+      <h2>{{ s.om_rubrik }}</h2>
+      <p>{{ s.om_intro }}</p>
+      {%- for p in s.personer %}
+      <h3>{{ p.namn }}</h3>
+      <p>{{ p.text }}</p>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{%- if synlighet.fragor and faq.fragor.length %}
+<section class="section" id="fragor">
+  <div class="wrap narrow">
+    <div class="section-head"><p class="eyebrow">Frågor och svar</p><h2>{{ faq.rubrik }}</h2></div>
+    <div class="faq">
+      {%- for f in faq.fragor %}
+      <details{% if loop.first %} open{% endif %}><summary>{{ f.fraga }}</summary><p>{{ f.svar }}</p></details>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section section-alt" id="kontakt">
+  <div class="wrap contact">
+    <div>
+      <p class="eyebrow">Kontakt</p>
+      <h2>Berätta vad ni planerar</h2>
+      <p>Mejla oss gärna på <a href="mailto:{{ site.epost }}">{{ site.epost }}</a> eller skicka en förfrågan här. Det är enklast för oss, eftersom vi ofta står i köket. Vi återkommer med förslag och offert{% if site.svarstid %} – {{ site.svarstid }}{% endif %}.</p>
+      <ul class="contact-list">
+        <li><span>E-post</span><a href="mailto:{{ site.epost }}">{{ site.epost }}</a></li>
+        <li><span>Telefon</span><a href="tel:{{ site.telefon | tel }}">{{ site.telefon }}</a></li>
+        <li><span>Adress</span>{{ site.gatuadress }}, {{ site.postnummer }} {{ site.ort }}</li>
+        <li><span>Instagram</span><a href="https://www.instagram.com/{{ site.instagram_anvandare }}/" target="_blank" rel="noopener">@{{ site.instagram_anvandare }}</a></li>
+      </ul>
+      <iframe class="map" title="Karta till {{ site.gatuadress }}, {{ site.ort }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q={{ (site.gatuadress + ', ' + site.postnummer + ' ' + site.ort) | urlencode }}&z=15&output=embed"></iframe>
+    </div>
+    {% set valt = "Catering – fest" %}{% include "offertform.njk" %}
+  </div>
+</section>
