@@ -2,6 +2,9 @@
 
 Hemsida för Mat på Fat: catering, privat kock och eventlokal i Kungälv.
 
+- **Live på Netlify:** https://matpafat-kungalv.netlify.app (projekt `matpafat-kungalv`)
+- **Admin:** https://matpafat-kungalv.netlify.app/admin/ (fungerar när GitHub-inloggningen är uppsatt)
+
 - Byggs med [Eleventy](https://www.11ty.dev/) till en statisk sida (`_site/`).
 - Innehåll (priser, menyer, nyheter, texter) redigeras i ett admin-gränssnitt på `/admin`
   ([Sveltia CMS](https://github.com/sveltia/sveltia-cms)) som sparar direkt i det här repot.
