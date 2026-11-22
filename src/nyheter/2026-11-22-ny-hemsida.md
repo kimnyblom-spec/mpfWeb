@@ -1,6 +1,6 @@
 ---
 title: Välkommen till vår nya hemsida!
-date: 2026-11-20
+date: 2026-11-22
 ingress: Nu har vi fått en ny hemsida med priser, menyförslag och nyheter samlade på ett ställe.
 bild: /img/hero.jpg
 bildtext: Dukat långbord med smårätter och citroner
