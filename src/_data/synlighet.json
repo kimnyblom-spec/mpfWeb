@@ -5,7 +5,7 @@
   "nyheter": true,
   "instagram": true,
   "butik": true,
-  "omdomen": false,
+  "omdomen": true,
   "fragor": true,
   "privat_kock": true,
   "lokal": true
