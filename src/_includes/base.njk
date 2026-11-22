@@ -102,6 +102,10 @@
   }
   document.addEventListener('click', e => {
     const a = e.target.closest('a[href$="#offertformular"]');
+    // Knappar med data-typ väljer rätt alternativ i formuläret, t.ex. "Presentkorg"
+    const val = a && a.dataset.typ;
+    const sel = document.querySelector('#offertformular select[name="typ"]');
+    if (val && sel && [...sel.options].some(o => o.value === val)) sel.value = val;
     if (a && a.pathname === location.pathname && tillFormular(true)) {
       e.preventDefault();
       history.replaceState(null, '', '#offertformular');
