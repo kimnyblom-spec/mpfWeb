@@ -1,18 +1,12 @@
 ---
-title: Catering till minnesstund i Kungälv
 kort_namn: Minnesstund
+title: Catering till minnesstund i Kungälv
 adress: minnesstund-catering
 seo_titel: Catering till minnesstund i Kungälv | Mat på Fat
 seo_beskrivning: Vi ordnar mat och fika till minnesstunden, dukar fint med ljus och blommor, serverar och diskar – så att ni kan vara närvarande. Mat på Fat i Kungälv.
 ingress: Vi tar hand om mat, dukning, servering och disk så att ni kan lägga fokus på att vara närvarande i stunden.
 bild: /img/hero.jpg
 bildtext: Dukat bord med bröd och gröna kvistar
-menykategori: Minnesstund
-fokus: true
-formval: Minnesstund
-visa: true
-meny_namn: "Minnesstund"
-ordning: 2
 punkter:
   - Allt från landgång och smörgåstårta till varm tallriksservering
   - Tårtor, fika och desserter
@@ -20,6 +14,12 @@ punkter:
   - Servering, undanplockning och disk
   - Plats för upp till 45 personer i vår lokal i Rollsbo
   - Bara leverans om ni hellre ordnar resten själva
+menykategori: Minnesstund
+formval: Minnesstund
+visa: true
+meny_namn: Minnesstund
+fokus: true
+ordning: 2
 fragor:
   - fraga: Vad brukar man servera på en minnesstund?
     svar: Allt från landgång och smörgåstårta till varm tallriksservering. Vi gör även tårtor, fika och desserter. Vi hjälper er att välja något som passar antalet gäster, tiden på dagen och vad den som har gått bort tyckte om.
@@ -32,11 +32,12 @@ fragor:
   - fraga: Kan ni ta hänsyn till allergier och specialkost?
     svar: Ja. Vi anpassar maten efter gästernas behov av specialkost och vid allergier. Berätta om det när ni hör av er.
 ---
+
 ## Omtanke i varje detalj
 
 En minnesstund är ett tillfälle att samlas, minnas och dela berättelser. Då ska ingen behöva tänka på kaffebryggare, disk eller om maten räcker.
 
-Vi kommer till er, lägger på dukar, sätter ljus och blommor på borden, serverar och plockar undan. Vi stannar under hela minnesstunden och ser till att allt fungerar, så att ni kan lägga fokus på att vara närvarande.
+Vi kommer till er, dukar, sätter ljus och blommor på borden, serverar och plockar undan. Vi stannar under hela minnesstunden och ser till att allt fungerar, så att ni kan lägga fokus på att vara närvarande.
 
 ## Vad vill ni ha?
 
