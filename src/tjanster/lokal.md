@@ -5,7 +5,7 @@ adress: lokal-kungalv
 seo_titel: Festlokal i Kungälv för 45 personer | Mat på Fat
 seo_beskrivning: Hyr vår lokal i Rollsbo i Kungälv för fest, kundkväll, minnesstund eller workshop. Plats för upp till 45 personer och mat från vårt eget kök.
 ingress: Vår lokal i Rollsbo i Kungälv har plats för upp till 45 personer. Maten lagar vi i köket intill.
-bild: /uploads/lokalen.webp
+bild: /uploads/lokalen4.webp
 bildtext: Linnea och Matilda vid ett dukat bord
 punkter:
   - Plats för upp till 45 personer
