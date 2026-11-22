@@ -324,3 +324,10 @@ a.rating:hover { border-color: var(--olive); }
 .quotes figure { display: grid; gap: 10px; align-content: start; }
 .review-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .section:not(.section-alt) .quotes figure { background: #fff; }
+
+/* iPhone/Safari: datumfältet har egen minsta bredd och höjd – tvinga det att följa rutnätet */
+.form input, .form select { min-height: 2.9em; }
+.form input[type="date"] { -webkit-appearance: none; appearance: none; display: block; width: 100%; min-width: 0; max-width: 100%; text-align: left; }
+.form input[type="date"]::-webkit-date-and-time-value { text-align: left; margin: 0; }
+.form input[type="date"]::-webkit-calendar-picker-indicator { margin: 0; }
+.form .row > label { min-width: 0; }
