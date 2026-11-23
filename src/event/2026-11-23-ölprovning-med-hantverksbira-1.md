@@ -6,7 +6,7 @@ pris: '595'
 kapacitet: 30
 status: platser
 kort: Ge bort en ölprovning i julklapp – eller boka en kväll till dig själv!
-bild: ''
+bild: /uploads/matpafat_oktober2025-124.webp
 bildtext: ''
 utkast: true
 ---
