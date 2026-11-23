@@ -66,6 +66,14 @@ export default async (req) => {
       });
       return json({ ok: true });
     }
+    if (d.action === "status") {
+      if (!["anmald", "fakturerad", "betald"].includes(d.status)) return json({ fel: "Okänd status" }, 400);
+      await andra(ev.id, ev.dag, (post) => {
+        const b = post.bokningar.find((x) => x.id === d.id);
+        if (b) { b.status = d.status; b.status_andrad = new Date().toISOString(); }
+      });
+      return json({ ok: true });
+    }
     if (d.action === "flytta") {
       await andra(ev.id, ev.dag, (post) => {
         const b = post.ko.find((x) => x.id === d.id);
