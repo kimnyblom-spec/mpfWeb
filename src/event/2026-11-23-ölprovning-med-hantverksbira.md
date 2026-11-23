@@ -6,9 +6,9 @@ pris: '595'
 kapacitet: 30
 status: platser
 kort: Ge bort en ölprovning i julklapp – eller boka en kväll till dig själv!
-bild: ''
+bild: /uploads/matpafat_oktober2025-25.webp
 bildtext: ''
-utkast: true
+utkast: false
 ---
 
 Tillsammans med  hantverksbira bjuder vi in till en avslappnad ölprovning hos Mat på fat. Vi provar 5-6 olika hantverksöl, upptäcker smaker och njuter av en plocktallrik. Inga förkunskaper behövs!
