@@ -1,18 +1,29 @@
 <form class="form" id="offertformular" name="offert" method="POST" action="/tack/" data-netlify="true" netlify-honeypot="bot-field">
   <input type="hidden" name="form-name" value="offert">
   <p class="hidden-field"><label>Fyll inte i detta fält: <input name="bot-field"></label></p>
-  <h3>Offertförfrågan</h3>
+  <h3 class="form-rubrik">Offertförfrågan</h3>
   <label>Vad gäller det?
     <select name="typ">
 {%- set val = valt or "Catering – fest" %}
-      {%- for o in ["Catering – fest","Catering – företag","Företagsevent i er lokal","Bröllop","Minnesstund","Tårta / efterrätt","Privat kock","Hyra lokalen / event","Presentkorg","Annat"] %}
+      {%- for o in ["Catering – fest","Catering – företag","Företagsevent i er lokal","Bröllop","Minnesstund","Tårta / efterrätt","Privat kock","Hyra lokalen / event","Anmälan till event","Presentkorg","Annat"] %}
+      {%- if o != "Anmälan till event" or collections.kommandeEvent.length %}
       <option{% if o == val %} selected{% endif %}>{{ o }}</option>
+      {%- endif %}
       {%- endfor %}
     </select>
   </label>
+  {%- if collections.kommandeEvent.length %}
+  <label class="form-event"{% if val != "Anmälan till event" %} hidden{% endif %}>Vilket event?
+    <select name="event"{% if val != "Anmälan till event" %} disabled{% endif %}>
+      {%- for e in collections.kommandeEvent %}{% set n = e.data.title + " – " + (e.data.datum | evdag("kort")) %}
+      <option value="{{ n }}"{% if n == valtEvent %} selected{% endif %} data-dag="{{ e.data.datum | isodatum }}">{{ n }}{% if e.data.status == "fullbokat" %} (fullbokat – kö){% endif %}</option>
+      {%- endfor %}
+    </select>
+  </label>
+  {%- endif %}
   <div class="row">
-    <label>Datum<input type="date" name="datum"></label>
-    <label>Antal gäster<input type="number" name="antal" min="1" inputmode="numeric"></label>
+    <label class="form-datum">Datum<input type="date" name="datum"></label>
+    <label><span class="form-antal">Antal gäster</span><input type="number" name="antal" min="1" inputmode="numeric"></label>
   </div>
   <label>Namn<input type="text" name="namn" autocomplete="name" required></label>
   <div class="row">
@@ -20,6 +31,6 @@
     <label>Telefon<input type="tel" name="telefon" autocomplete="tel"></label>
   </div>
   <label>Berätta mer<textarea name="meddelande" rows="3" placeholder="Plats, önskemål, allergier, budget …"></textarea></label>
-  <button type="submit" class="btn">Skicka förfrågan</button>
+  <button type="submit" class="btn form-skicka">Skicka förfrågan</button>
   <p class="form-privacy">När du skickar ett meddelande till oss behandlar vi dina personuppgifter (kontaktuppgifter och uppgifter om ert event) för att kunna besvara din förfrågan. Läs mer om hur vi hanterar dina uppgifter och dina rättigheter i vår <a href="/integritetspolicy/">integritetspolicy</a>.</p>
 </form>

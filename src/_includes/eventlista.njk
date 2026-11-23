@@ -1,0 +1,31 @@
+{#- Lista med event. Sätt eventLista (och ev. eventAntal) innan include. -#}
+{%- set statusText = { platser: "Platser kvar", fa: "Få platser kvar", fullbokat: "Fullbokat" } %}
+{%- set lista = eventLista | first(eventAntal or 50) %}
+<div class="event-list" data-event-lista>
+  {%- for e in lista %}
+  {%- set st = e.data.status or "platser" %}
+  {%- set evnamn = e.data.title + " – " + (e.data.datum | evdag("kort")) %}
+  <article class="event-card" data-dag="{{ e.data.datum | isodatum }}">
+    <a class="event-date" href="{{ e.url }}" aria-hidden="true" tabindex="-1">
+      <span class="event-wd">{{ e.data.datum | evdag("veckodag") }}</span>
+      <span class="event-d">{{ e.data.datum | evdag("dag") }}</span>
+      <span class="event-m">{{ e.data.datum | evdag("manad") }}</span>
+    </a>
+    <div class="event-main">
+      <p class="event-meta"><time datetime="{{ e.data.datum | isodatum }}">{{ e.data.datum | evdag("lang") }}</time>{% if e.data.tid %} · {{ e.data.tid }}{% endif %}</p>
+      <h3><a href="{{ e.url }}">{{ e.data.title }}</a></h3>
+      {% if e.data.kort %}<p class="event-text">{{ e.data.kort }}</p>{% endif %}
+    </div>
+    <div class="event-side">
+      {% if e.data.pris %}<p class="event-price">{{ e.data.pris }}</p>{% endif %}
+      <span class="event-status event-status-{{ st }}">{{ statusText[st] }}</span>
+      {%- if st == "fullbokat" %}
+      <a href="#offertformular" class="btn btn-small btn-ghost-dark" data-typ="Anmälan till event" data-event="{{ evnamn }}" data-ko>Ställ dig i kö</a>
+      {%- else %}
+      <a href="#offertformular" class="btn btn-small" data-typ="Anmälan till event" data-event="{{ evnamn }}">Anmäl dig</a>
+      {%- endif %}
+    </div>
+  </article>
+  {%- endfor %}
+  <p class="event-empty"{% if lista.length %} hidden{% endif %}>Inga event inbokade just nu. Följ oss på <a href="https://www.instagram.com/{{ site.instagram_anvandare }}/" target="_blank" rel="noopener">Instagram</a> så missar du inte nästa.</p>
+</div>

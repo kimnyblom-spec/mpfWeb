@@ -15,6 +15,7 @@ punkter:
 menykategori: Fest
 formval: Hyra lokalen / event
 visa: true
+visa_event: true
 meny_namn: ''
 fokus: false
 ordning: 6

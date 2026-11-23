@@ -85,6 +85,44 @@ function nyhet(site, d, url, date) {
   };
 }
 
+function event(site, d, url) {
+  const dag = new Date(d.datum).toISOString().slice(0, 10);
+  // "18.00–20.30" -> start 18:00, slut 20:30 (svensk tid)
+  const tider = String(d.tid || "").match(/(\d{1,2})[.:](\d{2})/g) || [];
+  const tz = (t) => {
+    const [h, m] = t.split(/[.:]/);
+    const off = new Intl.DateTimeFormat("en", { timeZone: "Europe/Stockholm", timeZoneName: "longOffset" })
+      .format(new Date(dag + "T12:00:00Z")).split("GMT")[1] || "+01:00";
+    return `${dag}T${h.padStart(2, "0")}:${m}:00${off}`;
+  };
+  const pris = parseInt(String(d.pris || "").replace(/\s/g, ""), 10);
+  const tillgang = { platser: "InStock", fa: "LimitedAvailability", fullbokat: "SoldOut" }[d.status || "platser"];
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Event",
+        name: d.title,
+        description: d.kort,
+        startDate: tider[0] ? tz(tider[0]) : dag,
+        endDate: tider[1] ? tz(tider[1]) : undefined,
+        eventStatus: "https://schema.org/EventScheduled",
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        image: d.bild ? abs(site, d.bild) : abs(site, "/img/og.jpg"),
+        url: abs(site, url),
+        location: {
+          "@type": "Place",
+          name: site.namn,
+          address: { "@type": "PostalAddress", streetAddress: site.gatuadress, postalCode: site.postnummer, addressLocality: site.ort, addressCountry: "SE" },
+        },
+        organizer: { "@id": site.url + "/#foretag" },
+        offers: pris > 0 ? { "@type": "Offer", price: pris, priceCurrency: "SEK", availability: "https://schema.org/" + tillgang, url: abs(site, url) } : undefined,
+      },
+      brodsmulor(site, [{ namn: "Start", url: "/" }, { namn: "Event", url: "/event/" }, { namn: d.title, url }]),
+    ],
+  };
+}
+
 const faqSida = (fragor) => ({ "@context": "https://schema.org", ...faq(fragor) });
 
-export default { foretag, faq, faqSida, tjanst, nyhet, brodsmulor };
+export default { foretag, faq, faqSida, tjanst, nyhet, event, brodsmulor };

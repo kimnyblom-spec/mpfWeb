@@ -133,9 +133,23 @@ harKontakt: true
       {{ s.lokal_text | md | safe }}
       <div class="hero-actions">
         {% if collections.tjanst | harUrl("/lokal-kungalv/") %}<a href="/lokal-kungalv/" class="btn btn-light">Läs mer om lokalen</a>{% else %}<a href="#offertformular" class="btn btn-light" data-typ="Hyra lokalen / event">Fråga om lokalen</a>{% endif %}
-        {% if synlighet.instagram %}<a href="#instagram" class="btn btn-ghost">Kommande event</a>{% endif %}
+        {% if synlighet.event and collections.kommandeEvent.length %}<a href="#event" class="btn btn-ghost">Kommande event</a>{% elif synlighet.instagram %}<a href="#instagram" class="btn btn-ghost">Kommande event</a>{% endif %}
       </div>
     </div>
+  </div>
+</section>
+{%- endif %}
+
+{%- if synlighet.event and collections.kommandeEvent.length %}
+<section class="section" id="event" data-event-sektion>
+  <div class="wrap">
+    <div class="section-head section-head-row">
+      <div><p class="eyebrow">I vår lokal</p><h2>{{ s.event_rubrik or "Kommande event" }}</h2>
+        {% if s.event_text %}{{ s.event_text | md | safe }}{% endif %}</div>
+      <a href="/event/" class="link">Alla event →</a>
+    </div>
+    {%- set eventLista = collections.kommandeEvent %}{% set eventAntal = 3 %}
+    {% include "eventlista.njk" %}
   </div>
 </section>
 {%- endif %}

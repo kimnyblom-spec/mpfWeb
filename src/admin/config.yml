@@ -50,6 +50,37 @@ collections:
       - { name: utkast, label: Utkast (visas inte på sidan), widget: boolean, default: false, required: false }
       - { name: body, label: Text, widget: markdown }
 
+  # ---------------- EVENT ----------------
+  - name: event
+    label: Event
+    label_singular: Event
+    description: Kommande event i lokalen. Passerade event försvinner automatiskt från hemsidan dagen efter.
+    folder: src/event
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: [datum, title]
+    summary: "{{datum | date('YYYY-MM-DD')}} – {{title}} ({{status}})"
+    fields:
+      - { name: title, label: Namn på eventet, widget: string, hint: "T.ex. Pensla & Pimpla" }
+      - { name: datum, label: Datum, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
+      - { name: tid, label: Tid, widget: string, required: false, hint: "T.ex. 18.00–20.30" }
+      - { name: pris, label: Pris, widget: string, required: false, hint: "T.ex. 399 kr/person" }
+      - name: status
+        label: Platser
+        widget: select
+        default: platser
+        options:
+          - { label: Platser kvar, value: platser }
+          - { label: Få platser kvar, value: fa }
+          - { label: Fullbokat, value: fullbokat }
+      - { name: kort, label: Kort text, widget: text, hint: "En eller två meningar som visas i listan." }
+      - { name: bild, label: Bild, widget: image, required: false }
+      - { name: bildtext, label: Bildbeskrivning, widget: string, required: false }
+      - { name: utkast, label: Utkast (visas inte på sidan), widget: boolean, default: false, required: false }
+      - { name: body, label: Mer information, widget: markdown, required: false, hint: "Visas på eventets egen sida." }
+
   # ---------------- MENYER ----------------
   - name: menyer
     label: Menyförslag
@@ -104,6 +135,7 @@ collections:
         widget: select
         options: ["Catering – fest", "Catering – företag", "Företagsevent i er lokal", "Bröllop", "Minnesstund", "Tårta / efterrätt", "Privat kock", "Hyra lokalen / event", "Presentkorg", "Annat"]
       - { name: visa, label: Visa sidan på hemsidan, widget: boolean, default: true, hint: "Stäng av för att dölja sidan helt, också för Google. Innehållet sparas." }
+      - { name: visa_event, label: Visa kommande event på sidan, widget: boolean, default: false, required: false, hint: "T.ex. på sidan om lokalen." }
       - { name: meny_namn, label: Namn i huvudmenyn, widget: string, required: false, hint: "Fyll i för att visa sidan i menyn högst upp, t.ex. Bröllop. Lämna tomt för att inte visa den där." }
       - { name: fokus, label: Visa som stort kort på startsidan, widget: boolean, default: false, required: false }
       - { name: ordning, label: Ordning, widget: number, value_type: int, default: 10, hint: "Lägre nummer visas först." }
@@ -137,6 +169,7 @@ collections:
           - { name: fragor, label: Vanliga frågor på startsidan, widget: boolean, required: false }
           - { name: privat_kock, label: Privat kock på startsidan, widget: boolean, required: false, hint: "Själva tjänstesidan döljs under Tjänstesidor." }
           - { name: lokal, label: Lokalen på startsidan, widget: boolean, required: false, hint: "Själva tjänstesidan döljs under Tjänstesidor." }
+          - { name: event, label: Kommande event, widget: boolean, required: false, hint: "Eventen på startsidan, sidan Event, menyvalet Event och anmälan i formuläret. Visas bara när det finns kommande event." }
 
       - name: priser
         label: Priser
@@ -253,6 +286,8 @@ collections:
           - { name: lokal_rubrik, label: "Lokalen: rubrik", widget: string }
           - { name: lokal_text, label: "Lokalen: text", widget: markdown }
           - { name: lokal_bild, label: "Lokalen: bild", widget: image }
+          - { name: event_rubrik, label: "Event: rubrik", widget: string, required: false }
+          - { name: event_text, label: "Event: text", widget: markdown, required: false }
           - { name: event_bild, label: "Event: bild på kortet", widget: image }
           - { name: butik_rubrik, label: "Butik: rubrik", widget: string }
           - { name: butik_text, label: "Butik: text", widget: text }

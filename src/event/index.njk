@@ -1,0 +1,24 @@
+---
+layout: base.njk
+titel: Kommande event i Kungälv – Mat på Fat
+beskrivning: Keramik, akvarell, provningar och andra kvällar i vår lokal i Rollsbo, Kungälv. Se datum, pris och lediga platser och anmäl dig direkt.
+---
+<section class="section page-top">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">Event</p><h1 class="page-title">{{ startsida.event_rubrik or "Kommande event" }}</h1>
+      {% if startsida.event_text %}<div class="intro">{{ startsida.event_text | md | safe }}</div>{% endif %}</div>
+    {%- set eventLista = collections.kommandeEvent %}
+    {% include "eventlista.njk" %}
+  </div>
+</section>
+
+<section class="section section-alt" id="kontakt">
+  <div class="wrap contact">
+    <div>
+      <p class="eyebrow">Anmälan</p>
+      <h2>Anmäl dig</h2>
+      <p>Välj event i formuläret och skriv hur många ni är. Vi bekräftar din plats via mejl{% if site.svarstid %} {{ site.svarstid }}{% endif %}. Du kan också mejla <a href="mailto:{{ site.epost }}">{{ site.epost }}</a>.</p>
+    </div>
+    {% set valt = "Anmälan till event" %}{% include "offertform.njk" %}
+  </div>
+</section>

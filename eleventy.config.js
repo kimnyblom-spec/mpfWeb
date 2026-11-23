@@ -37,6 +37,14 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("tjanst", (api) =>
     api.getFilteredByGlob("src/tjanster/*.md").filter((p) => p.data.visa !== false).sort((a, b) => (a.data.ordning ?? 99) - (b.data.ordning ?? 99))
   );
+  // Event: alla som inte är utkast, närmast först. Passerade event tas bort när sidan byggs
+  // (och döljs dessutom i besökarens webbläsare dagen efter, ifall sidan inte byggts om sedan dess).
+  const idag = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Stockholm" }).format(new Date());
+  const evDag = (p) => new Date(p.data.datum).toISOString().slice(0, 10);
+  const allaEvent = (api) =>
+    api.getFilteredByGlob("src/event/*.md").filter((p) => !p.data.utkast && p.data.datum).sort((a, b) => evDag(a).localeCompare(evDag(b)));
+  eleventyConfig.addCollection("event", allaEvent);
+  eleventyConfig.addCollection("kommandeEvent", (api) => allaEvent(api).filter((p) => evDag(p) >= idag()));
   // Menyer i vald ordning
   eleventyConfig.addCollection("menyer", (api) =>
     api.getFilteredByGlob("src/menyer/*.md").sort((a, b) => (a.data.ordning ?? 99) - (b.data.ordning ?? 99))
@@ -60,6 +68,15 @@ export default function (eleventyConfig) {
   });
   // Omdömen som hör till en viss tjänstesida
   eleventyConfig.addFilter("forTjanst", (lista, namn) => (lista || []).filter((o) => o && o.tjanst && o.tjanst === namn));
+  // Datumdelar för event: "veckodag" (tor), "dag" (3), "manad" (dec), "kort" (3 december), "lang" (torsdag 3 december 2026)
+  eleventyConfig.addFilter("evdag", (d, del) => {
+    const f = (o) => new Intl.DateTimeFormat("sv-SE", { timeZone: "UTC", ...o }).format(new Date(d));
+    if (del === "veckodag") return f({ weekday: "short" }).replace(".", "");
+    if (del === "dag") return f({ day: "numeric" });
+    if (del === "manad") return f({ month: "short" }).replace(".", "");
+    if (del === "kort") return f({ day: "numeric", month: "long" });
+    return f({ weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  });
   eleventyConfig.addFilter("first", (arr, n) => (arr || []).slice(0, n));
 
   return {

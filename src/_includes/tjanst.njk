@@ -29,6 +29,19 @@ layout: base.njk
   </div>
 </section>
 
+{%- if visa_event and synlighet.event and collections.kommandeEvent.length %}
+<section class="section section-alt" id="event" data-event-sektion>
+  <div class="wrap">
+    <div class="section-head section-head-row">
+      <div><p class="eyebrow">Boka in dig</p><h2>{{ startsida.event_rubrik or "Kommande event" }}</h2></div>
+      <a href="/event/" class="link">Alla event →</a>
+    </div>
+    {%- set eventLista = collections.kommandeEvent %}{% set eventAntal = 6 %}
+    {% include "eventlista.njk" %}
+  </div>
+</section>
+{%- endif %}
+
 {%- set relmenyer = collections.menyer | medKategori(menykategori) %}
 {%- if synlighet.menyer and relmenyer.length %}
 <section class="section section-alt">

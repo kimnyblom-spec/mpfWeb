@@ -1,0 +1,45 @@
+---
+layout: base.njk
+---
+{%- set statusText = { platser: "Platser kvar", fa: "Få platser kvar", fullbokat: "Fullbokat" } %}
+{%- set st = status or "platser" %}
+{%- set evnamn = title + " – " + (datum | evdag("kort")) %}
+<article class="section page-top" data-dag="{{ datum | isodatum }}" data-event-sida>
+  <div class="wrap event-page">
+    <div class="article">
+      <a href="/event/" class="link">← Alla event</a>
+      <p class="event-meta"><time datetime="{{ datum | isodatum }}">{{ datum | evdag("lang") }}</time>{% if tid %} · {{ tid }}{% endif %}</p>
+      <h1 class="page-title">{{ title }}</h1>
+      <p class="event-passerat" hidden>Det här eventet har redan varit. <a href="/event/">Se kommande event</a></p>
+      {% if kort %}<p class="intro">{{ kort }}</p>{% endif %}
+      {% if bild %}<img class="article-img" src="{{ bild }}" alt="{{ bildtext or title }}" sizes="(max-width: 760px) 100vw, 640px">{% endif %}
+      <div class="article-body">{{ content | safe }}</div>
+    </div>
+    <aside class="service-card event-facts">
+      <h2>Fakta</h2>
+      <dl>
+        <dt>Datum</dt><dd>{{ datum | evdag("lang") }}</dd>
+        {% if tid %}<dt>Tid</dt><dd>{{ tid }}</dd>{% endif %}
+        {% if pris %}<dt>Pris</dt><dd>{{ pris }}</dd>{% endif %}
+        <dt>Plats</dt><dd>{{ plats or (site.gatuadress + ", " + site.ort) }}</dd>
+      </dl>
+      <span class="event-status event-status-{{ st }}">{{ statusText[st] }}</span>
+      {%- if st == "fullbokat" %}
+      <a href="#offertformular" class="btn btn-ghost-dark" data-typ="Anmälan till event" data-event="{{ evnamn }}" data-ko>Ställ dig i kö</a>
+      {%- else %}
+      <a href="#offertformular" class="btn" data-typ="Anmälan till event" data-event="{{ evnamn }}">Anmäl dig</a>
+      {%- endif %}
+    </aside>
+  </div>
+</article>
+
+<section class="section section-alt" id="kontakt">
+  <div class="wrap contact">
+    <div>
+      <p class="eyebrow">Anmälan</p>
+      <h2>{{ "Ställ dig i kö" if st == "fullbokat" else "Anmäl dig" }}</h2>
+      <p>{% if st == "fullbokat" %}Eventet är fullbokat, men det händer att platser blir lediga. Skicka formuläret så hör vi av oss om en plats blir ledig.{% else %}Skriv hur många ni är, så bekräftar vi din plats via mejl{% if site.svarstid %} {{ site.svarstid }}{% endif %}.{% endif %}</p>
+    </div>
+    {% set valt = "Anmälan till event" %}{% set valtEvent = evnamn %}{% include "offertform.njk" %}
+  </div>
+</section>

@@ -47,6 +47,9 @@
       {%- for t in collections.tjanst %}{% if t.data.meny_namn %}
       <a href="{{ t.url }}">{{ t.data.meny_namn }}</a>
       {%- endif %}{% endfor %}
+      {%- if synlighet.event and collections.kommandeEvent.length %}
+      <a href="/event/">Event</a>
+      {%- endif %}
       {%- if synlighet.nyheter %}
       <a href="/nyheter/">Nyheter</a>
       {%- endif %}
@@ -109,12 +112,51 @@
     // Knappar med data-typ väljer rätt alternativ i formuläret, t.ex. "Presentkorg"
     const val = a && a.dataset.typ;
     const sel = document.querySelector('#offertformular select[name="typ"]');
-    if (val && sel && [...sel.options].some(o => o.value === val)) sel.value = val;
+    if (val && sel && [...sel.options].some(o => o.value === val)) { sel.value = val; anpassaFormular(); }
+    // "Anmäl dig" på ett event väljer eventet i formuläret
+    const ev = document.querySelector('#offertformular select[name="event"]');
+    if (a && a.dataset.event && ev && [...ev.options].some(o => o.value === a.dataset.event)) {
+      ev.value = a.dataset.event;
+      const msg = document.querySelector('#offertformular textarea[name="meddelande"]');
+      if (msg && 'ko' in a.dataset && !msg.value) msg.value = 'Jag vill stå i kö om en plats blir ledig.';
+    }
     if (a && a.pathname === location.pathname && tillFormular(true)) {
       e.preventDefault();
       history.replaceState(null, '', '#offertformular');
     }
   });
+  // När "Anmälan till event" är valt visas eventlistan i formuläret, och datumfältet döljs
+  function anpassaFormular() {
+    const f = document.getElementById('offertformular');
+    const typ = f && f.querySelector('select[name="typ"]');
+    if (!typ) return;
+    const arEvent = typ.value === 'Anmälan till event';
+    const evLabel = f.querySelector('.form-event');
+    if (evLabel) { evLabel.hidden = !arEvent; evLabel.querySelector('select').disabled = !arEvent; }
+    const datum = f.querySelector('.form-datum');
+    if (datum) { datum.hidden = arEvent; datum.querySelector('input').disabled = arEvent; }
+    const antal = f.querySelector('.form-antal');
+    if (antal) antal.textContent = arEvent ? 'Antal platser' : 'Antal gäster';
+    f.querySelector('.form-rubrik').textContent = arEvent ? 'Anmälan' : 'Offertförfrågan';
+    f.querySelector('.form-skicka').textContent = arEvent ? 'Skicka anmälan' : 'Skicka förfrågan';
+  }
+  document.querySelector('#offertformular select[name="typ"]')?.addEventListener('change', anpassaFormular);
+  anpassaFormular();
+  // Passerade event döljs dagen efter, även om sidan inte har byggts om sedan dess
+  {
+    const d = new Date(), idag = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    document.querySelectorAll('.event-card[data-dag]').forEach(c => { if (c.dataset.dag < idag) c.remove(); });
+    document.querySelectorAll('[data-event-lista]').forEach(l => {
+      if (!l.querySelector('.event-card')) { l.querySelector('.event-empty').hidden = false; l.closest('[data-event-sektion]')?.remove(); }
+    });
+    document.querySelectorAll('#offertformular select[name="event"] option[data-dag]').forEach(o => { if (o.dataset.dag < idag) o.remove(); });
+    const sida = document.querySelector('[data-event-sida]');
+    if (sida && sida.dataset.dag < idag) {
+      sida.querySelector('.event-passerat').hidden = false;
+      sida.querySelectorAll('.event-facts .btn, .event-facts .event-status').forEach(e => e.remove());
+      document.getElementById('kontakt')?.remove();
+    }
+  }
   if (location.hash === '#offertformular') addEventListener('load', () => tillFormular(false));
   // Omdömen: "Läs mer" för långa texter, och karusell som rullar av sig själv när det finns fler än tre
   document.querySelectorAll('.review').forEach(r => {
