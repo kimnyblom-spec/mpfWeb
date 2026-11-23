@@ -206,6 +206,8 @@ collections:
           - { name: gatuadress, label: Gatuadress, widget: string }
           - { name: postnummer, label: Postnummer, widget: string }
           - { name: ort, label: Ort, widget: string }
+          - { name: latitud, label: "Koordinater: latitud", widget: string, required: false, hint: "För Google. I Google Maps: högerklicka på företaget, klicka på siffrorna överst så kopieras de. Första talet, t.ex. 57.87…" }
+          - { name: longitud, label: "Koordinater: longitud", widget: string, required: false, hint: "Andra talet, t.ex. 11.99…" }
           - { name: svarstid, label: Svarstid, widget: string, required: false, hint: "T.ex. oftast inom ett dygn på vardagar" }
           - { name: leverans_satt, label: Sätt att få maten, widget: list, required: false, hint: "T.ex. Upphämtning i Rollsbo, Leverans" }
           - { name: leverans_omraden, label: Leveransområden, widget: list, required: false, hint: "En ort per rad" }
@@ -256,7 +258,7 @@ collections:
         fields:
           - { name: seo_titel, label: Titel i Google, widget: string }
           - { name: seo_beskrivning, label: Beskrivning i Google, widget: text }
-          - { name: hero_etikett, label: "Toppbild: liten rad ovanför rubriken", widget: string }
+          - { name: hero_etikett, label: "Toppbild: liten rad ovanför rubriken", widget: string, hint: "Är en del av sidans huvudrubrik för Google. Börja gärna med Catering i Kungälv." }
           - { name: hero_rubrik, label: "Toppbild: rubrik", widget: string }
           - { name: hero_text, label: "Toppbild: text", widget: text }
           - { name: hero_bild, label: "Toppbild: bild", widget: image }

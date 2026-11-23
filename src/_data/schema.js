@@ -22,9 +22,12 @@ function foretag(site, startsida) {
       addressRegion: "Västra Götalands län",
       addressCountry: "SE",
     },
-    hasMap: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${site.gatuadress}, ${site.postnummer} ${site.ort}`),
-    sameAs: [`https://www.instagram.com/${site.instagram_anvandare}/`],
+    // Länken till Google-profilen gör att Google kopplar ihop hemsidan och företagsprofilen
+    hasMap: startsida?.google_lank || "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${site.gatuadress}, ${site.postnummer} ${site.ort}`),
+    sameAs: [`https://www.instagram.com/${site.instagram_anvandare}/`, startsida?.google_lank].filter(Boolean),
   };
+  const lat = parseFloat(String(site.latitud || "").replace(",", ".")), lng = parseFloat(String(site.longitud || "").replace(",", "."));
+  if (lat && lng) data.geo = { "@type": "GeoCoordinates", latitude: lat, longitude: lng };
   const omraden = (site.leverans_omraden || []).filter(Boolean);
   data.areaServed = (omraden.length ? omraden : [site.ort]).map((n) => ({ "@type": "City", name: n }));
   return data;

@@ -422,3 +422,15 @@ a.rating:hover { border-color: var(--olive); }
 }
 .form [hidden] { display: none !important; }
 .form-fel { margin: 0; padding: 10px 14px; border-radius: var(--radius); background: #f6e3d8; color: #7a3a1c; }
+
+/* Etiketten ovanför rubriken på startsidan är en del av h1 (för Google), men ser ut som förut */
+.hero h1 .eyebrow { display: block; font-family: var(--sans); line-height: 1.5; }
+.hero h1 .hero-rubrik { display: block; }
+
+/* Fler tjänster längst ner på tjänstesidorna */
+.fler-tjanster { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.fler-tjanster a { display: block; height: 100%; padding: 18px 20px; background: #fff; border-radius: var(--radius); text-decoration: none; color: var(--ink); transition: transform .2s, box-shadow .2s; }
+.fler-tjanster a:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(60, 50, 30, .1); }
+.fler-tjanster strong { display: block; font-weight: 400; font-size: 1.2rem; margin-bottom: 4px; }
+.fler-tjanster span { color: var(--muted); font-size: .95rem; }
+.section-alt .fler-tjanster a { background: var(--cream); }

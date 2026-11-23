@@ -85,6 +85,21 @@ layout: base.njk
 </section>
 {%- endif %}
 
+{#- Länkar till de andra tjänsterna: hjälper besökare vidare och Google att förstå sidorna -#}
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">Mer från Mat på Fat</p><h2>Fler tjänster i Kungälv</h2></div>
+    <ul class="fler-tjanster">
+      {%- for t in collections.tjanst %}{% if t.url != page.url %}
+      <li><a href="{{ t.url }}"><strong>{{ t.data.kort_namn }}</strong><span>{{ t.data.ingress | truncate(90) }}</span></a></li>
+      {%- endif %}{% endfor %}
+      {%- if synlighet.event and collections.kommandeEvent.length and page.url != "/event/" %}
+      <li><a href="/event/"><strong>Kommande event</strong><span>Kreativa kvällar med mat och dryck i vår lokal i Rollsbo.</span></a></li>
+      {%- endif %}
+    </ul>
+  </div>
+</section>
+
 <section class="section section-alt" id="kontakt">
   <div class="wrap contact">
     <div>
