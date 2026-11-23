@@ -11,8 +11,6 @@ bildtext: Julkort akvarell
 utkast: false
 ---
 
-Den 2 december bjuder vi in till en kreativ och julig kväll hos Mat på Fat!
-
 Tillsammans med konstnären Thea Dove målar vi egna julkort i akvarell. Ingen erfarenhet krävs – bara lusten att skapa.
 
 Under kvällen serverar vi plockmat från Mat på Fat och ett glas vin eller alkoholfritt.
