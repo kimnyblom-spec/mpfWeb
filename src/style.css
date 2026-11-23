@@ -421,3 +421,4 @@ a.rating:hover { border-color: var(--olive); }
   .event-page { grid-template-columns: 1fr; gap: 28px; }
 }
 .form [hidden] { display: none !important; }
+.form-fel { margin: 0; padding: 10px 14px; border-radius: var(--radius); background: #f6e3d8; color: #7a3a1c; }

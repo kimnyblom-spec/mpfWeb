@@ -16,7 +16,7 @@
   <label class="form-event"{% if val != "Anmälan till event" %} hidden{% endif %}>Vilket event?
     <select name="event"{% if val != "Anmälan till event" %} disabled{% endif %}>
       {%- for e in collections.kommandeEvent %}{% set n = e.data.title + " – " + (e.data.datum | evdag("kort")) %}
-      <option value="{{ n }}"{% if n == valtEvent %} selected{% endif %} data-dag="{{ e.data.datum | isodatum }}">{{ n }}{% if e.data.status == "fullbokat" %} (fullbokat – kö){% endif %}</option>
+      <option value="{{ n }}"{% if n == valtEvent %} selected{% endif %} data-dag="{{ e.data.datum | isodatum }}" data-ev="{{ e.url | evid }}"{% if e.data.kapacitet %} data-kapacitet="{{ e.data.kapacitet }}"{% endif %}>{{ n }}{% if e.data.status == "fullbokat" %} (fullbokat – kö){% endif %}</option>
       {%- endfor %}
     </select>
   </label>
@@ -31,6 +31,8 @@
     <label>Telefon<input type="tel" name="telefon" autocomplete="tel"></label>
   </div>
   <label>Berätta mer<textarea name="meddelande" rows="3" placeholder="Plats, önskemål, allergier, budget …"></textarea></label>
+  <input type="hidden" name="bokning" value="">
+  <p class="form-fel" role="alert" hidden></p>
   <button type="submit" class="btn form-skicka">Skicka förfrågan</button>
   <p class="form-privacy">När du skickar ett meddelande till oss behandlar vi dina personuppgifter (kontaktuppgifter och uppgifter om ert event) för att kunna besvara din förfrågan. Läs mer om hur vi hanterar dina uppgifter och dina rättigheter i vår <a href="/integritetspolicy/">integritetspolicy</a>.</p>
 </form>

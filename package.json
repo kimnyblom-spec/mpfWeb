@@ -16,5 +16,8 @@
     "@fontsource/fraunces": "5.2.9",
     "@sveltia/cms": "0.256.1",
     "markdown-it": "14.3.3"
+  },
+  "dependencies": {
+    "@netlify/blobs": "11.1.10"
   }
 }

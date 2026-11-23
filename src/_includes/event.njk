@@ -4,7 +4,7 @@ layout: base.njk
 {%- set statusText = { platser: "Platser kvar", fa: "Få platser kvar", fullbokat: "Fullbokat" } %}
 {%- set st = status or "platser" %}
 {%- set evnamn = title + " – " + (datum | evdag("kort")) %}
-<article class="section page-top" data-dag="{{ datum | isodatum }}" data-event-sida>
+<article class="section page-top" data-dag="{{ datum | isodatum }}" data-event-sida data-ev="{{ page.url | evid }}">
   <div class="wrap event-page">
     <div class="article">
       <a href="/event/" class="link">← Alla event</a>
@@ -21,13 +21,14 @@ layout: base.njk
         <dt>Datum</dt><dd>{{ datum | evdag("lang") }}</dd>
         {% if tid %}<dt>Tid</dt><dd>{{ tid }}</dd>{% endif %}
         {% if pris %}<dt>Pris</dt><dd>{{ pris }}</dd>{% endif %}
+        {% if kapacitet %}<dt>Platser</dt><dd data-ev-antal>{{ kapacitet }} platser</dd>{% endif %}
         <dt>Plats</dt><dd>{{ plats or (site.gatuadress + ", " + site.ort) }}</dd>
       </dl>
-      <span class="event-status event-status-{{ st }}">{{ statusText[st] }}</span>
+      <span class="event-status event-status-{{ st }}" data-ev-status>{{ statusText[st] }}</span>
       {%- if st == "fullbokat" %}
-      <a href="#offertformular" class="btn btn-ghost-dark" data-typ="Anmälan till event" data-event="{{ evnamn }}" data-ko>Ställ dig i kö</a>
+      <a href="#offertformular" class="btn btn-ghost-dark" data-typ="Anmälan till event" data-event="{{ evnamn }}" data-ko data-ev-knapp>Ställ dig i kö</a>
       {%- else %}
-      <a href="#offertformular" class="btn" data-typ="Anmälan till event" data-event="{{ evnamn }}">Anmäl dig</a>
+      <a href="#offertformular" class="btn" data-typ="Anmälan till event" data-event="{{ evnamn }}" data-ev-knapp>Anmäl dig</a>
       {%- endif %}
     </aside>
   </div>

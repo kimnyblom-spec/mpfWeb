@@ -138,11 +138,16 @@
     const antal = f.querySelector('.form-antal');
     if (antal) antal.textContent = arEvent ? 'Antal platser' : 'Antal gäster';
     f.querySelector('.form-rubrik').textContent = arEvent ? 'Anmälan' : 'Offertförfrågan';
-    f.querySelector('.form-skicka').textContent = arEvent ? 'Skicka anmälan' : 'Skicka förfrågan';
+    const valtEv = f.querySelector('select[name="event"]')?.selectedOptions[0];
+    f.querySelector('.form-skicka').textContent = !arEvent ? 'Skicka förfrågan' : valtEv?.dataset.full ? 'Ställ dig i kö' : 'Skicka anmälan';
+    const antalIn = f.querySelector('input[name="antal"]');
+    if (antalIn) { antalIn.required = arEvent; antalIn.max = arEvent && valtEv?.dataset.kvar && !valtEv.dataset.full ? Math.min(20, +valtEv.dataset.kvar) : ''; }
+    const fel = f.querySelector('.form-fel'); if (fel) fel.hidden = true;
     const msg = f.querySelector('textarea[name="meddelande"]');
     if (msg) { msg.dataset.ph ??= msg.placeholder; msg.placeholder = arEvent ? 'Allergier, önskemål …' : msg.dataset.ph; }
   }
   document.querySelector('#offertformular select[name="typ"]')?.addEventListener('change', anpassaFormular);
+  document.querySelector('#offertformular select[name="event"]')?.addEventListener('change', anpassaFormular);
   anpassaFormular();
   // Passerade event döljs dagen efter, även om sidan inte har byggts om sedan dess
   {
@@ -159,6 +164,74 @@
       document.getElementById('kontakt')?.remove();
     }
   }
+  // Lediga platser hämtas live, så att siffrorna alltid stämmer med bokningarna
+  const evOptions = document.querySelectorAll('#offertformular select[name="event"] option[data-ev]');
+  evOptions.forEach(o => { if (/fullbokat/.test(o.textContent)) o.dataset.full = '1'; });
+  if (document.querySelector('[data-ev], option[data-kapacitet]')) {
+    fetch('/api/platser').then(r => r.ok ? r.json() : {}).then(platser => {
+      const stat = (el, klass, text) => { if (!el) return; el.className = 'event-status event-status-' + klass; el.textContent = text; };
+      document.querySelectorAll('[data-ev]:not(option)').forEach(box => {
+        const i = platser[box.dataset.ev];
+        if (!i || i.kvar === null) return;
+        const full = i.stangd || i.kvar === 0;
+        stat(box.querySelector('[data-ev-status]'), full ? 'fullbokat' : i.kvar <= 3 ? 'fa' : 'platser',
+          full ? 'Fullbokat' : i.kvar <= 3 ? `Bara ${i.kvar} ${i.kvar === 1 ? 'plats' : 'platser'} kvar` : `${i.kvar} platser kvar`);
+        box.querySelectorAll('[data-ev-knapp]').forEach(b => {
+          b.textContent = full ? 'Ställ dig i kö' : 'Anmäl dig';
+          b.classList.toggle('btn-ghost-dark', full);
+          if (full) b.dataset.ko = ''; else delete b.dataset.ko;
+        });
+        const antal = box.querySelector('[data-ev-antal]');
+        if (antal) antal.textContent = full ? `Alla ${i.kapacitet} platser är bokade` : `${i.kvar} av ${i.kapacitet} platser kvar`;
+      });
+      evOptions.forEach(o => {
+        const i = platser[o.dataset.ev];
+        if (!i || i.kvar === null) return;
+        const full = i.stangd || i.kvar === 0;
+        o.dataset.kvar = i.kvar;
+        if (full) o.dataset.full = '1'; else delete o.dataset.full;
+        o.textContent = o.value + (full ? ' (fullbokat – kö)' : '');
+      });
+      anpassaFormular();
+    }).catch(() => {});
+  }
+  // Anmälan till event med antal platser bokas via hemsidans bokningssystem,
+  // och skickas sedan som vanligt vidare som mejl.
+  document.getElementById('offertformular')?.addEventListener('submit', async e => {
+    const f = e.currentTarget;
+    const opt = f.querySelector('select[name="event"]:not(:disabled)')?.selectedOptions[0];
+    if (!opt || !opt.dataset.ev || f.dataset.skickar === 'vanligt') return;
+    e.preventDefault();
+    if (f.dataset.skickar) return;
+    const fel = f.querySelector('.form-fel'), knapp = f.querySelector('.form-skicka'), knapptext = knapp.textContent;
+    const visaFel = t => { fel.textContent = t; fel.hidden = false; fel.scrollIntoView({ block: 'center', behavior: 'smooth' }); };
+    const data = Object.fromEntries(new FormData(f));
+    const ko = !!opt.dataset.full;
+    f.dataset.skickar = '1'; knapp.disabled = true; knapp.textContent = 'Skickar …';
+    const mejla = async (status) => {
+      f.querySelector('input[name="bokning"]').value = status;
+      await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(f)).toString() }).catch(() => {});
+    };
+    try {
+      const r = await fetch('/api/boka', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...data, event: opt.dataset.ev, ko }) });
+      const svar = await r.json().catch(() => ({}));
+      if (r.ok && svar.ok) {
+        await mejla(svar.ko ? 'Kö (finns i bokningslistan)' : 'Bokad (finns i bokningslistan)');
+        location.href = '/tack/?anmalan=' + (svar.ko ? 'ko' : 'bokad');
+        return;
+      }
+      if (r.status >= 500 || !svar.fel) throw new Error();
+      if (svar.kvar === 0) { opt.dataset.full = '1'; opt.dataset.kvar = 0; opt.textContent = opt.value + ' (fullbokat – kö)'; }
+      else if (svar.kvar) opt.dataset.kvar = svar.kvar;
+      anpassaFormular();
+      visaFel(svar.fel + (svar.kvar === 0 ? ' Klicka på knappen igen så ställer du dig i kö.' : ''));
+    } catch {
+      // Bokningssystemet svarar inte: skicka som vanligt mejl, så att anmälan inte försvinner
+      f.querySelector('input[name="bokning"]').value = 'EJ registrerad i bokningslistan – lägg in den för hand';
+      f.dataset.skickar = 'vanligt'; f.submit(); return;
+    }
+    delete f.dataset.skickar; knapp.disabled = false; if (knapp.textContent === 'Skickar …') knapp.textContent = knapptext;
+  });
   if (location.hash === '#offertformular') addEventListener('load', () => tillFormular(false));
   // Omdömen: "Läs mer" för långa texter, och karusell som rullar av sig själv när det finns fler än tre
   document.querySelectorAll('.review').forEach(r => {

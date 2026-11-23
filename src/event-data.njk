@@ -1,0 +1,9 @@
+---
+permalink: /event-data.json
+eleventyExcludeFromCollections: true
+---
+{%- set ut = [] %}
+{%- for e in collections.event %}{% if e.url %}
+{%- set ut = (ut.push({ id: e.url | evid, titel: e.data.title, namn: e.data.title + " – " + (e.data.datum | evdag("kort")), dag: e.data.datum | isodatum, tid: e.data.tid or "", kapacitet: (e.data.kapacitet | int) or null, stangd: e.data.status == "fullbokat", url: e.url }), ut) %}
+{%- endif %}{% endfor -%}
+{{ { event: ut } | dump | safe }}

@@ -8,8 +8,17 @@ noindex: true
 <section class="section page-top">
   <div class="wrap narrow center">
     <p class="eyebrow">Tack!</p>
-    <h1 class="page-title">Vi har fått din förfrågan</h1>
-    <p>Vi återkommer så snart vi kan{% if site.svarstid %}, {{ site.svarstid }}{% endif %}. Brådskar det går det bra att ringa oss på {{ site.telefon }}.</p>
+    <h1 class="page-title" id="tack-rubrik">Vi har fått din förfrågan</h1>
+    <p id="tack-text">Vi återkommer så snart vi kan{% if site.svarstid %}, {{ site.svarstid }}{% endif %}. Brådskar det går det bra att ringa oss på {{ site.telefon }}.</p>
     <a href="/" class="btn">Tillbaka till startsidan</a>
   </div>
 </section>
+<script>
+  const a = new URLSearchParams(location.search).get('anmalan');
+  if (a) {
+    document.getElementById('tack-rubrik').textContent = a === 'ko' ? 'Du står i kö' : 'Tack för din anmälan!';
+    document.getElementById('tack-text').textContent = a === 'ko'
+      ? 'Eventet är fullbokat just nu, men du står i kö. Vi hör av oss om en plats blir ledig.'
+      : 'Dina platser är reserverade. Vi skickar en bekräftelse via mejl, med information om hur du betalar.';
+  }
+</script>

@@ -77,6 +77,8 @@ export default function (eleventyConfig) {
     if (del === "kort") return f({ day: "numeric", month: "long" });
     return f({ weekday: "long", day: "numeric", month: "long", year: "numeric" });
   });
+  // Eventets id i bokningssystemet, t.ex. "pensla-pimpla-2026-12-03"
+  eleventyConfig.addFilter("evid", (url) => String(url || "").replace(/^\/event\//, "").replace(/\/$/, ""));
   eleventyConfig.addFilter("first", (arr, n) => (arr || []).slice(0, n));
 
   return {

@@ -19,6 +19,8 @@ ingress: Vi värnar om din integritet. Här beskriver vi vilka personuppgifter v
 
 När formuläret skickas registreras också tekniska uppgifter som IP-adress och vilken webbläsare du använder. Det görs för att skydda formuläret mot spam och missbruk.
 
+**När du anmäler dig till ett event** behandlar vi namn, e-postadress, telefonnummer (om du anger det), vilket event det gäller, antal platser och det du skriver i meddelandet. Anmälan sparas i vår bokningslista så att vi kan hålla koll på lediga platser och kön.
+
 **När du mejlar eller ringer oss** behandlar vi de uppgifter du lämnar, till exempel namn, e-postadress, telefonnummer och innehållet i ditt meddelande.
 
 **När du blir kund** behandlar vi också de uppgifter som behövs för att genomföra uppdraget och fakturera, till exempel leveransadress och fakturauppgifter.
@@ -33,6 +35,7 @@ Om du berättar om allergier eller specialkost för dig eller dina gäster anvä
 |---|---|
 | Besvara din förfrågan och ta fram menyförslag och offert | Åtgärder innan ett eventuellt avtal ingås |
 | Genomföra beställda uppdrag och leveranser | Fullgörande av avtal |
+| Hantera anmälningar till event, platser och kö | Åtgärder innan ett avtal ingås, och fullgörande av avtal |
 | Bokföring och fakturering | Rättslig förpliktelse (bokföringslagen) |
 | Skydda hemsidan och formuläret mot spam och missbruk | Berättigat intresse |
 | Anpassa maten efter allergier och specialkost | Ditt uttryckliga samtycke, som du lämnar genom att berätta om dem |
@@ -41,13 +44,14 @@ Om du berättar om allergier eller specialkost för dig eller dina gäster anvä
 
 - **Förfrågningar som inte leder till ett uppdrag** sparar vi högst 12 månader efter vår senaste kontakt, så att vi kan svara på eventuella följdfrågor.
 - **Uppgifter om kunder och uppdrag** sparar vi så länge det behövs för uppdraget och därefter så länge lagen kräver. Bokföringsunderlag sparas i sju år enligt bokföringslagen.
+- **Anmälningar till event** raderas automatiskt ur bokningslistan senast tre månader efter eventet. Ett mejl med anmälan kan finnas kvar i vår inkorg enligt punkten om förfrågningar ovan.
 - **Uppgifter om allergier och specialkost** raderar vi när uppdraget är genomfört.
 
 ## Vem som får ta del av uppgifterna
 
 Vi säljer aldrig dina uppgifter. Vi delar dem bara med de leverantörer som behövs för att driva hemsidan och vår verksamhet, och som behandlar uppgifterna för vår räkning:
 
-- **Netlify** – driftar hemsidan och tar emot förfrågningar från formuläret.
+- **Netlify** – driftar hemsidan, tar emot förfrågningar från formuläret och lagrar bokningslistan för event.
 - **Vår e-postleverantör** – tar emot och lagrar e-post till info@matpafat.se.
 - **Vår bokföringsbyrå eller vårt bokföringsprogram** – för uppgifter som behövs i bokföringen.
 

@@ -67,8 +67,10 @@ collections:
       - { name: datum, label: Datum, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
       - { name: tid, label: Tid, widget: string, required: false, hint: "T.ex. 18.00–20.30" }
       - { name: pris, label: Pris, widget: string, required: false, hint: "T.ex. 399 kr/person" }
+      - { name: kapacitet, label: Antal platser, widget: number, value_type: int, min: 1, required: false, hint: "Fyll i hur många platser som finns, t.ex. 20. Då räknar hemsidan ner automatiskt när folk anmäler sig, och bokningarna syns på matpafat.se/admin/bokningar. Lämna tomt om ni vill sköta platserna för hand." }
       - name: status
         label: Platser
+        hint: "Om Antal platser är ifyllt sköts detta automatiskt. Välj då Fullbokat bara om ni vill stänga bokningen i förtid."
         widget: select
         default: platser
         options:

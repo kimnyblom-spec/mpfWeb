@@ -1,0 +1,243 @@
+---
+permalink: /admin/bokningar/
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Bokningar – Mat på Fat</title>
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <style>
+    @font-face { font-family: "Fraunces"; font-weight: 400; src: url("/fonts/fraunces-latin-400-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Fraunces"; font-weight: 500; src: url("/fonts/fraunces-latin-500-normal.woff2") format("woff2"); }
+    :root { --cream: #f7f2ea; --sand: #efe6d8; --ink: #2b2a26; --muted: #6b665c; --olive: #4a5a3f; --olive-dark: #343f2c; --terracotta: #b0603a; --line: #ddd2bf; }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font: 16px/1.5 "Fraunces", Georgia, serif; }
+    header { background: #fff; border-bottom: 1px solid var(--line); }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; }
+    header img { height: 30px; width: auto; display: block; }
+    header nav { display: flex; gap: 16px; align-items: center; font-size: .95rem; }
+    a { color: var(--olive-dark); }
+    h1 { font-weight: 400; font-size: 2rem; margin: 32px 0 4px; }
+    .lead { color: var(--muted); margin: 0 0 24px; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; font: inherit; font-size: .9rem; padding: .5em 1.1em; border-radius: 999px; border: 1px solid var(--olive); background: var(--olive); color: #fff; cursor: pointer; text-decoration: none; }
+    .btn:hover { background: var(--olive-dark); }
+    .btn.ghost { background: transparent; color: var(--olive-dark); }
+    .btn.ghost:hover { background: var(--sand); }
+    .btn.liten { font-size: .8rem; padding: .3em .8em; }
+    .btn.fara { border-color: #c9b9a9; color: #7a3a1c; background: transparent; }
+    .btn.fara:hover { background: #f6e3d8; }
+    .login { max-width: 380px; margin: 64px auto; background: #fff; padding: 28px; border-radius: 6px; }
+    .login h1 { margin-top: 0; font-size: 1.6rem; }
+    label { display: block; font-size: .9rem; margin-bottom: 12px; }
+    input, textarea { display: block; width: 100%; margin-top: 4px; font: inherit; padding: .55em .7em; border: 1px solid var(--line); border-radius: 4px; background: #fff; }
+    .fel { background: #f6e3d8; color: #7a3a1c; padding: 10px 14px; border-radius: 4px; margin: 0 0 16px; }
+    .event { background: #fff; border-radius: 6px; margin: 0 0 20px; overflow: hidden; }
+    .event > summary { list-style: none; cursor: pointer; padding: 18px 20px; display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; }
+    .event > summary::-webkit-details-marker { display: none; }
+    .event > summary::before { content: "▸"; color: var(--muted); }
+    .event[open] > summary::before { content: "▾"; }
+    .ev-titel { font-size: 1.25rem; flex: 1 1 260px; }
+    .ev-titel small { display: block; font-size: .85rem; color: var(--muted); }
+    .matare { flex: 0 0 auto; text-align: right; font-size: .9rem; color: var(--muted); min-width: 160px; }
+    .matare strong { color: var(--ink); font-size: 1.15rem; font-weight: 500; }
+    .bar { height: 6px; background: var(--sand); border-radius: 3px; margin-top: 4px; overflow: hidden; }
+    .bar i { display: block; height: 100%; background: var(--olive); }
+    .bar i.full { background: var(--terracotta); }
+    .inne { padding: 0 20px 20px; }
+    .verktyg { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+    table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+    th, td { text-align: left; padding: 8px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-weight: 500; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+    td.num { text-align: center; }
+    td.medd { color: var(--muted); max-width: 280px; white-space: pre-wrap; }
+    .tag { font-size: .72rem; background: var(--sand); padding: 1px 6px; border-radius: 3px; color: var(--muted); margin-left: 4px; white-space: nowrap; }
+    h3 { font-weight: 500; font-size: 1rem; margin: 20px 0 6px; }
+    .tomt { color: var(--muted); font-style: italic; margin: 6px 0; }
+    .ny { background: var(--cream); padding: 14px; border-radius: 4px; margin: 14px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 12px; }
+    .ny .hel { grid-column: 1 / -1; }
+    .ny .rad { grid-column: 1 / -1; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .ny .rad label { display: flex; gap: 6px; align-items: center; margin: 0; }
+    .ny .rad input[type=checkbox] { width: auto; display: inline; margin: 0; }
+    .passerat { opacity: .75; }
+    .not { font-size: .85rem; color: var(--muted); margin: 32px 0; }
+    @media (max-width: 720px) {
+      h1 { font-size: 1.6rem; }
+      .ny { grid-template-columns: 1fr 1fr; }
+      table, tbody, tr, td { display: block; width: 100%; }
+      thead { display: none; }
+      tr { border-bottom: 1px solid var(--line); padding: 8px 0; }
+      td { border: 0; padding: 2px 0; }
+      td.num { text-align: left; }
+      td.num::before { content: "Antal: "; color: var(--muted); }
+      td.medd { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+<header><div class="wrap">
+  <a href="/"><img src="/img/logo-header.png" alt="Mat på Fat" width="720" height="123"></a>
+  <nav><a href="/admin/">Admin</a><a href="#" id="loggaut" hidden>Logga ut</a></nav>
+</div></header>
+
+<main class="wrap">
+  <form class="login" id="login" hidden>
+    <h1>Bokningar</h1>
+    <p class="lead">Skriv lösenordet för bokningslistan.</p>
+    <p class="fel" id="loginfel" hidden></p>
+    <label>Lösenord<input type="password" name="losen" autocomplete="current-password" required></label>
+    <button class="btn" type="submit">Logga in</button>
+  </form>
+
+  <div id="app" hidden>
+    <h1>Bokningar</h1>
+    <p class="lead">Anmälningar till era event. Bokningar raderas automatiskt tre månader efter eventet.</p>
+    <p class="fel" id="fel" hidden></p>
+    <div id="lista"></div>
+    <p class="not">Antal platser och status ändrar du på eventet i <a href="/admin/#/collections/event">admin</a>. Där visas också nya event, ungefär en minut efter att du sparat.</p>
+  </div>
+</main>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  let losen = '';
+  try { losen = sessionStorage.getItem('bokningLosen') || ''; } catch {}
+  let data = null;
+
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const datum = d => d ? new Intl.DateTimeFormat('sv-SE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(d + 'T00:00:00Z')) : '';
+  const tid = iso => new Intl.DateTimeFormat('sv-SE', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(iso));
+
+  async function api(method, body) {
+    const r = await fetch('/api/bokningar', { method, headers: { Authorization: 'Bearer ' + losen, 'Content-Type': 'application/json' }, body: body ? JSON.stringify(body) : undefined });
+    const svar = await r.json().catch(() => ({ fel: 'Något gick fel (' + r.status + ').' }));
+    if (r.status === 401) { loggaUt(svar.fel); throw new Error(svar.fel); }
+    if (!r.ok) throw new Error(svar.fel || 'Något gick fel.');
+    return svar;
+  }
+
+  function loggaUt(msg) {
+    losen = ''; try { sessionStorage.removeItem('bokningLosen'); } catch {}
+    $('#app').hidden = true; $('#loggaut').hidden = true; $('#login').hidden = false;
+    $('#loginfel').hidden = !msg; $('#loginfel').textContent = msg || '';
+  }
+
+  async function ladda() {
+    try {
+      data = await api('GET');
+      $('#login').hidden = true; $('#app').hidden = false; $('#loggaut').hidden = false; $('#fel').hidden = true;
+      rita();
+    } catch (e) {
+      if (losen) { $('#fel').textContent = e.message; $('#fel').hidden = false; $('#login').hidden = true; $('#app').hidden = false; }
+    }
+  }
+
+  function tabell(ev, rader, ko) {
+    if (!rader.length) return `<p class="tomt">${ko ? 'Ingen står i kö.' : 'Inga bokningar ännu.'}</p>`;
+    return `<table><thead><tr><th>Namn</th><th>Kontakt</th><th>Antal</th><th>Meddelande</th><th></th></tr></thead><tbody>${rader.map(b => `
+      <tr>
+        <td><strong>${esc(b.namn)}</strong>${b.kalla === 'manuell' ? '<span class="tag">tillagd för hand</span>' : ''}${b.fran_ko ? '<span class="tag">från kön</span>' : ''}<br><small style="color:var(--muted)">${esc(tid(b.skapad))}</small></td>
+        <td>${[b.epost && `<a href="mailto:${esc(b.epost)}">${esc(b.epost)}</a>`, b.telefon && `<a href="tel:${esc(b.telefon)}">${esc(b.telefon)}</a>`].filter(Boolean).join('<br>')}</td>
+        <td class="num">${esc(b.antal)}</td>
+        <td class="medd">${esc(b.meddelande)}</td>
+        <td style="white-space:nowrap">${ko ? `<button class="btn liten ghost" data-gor="flytta" data-ev="${esc(ev.id)}" data-id="${esc(b.id)}">Boka in</button> ` : ''}<button class="btn liten fara" data-gor="avboka" data-ev="${esc(ev.id)}" data-id="${esc(b.id)}" data-namn="${esc(b.namn)}">${ko ? 'Ta bort' : 'Avboka'}</button></td>
+      </tr>`).join('')}</tbody></table>`;
+  }
+
+  function rita() {
+    const evs = [...data.event].sort((a, b) => {
+      const pa = a.dag < data.idag, pb = b.dag < data.idag;
+      return pa !== pb ? (pa ? 1 : -1) : pa ? b.dag.localeCompare(a.dag) : a.dag.localeCompare(b.dag);
+    });
+    if (!evs.length) { $('#lista').innerHTML = '<p class="tomt">Inga event ännu. Lägg upp ett under Event i admin.</p>'; return; }
+    const oppna = new Set([...document.querySelectorAll('.event[open]')].map(d => d.dataset.ev));
+    const forsta = !document.querySelector('.event');
+    $('#lista').innerHTML = evs.map((ev, i) => {
+      const passerat = ev.dag && ev.dag < data.idag;
+      const kap = ev.kapacitet;
+      const pct = kap ? Math.min(100, Math.round(ev.bokade / kap * 100)) : 0;
+      const open = forsta ? (!passerat && i === 0) : oppna.has(ev.id);
+      return `<details class="event${passerat ? ' passerat' : ''}" data-ev="${esc(ev.id)}"${open ? ' open' : ''}>
+        <summary>
+          <span class="ev-titel">${esc(ev.titel)}<small>${esc(datum(ev.dag))}${ev.tid ? ' · ' + esc(ev.tid) : ''}${passerat ? ' · har varit' : ''}${ev.borttaget ? ' · borttaget i admin' : ''}</small></span>
+          <span class="matare">${kap ? `<strong>${ev.bokade}</strong> av ${kap} bokade · ${ev.kvar} kvar<span class="bar"><i class="${ev.kvar === 0 ? 'full' : ''}" style="width:${pct}%"></i></span>` : `<strong>${ev.bokade}</strong> bokade<br><small>Inget antal platser angivet</small>`}${ev.ko.length ? `<br>${ev.ko.length} i kö` : ''}</span>
+        </summary>
+        <div class="inne">
+          <div class="verktyg">
+            <button class="btn liten" data-gor="ladda-ner" data-ev="${esc(ev.id)}">Ladda ner (Excel)</button>
+            <button class="btn liten ghost" data-gor="visa-ny" data-ev="${esc(ev.id)}">Lägg till bokning</button>
+            ${ev.url && !passerat ? `<a class="btn liten ghost" href="${esc(ev.url)}" target="_blank">Visa eventet</a>` : ''}
+          </div>
+          <form class="ny" data-ev="${esc(ev.id)}" hidden>
+            <label class="hel">Namn<input name="namn" required></label>
+            <label>E-post<input name="epost" type="email"></label>
+            <label>Telefon<input name="telefon"></label>
+            <label>Antal platser<input name="antal" type="number" min="1" max="20" value="1" required></label>
+            <label class="hel">Meddelande, t.ex. allergier<textarea name="meddelande" rows="2"></textarea></label>
+            <div class="rad"><label><input type="checkbox" name="ko"> Lägg i kön</label><button class="btn liten" type="submit">Spara</button><button class="btn liten ghost" type="button" data-gor="stang-ny">Avbryt</button></div>
+          </form>
+          <h3>Bokade (${ev.bokade} ${ev.bokade === 1 ? 'plats' : 'platser'})</h3>
+          ${tabell(ev, ev.bokningar, false)}
+          ${ev.ko.length || ev.kvar === 0 ? `<h3>Kö</h3>${tabell(ev, ev.ko, true)}` : ''}
+        </div>
+      </details>`;
+    }).join('');
+  }
+
+  function laddaNer(ev) {
+    const rader = [['Status', 'Namn', 'E-post', 'Telefon', 'Antal', 'Meddelande', 'Bokad']];
+    const fyll = (lista, status) => lista.forEach(b => rader.push([status, b.namn, b.epost, b.telefon, b.antal, b.meddelande, new Date(b.skapad).toLocaleString('sv-SE')]));
+    fyll(ev.bokningar, 'Bokad'); fyll(ev.ko, 'Kö');
+    rader.push([], ['Totalt bokade platser', '', '', '', ev.bokade]);
+    const cell = v => { const s = String(v ?? ''); return /[;"\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+    const csv = '﻿' + rader.map(r => r.map(cell).join(';')).join('\r\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+    a.download = `bokningar-${ev.id}.csv`;
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  document.addEventListener('click', async e => {
+    const b = e.target.closest('[data-gor]'); if (!b) return;
+    const ev = data?.event.find(x => x.id === b.dataset.ev);
+    const gor = b.dataset.gor;
+    if (gor === 'ladda-ner' && ev) return laddaNer(ev);
+    if (gor === 'visa-ny') { const f = b.closest('.inne').querySelector('form.ny'); f.hidden = !f.hidden; if (!f.hidden) f.namn.focus(); return; }
+    if (gor === 'stang-ny') { b.closest('form').hidden = true; return; }
+    if (gor === 'avboka' && !confirm(`Ta bort ${b.dataset.namn}? Platserna blir lediga igen.`)) return;
+    if (gor === 'avboka' || gor === 'flytta') {
+      b.disabled = true;
+      try { await api('POST', { action: gor, event: b.dataset.ev, id: b.dataset.id }); await ladda(); }
+      catch (err) { alert(err.message); b.disabled = false; }
+    }
+  });
+
+  document.addEventListener('submit', async e => {
+    if (e.target.id === 'login') {
+      e.preventDefault();
+      losen = e.target.losen.value;
+      try { sessionStorage.setItem('bokningLosen', losen); } catch {}
+      const knapp = e.target.querySelector('button'); knapp.disabled = true;
+      await ladda(); knapp.disabled = false;
+      return;
+    }
+    if (e.target.matches('form.ny')) {
+      e.preventDefault();
+      const f = e.target, d = Object.fromEntries(new FormData(f));
+      try { await api('POST', { action: 'lagg-till', event: f.dataset.ev, ...d, ko: !!d.ko }); await ladda(); }
+      catch (err) { alert(err.message); }
+    }
+  });
+
+  $('#loggaut').addEventListener('click', e => { e.preventDefault(); loggaUt(); });
+  if (losen) ladda(); else loggaUt();
+})();
+</script>
+</body>
+</html>
