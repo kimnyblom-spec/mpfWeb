@@ -4,6 +4,7 @@ datum: 2026-12-03
 tid: 18.00–20.30
 pris: 399 kr/person
 status: fa
+utkast: true
 kort: Måla din egen keramik tillsammans med Lih Keramik. I priset ingår ett glas vin eller alkoholfritt och plockmat.
 bild: /uploads/pensla-och-pimpla.webp
 bildtext: Handdrejad keramik och penslar på ett bord
