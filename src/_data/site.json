@@ -1,5 +1,8 @@
 {
   "namn": "Mat på Fat",
+  "juridiskt_namn": "Mat på fat i Kungälv AB",
+  "orgnr": "5595018705",
+  "beskrivning": "Catering, bröllop, minnesstunder, företagsevent och privat kock. Egen eventlokal för upp till 45 personer i Rollsbo, Kungälv.",
   "url": "https://www.matpafat.se",
   "telefon": "0303-552 22",
   "epost": "info@matpafat.se",
@@ -7,9 +10,6 @@
   "postnummer": "442 40",
   "ort": "Kungälv",
   "svarstid": "",
-  "instagram_anvandare": "matpafat_catering",
-  "instagram_behold_id": "XizYwpSf0ltWa34bI808",
-  "instagram_inlagg": [],
   "leverans_satt": [
     "Upphämtning i Rollsbo",
     "Leverans",
@@ -18,7 +18,7 @@
   "leverans_omraden": [],
   "leverans_info": "",
   "framforhallning": "",
-  "beskrivning": "Catering, bröllop, minnesstunder, företagsevent och privat kock. Egen eventlokal för upp till 45 personer i Rollsbo, Kungälv.",
-  "juridiskt_namn": "",
-  "orgnr": ""
+  "instagram_anvandare": "matpafat_catering",
+  "instagram_behold_id": "XizYwpSf0ltWa34bI808",
+  "instagram_inlagg": []
 }
