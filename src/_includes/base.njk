@@ -139,6 +139,8 @@
     if (antal) antal.textContent = arEvent ? 'Antal platser' : 'Antal gäster';
     f.querySelector('.form-rubrik').textContent = arEvent ? 'Anmälan' : 'Offertförfrågan';
     f.querySelector('.form-skicka').textContent = arEvent ? 'Skicka anmälan' : 'Skicka förfrågan';
+    const msg = f.querySelector('textarea[name="meddelande"]');
+    if (msg) { msg.dataset.ph ??= msg.placeholder; msg.placeholder = arEvent ? 'Allergier, önskemål …' : msg.dataset.ph; }
   }
   document.querySelector('#offertformular select[name="typ"]')?.addEventListener('change', anpassaFormular);
   anpassaFormular();
