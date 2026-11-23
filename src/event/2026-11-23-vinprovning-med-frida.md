@@ -6,9 +6,9 @@ pris: '595'
 kapacitet: 30
 status: platser
 kort: Ge bort en vinprovning i julklapp!
-bild: ''
+bild: /uploads/matpafat_oktober2025-16.webp
 bildtext: ''
-utkast: true
+utkast: false
 ---
 
 Välkommen till en avslappnad vinprovning hos Mat på Fat. Tillsammans med bästa sommelier-Frida provar vi fem olika viner och upptäcker nya smaker.
