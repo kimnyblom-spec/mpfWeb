@@ -59,7 +59,7 @@ Hemsidan använder inga egna kakor för statistik eller marknadsföring.
 
 På vissa sidor visas innehåll från andra tjänster:
 
-- **Google Maps** – kartan på kontaktsidan hämtas från Google, som kan sätta egna kakor och registrera ditt besök enligt Googles integritetspolicy.
+- **Google Maps** – kartan på startsidan laddas först när du klickar på "Visa karta". Då hämtas den från Google, som kan sätta egna kakor och registrera ditt besök enligt Googles integritetspolicy. Klickar du inte laddas inget från Google.
 - **Instagram-flödet** – bilderna från vårt Instagram-konto hämtas via tjänsten Behold.
 
 När du klickar på länkar till Google, Instagram eller andra webbplatser gäller den webbplatsens egen integritetspolicy.

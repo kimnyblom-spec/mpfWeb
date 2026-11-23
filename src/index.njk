@@ -239,8 +239,18 @@ harKontakt: true
         <li><span>Adress</span>{{ site.gatuadress }}, {{ site.postnummer }} {{ site.ort }}</li>
         <li><span>Instagram</span><a href="https://www.instagram.com/{{ site.instagram_anvandare }}/" target="_blank" rel="noopener">@{{ site.instagram_anvandare }}</a></li>
       </ul>
-      <iframe class="map" title="Karta till {{ site.gatuadress }}, {{ site.ort }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        src="https://maps.google.com/maps?q={{ (site.gatuadress + ', ' + site.postnummer + ' ' + site.ort) | urlencode }}&z=15&output=embed"></iframe>
+      {%- set kartadress = site.gatuadress + ', ' + site.postnummer + ' ' + site.ort %}
+      <div class="map map-consent" data-src="https://maps.google.com/maps?q={{ kartadress | urlencode }}&z=15&output=embed" data-title="Karta till {{ site.gatuadress }}, {{ site.ort }}">
+        <div class="map-consent-inner">
+          <svg class="map-pin" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <p class="map-address">{{ site.gatuadress }}<br>{{ site.postnummer }} {{ site.ort }}</p>
+          <div class="map-actions">
+            <button type="button" class="btn btn-small map-show">Visa karta</button>
+            <a class="btn btn-small btn-ghost-dark" href="{{ startsida.google_lank or ('https://www.google.com/maps/search/?api=1&query=' + (kartadress | urlencode)) }}" target="_blank" rel="noopener">Öppna i Google Maps</a>
+          </div>
+          <p class="map-note">Kartan hämtas från Google, som då kan sätta kakor. <a href="/integritetspolicy/">Läs mer</a></p>
+        </div>
+      </div>
     </div>
     {% set valt = "Catering – fest" %}{% include "offertform.njk" %}
   </div>

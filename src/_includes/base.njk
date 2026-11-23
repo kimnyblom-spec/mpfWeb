@@ -141,6 +141,13 @@
       setInterval(() => { if (!paus && !document.hidden && c.getBoundingClientRect().top < innerHeight) go(1); }, 6000);
     }
   });
+  // Google-kartan laddas först när besökaren klickar på "Visa karta"
+  document.querySelectorAll('.map-consent').forEach(m => m.querySelector('.map-show').addEventListener('click', () => {
+    const f = document.createElement('iframe');
+    f.className = 'map'; f.title = m.dataset.title; f.src = m.dataset.src;
+    f.referrerPolicy = 'no-referrer-when-downgrade';
+    m.replaceWith(f);
+  }));
   nav.addEventListener('click', e => {
     if (e.target.tagName === 'A') { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', false); }
   });
