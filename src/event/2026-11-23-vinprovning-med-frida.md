@@ -6,7 +6,7 @@ pris: '595'
 kapacitet: 30
 status: platser
 kort: Ge bort en vinprovning i julklapp!
-bild: /uploads/matpafat_oktober2025-16.webp
+bild: /uploads/matpafat_oktober2025-12.webp
 bildtext: ''
 utkast: false
 ---
