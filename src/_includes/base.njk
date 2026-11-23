@@ -115,6 +115,31 @@
     }
   });
   if (location.hash === '#offertformular') addEventListener('load', () => tillFormular(false));
+  // Omdömen: "Läs mer" för långa texter, och karusell som rullar av sig själv när det finns fler än tre
+  document.querySelectorAll('.review').forEach(r => {
+    const t = r.querySelector('.review-text'), b = r.querySelector('.review-more');
+    if (t && b && t.scrollHeight > t.clientHeight + 2) {
+      b.hidden = false;
+      b.addEventListener('click', () => { const open = r.classList.toggle('is-open'); b.textContent = open ? 'Visa mindre' : 'Läs mer'; });
+    }
+  });
+  document.querySelectorAll('[data-carousel]').forEach(c => {
+    const track = c.querySelector('.reviews-track');
+    const step = () => { const card = track.querySelector('.review'); return card ? card.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0) : track.clientWidth; };
+    const go = dir => {
+      const max = track.scrollWidth - track.clientWidth - 2;
+      if (dir > 0 && track.scrollLeft >= max) track.scrollTo({ left: 0 });
+      else if (dir < 0 && track.scrollLeft <= 2) track.scrollTo({ left: track.scrollWidth });
+      else track.scrollBy({ left: dir * step() });
+    };
+    c.querySelectorAll('.reviews-btn').forEach(b => b.addEventListener('click', () => { go(+b.dataset.dir); paus = true; }));
+    let paus = false;
+    ['mouseenter', 'focusin', 'touchstart'].forEach(ev => c.addEventListener(ev, () => { paus = true; }, { passive: true }));
+    c.addEventListener('mouseleave', () => { paus = false; });
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setInterval(() => { if (!paus && !document.hidden && c.getBoundingClientRect().top < innerHeight) go(1); }, 6000);
+    }
+  });
   nav.addEventListener('click', e => {
     if (e.target.tagName === 'A') { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', false); }
   });

@@ -14,14 +14,24 @@
   {%- endif %}
 </div>
 {%- if omdomenLista.length %}
-<div class="quotes">
-  {%- for o in omdomenLista %}
-  <figure>
-    <div class="quote-stars" aria-label="5 av 5" role="img">★★★★★</div>
-    <blockquote>{{ o.citat }}</blockquote>
-    <figcaption>{{ o.vem }}{% if o.kalla %} · {{ o.kalla }}{% endif %}</figcaption>
-  </figure>
-  {%- endfor %}
+{%- set karusell = omdomenLista.length > 3 %}
+<div class="reviews{% if karusell %} is-carousel{% endif %}"{% if karusell %} data-carousel{% endif %}>
+  <div class="reviews-track"{% if karusell %} tabindex="0" role="region" aria-label="Kundomdömen, bläddra i sidled"{% endif %}>
+    {%- for o in omdomenLista %}
+    <figure class="review">
+      <div class="quote-stars" aria-label="5 av 5" role="img">★★★★★</div>
+      <blockquote class="review-text">{{ o.citat }}</blockquote>
+      <button type="button" class="review-more" hidden>Läs mer</button>
+      <figcaption>{{ o.vem }}{% if o.kalla %} · {{ o.kalla }}{% endif %}</figcaption>
+    </figure>
+    {%- endfor %}
+  </div>
+  {%- if karusell %}
+  <div class="reviews-nav">
+    <button type="button" class="reviews-btn" data-dir="-1" aria-label="Föregående omdöme">←</button>
+    <button type="button" class="reviews-btn" data-dir="1" aria-label="Nästa omdöme">→</button>
+  </div>
+  {%- endif %}
 </div>
 {%- endif %}
 {%- if s.google_lank or s.google_recension_lank %}

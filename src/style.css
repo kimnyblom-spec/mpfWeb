@@ -331,3 +331,28 @@ a.rating:hover { border-color: var(--olive); }
 .form input[type="date"]::-webkit-date-and-time-value { text-align: left; margin: 0; }
 .form input[type="date"]::-webkit-calendar-picker-indicator { margin: 0; }
 .form .row > label { min-width: 0; }
+
+/* ---------- Omdömen: kort och karusell ---------- */
+.reviews-track { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start; }
+.is-carousel .reviews-track { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: calc((100% - 48px) / 3); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; padding-bottom: 4px; }
+.is-carousel .reviews-track::-webkit-scrollbar { display: none; }
+.review { margin: 0; background: var(--cream); padding: 28px; display: grid; gap: 10px; align-content: start; scroll-snap-align: start; border-radius: var(--radius); }
+.section:not(.section-alt) .review { background: #fff; }
+.review-text { margin: 0; font-family: var(--serif); font-size: 1.15rem; font-style: italic; line-height: 1.45; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 8; line-clamp: 8; overflow: hidden; }
+.review.is-open .review-text { -webkit-line-clamp: unset; line-clamp: unset; display: block; }
+.review-more { justify-self: start; background: none; border: 0; padding: 0; color: var(--terracotta); font: 400 .9rem var(--sans); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.review figcaption { color: var(--muted); font-size: .9rem; }
+.reviews-nav { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
+.reviews-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: #fff; color: var(--olive-dark); font-size: 1.1rem; cursor: pointer; }
+.reviews-btn:hover { border-color: var(--olive); }
+.reviews-btn:focus-visible, .review-more:focus-visible, .reviews-track:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 3px; }
+@media (max-width: 900px) {
+  .reviews-track { grid-template-columns: 1fr; }
+  .is-carousel .reviews-track { grid-template-columns: none; grid-auto-columns: 82%; gap: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .is-carousel .reviews-track { scroll-behavior: auto; } }
+.reviews-track { align-items: stretch; }
+.review { display: flex; flex-direction: column; }
+.review figcaption { margin-top: auto; padding-top: 4px; }
+.review-more { align-self: flex-start; }
+@media (max-width: 900px) { .review { padding: 22px; } .review-text { font-size: 1.05rem; -webkit-line-clamp: 7; line-clamp: 7; } }
