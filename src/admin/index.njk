@@ -12,6 +12,25 @@ eleventyExcludeFromCollections: true
   <link href="/admin/config.yml" type="application/yaml" rel="cms-config-url">
 </head>
 <body>
+  <!-- Genväg till bokningslistan för event -->
+  <a href="/admin/bokningar/" class="mpf-bokningar" title="Anmälningar till event">📋 Bokningar</a>
+  <style>
+    .mpf-bokningar { position: fixed; left: 16px; bottom: 16px; z-index: 2147483000; display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: 999px; background: #4a5a3f; color: #fff; font: 500 14px/1.2 system-ui, sans-serif;
+      text-decoration: none !important; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+    .mpf-bokningar[hidden] { display: none; }
+    @media (max-width: 768px) { .mpf-bokningar { bottom: 88px; } }
+    .mpf-bokningar:hover { background: #343f2c; }
+  </style>
+  <script>
+    // Visa knappen bara i listorna, inte när man redigerar något (då skulle den skymma fälten)
+    (() => {
+      const k = document.querySelector('.mpf-bokningar');
+      const visa = () => { k.hidden = /\/(entries|new)\b/.test(location.hash); };
+      addEventListener('hashchange', visa); visa();
+    })();
+  </script>
+
   <script src="/admin/cms/sveltia-cms.js"></script>
 </body>
 </html>

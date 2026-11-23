@@ -54,7 +54,7 @@ collections:
   - name: event
     label: Event
     label_singular: Event
-    description: Kommande event i lokalen. Passerade event försvinner automatiskt från hemsidan dagen efter.
+    description: Kommande event i lokalen. Passerade event försvinner automatiskt från hemsidan dagen efter. Anmälningarna ser du under Bokningar (knappen längst ner till vänster).
     folder: src/event
     create: true
     extension: md
