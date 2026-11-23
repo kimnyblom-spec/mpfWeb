@@ -1,0 +1,17 @@
+---
+layout: base.njk
+---
+<article class="section page-top">
+  <div class="wrap narrow article policy">
+    <h1 class="page-title">{{ title }}</h1>
+    {% if uppdaterad %}<p class="small">Senast uppdaterad {{ uppdaterad | datum }}</p>{% endif %}
+    {% if ingress %}<p class="intro">{{ ingress }}</p>{% endif %}
+    <div class="policy-owner">
+      <h2>Personuppgiftsansvarig</h2>
+      <p>{{ site.juridiskt_namn or site.namn }}{% if site.orgnr %}, org.nr {{ site.orgnr }}{% endif %}<br>
+      {{ site.gatuadress }}, {{ site.postnummer }} {{ site.ort }}<br>
+      E-post: <a href="mailto:{{ site.epost }}">{{ site.epost }}</a> · Telefon: {{ site.telefon }}</p>
+    </div>
+    <div class="article-body prose">{{ content | safe }}</div>
+  </div>
+</article>

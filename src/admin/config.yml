@@ -162,6 +162,8 @@ collections:
         file: src/_data/site.json
         fields:
           - { name: namn, label: Företagsnamn, widget: string }
+          - { name: juridiskt_namn, label: Juridiskt företagsnamn, widget: string, required: false, hint: "Som det är registrerat hos Bolagsverket, t.ex. Mat på Fat HB. Visas i integritetspolicyn." }
+          - { name: orgnr, label: Organisationsnummer, widget: string, required: false, hint: "Visas i integritetspolicyn." }
           - { name: beskrivning, label: Kort beskrivning av företaget, widget: text, hint: "Visas i sidfoten och i informationen till Google." }
           - { name: url, label: Webbadress, widget: hidden }
           - { name: telefon, label: Telefon, widget: string }
@@ -198,6 +200,20 @@ collections:
             fields:
               - { name: fraga, label: Fråga, widget: string }
               - { name: svar, label: Svar, widget: text }
+
+      - name: integritetspolicy
+        label: Integritetspolicy
+        file: src/integritetspolicy.md
+        format: frontmatter
+        fields:
+          - { name: layout, label: Layout, widget: hidden }
+          - { name: permalink, label: Adress, widget: hidden }
+          - { name: title, label: Rubrik, widget: string }
+          - { name: seo_titel, label: Titel i Google, widget: string }
+          - { name: seo_beskrivning, label: Beskrivning i Google, widget: text }
+          - { name: uppdaterad, label: Senast uppdaterad, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD", hint: "Ändra datumet när ni ändrar i policyn." }
+          - { name: ingress, label: Inledning, widget: text }
+          - { name: body, label: Text, widget: markdown }
 
       - name: startsida
         label: Texter på startsidan

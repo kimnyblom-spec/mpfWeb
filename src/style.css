@@ -356,3 +356,16 @@ a.rating:hover { border-color: var(--olive); }
 .review figcaption { margin-top: auto; padding-top: 4px; }
 .review-more { align-self: flex-start; }
 @media (max-width: 900px) { .review { padding: 22px; } .review-text { font-size: 1.05rem; -webkit-line-clamp: 7; line-clamp: 7; } }
+
+/* ---------- Integritetspolicy och formulärtext ---------- */
+.form-privacy { font-size: .82rem; line-height: 1.5; color: var(--muted); margin: 0; }
+.form-privacy a { color: inherit; }
+.policy .policy-owner { background: var(--sand); border-radius: var(--radius); padding: 18px 22px; }
+.policy .policy-owner h2 { font-size: 1.2rem; margin: 0 0 6px; }
+.policy .policy-owner p { margin: 0; }
+.policy .prose h2 { font-size: clamp(1.5rem, 3vw, 1.9rem); margin-top: 1.6em; }
+.policy .prose h3 { font-size: 1.25rem; margin-top: 1.2em; }
+.policy .prose table { width: 100%; border-collapse: collapse; font-size: .95rem; margin: 1em 0; }
+.policy .prose th, .policy .prose td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.policy .prose th { font-weight: 500; background: var(--sand); }
+@media (max-width: 600px) { .policy .prose table { font-size: .88rem; } .policy .prose th, .policy .prose td { padding: 8px; } }
