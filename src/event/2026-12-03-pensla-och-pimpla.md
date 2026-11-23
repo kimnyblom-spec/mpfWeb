@@ -3,12 +3,13 @@ title: Pensla & Pimpla
 datum: 2026-12-03
 tid: 18.00–20.30
 pris: 399 kr/person
-status: fa
-utkast: true
+status: fullbokat
 kort: Måla din egen keramik tillsammans med Lih Keramik. I priset ingår ett glas vin eller alkoholfritt och plockmat.
 bild: /uploads/pensla-och-pimpla.webp
 bildtext: Handdrejad keramik och penslar på ett bord
+utkast: false
 ---
+
 En kreativ kväll hos oss på Bultgatan 27A, där vi tillsammans med Lisen från Lih Keramik målar på färdiga, handdrejade keramikalster. Lisen tar med sig keramiken, färgerna och all kunskap du behöver.
 
 **I priset ingår** ett glas vin eller alkoholfritt alternativ och god plockmat under kvällen.
