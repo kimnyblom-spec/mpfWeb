@@ -1,6 +1,9 @@
 [build]
   command = "npm run build"
   publish = "_site"
+  # Bygg bara main. Admin sparar på grenen utkast, som inte ska byggas (sparar Netlify-credits);
+  # hemsidan uppdateras när någon trycker Publicera i admin. (exit 0 = hoppa över bygget)
+  ignore = "if [ \"$BRANCH\" != \"main\" ]; then exit 0; fi; exit 1"
 
 [build.environment]
   NODE_VERSION = "22"

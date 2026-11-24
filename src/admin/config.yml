@@ -1,9 +1,10 @@
 # Admin-gränssnitt för matpafat.se (Sveltia CMS).
-# Ändringar som görs i admin sparas i GitHub-repot och publiceras automatiskt av Netlify.
+# "Spara" i admin sparar på grenen utkast (syns inte på hemsidan och kostar inga Netlify-credits).
+# Knappen "Publicera" i admin för över alla sparade ändringar till main på en gång → en deploy.
 backend:
   name: github
   repo: kimnyblom-spec/mpfWeb
-  branch: main
+  branch: utkast
   commit_messages:
     create: "Ny {{collection}}: {{slug}}"
     update: "Uppdatera {{collection}}: {{slug}}"

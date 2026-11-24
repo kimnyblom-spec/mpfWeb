@@ -2,7 +2,15 @@
 
 Allt görs på **www.matpafat.se/admin**. Logga in med **Logga in med GitHub**.
 Det finns också en illustrerad manual som PDF: [docs/Mat-pa-Fat-hemsidan-manual.pdf](docs/Mat-pa-Fat-hemsidan-manual.pdf).
-Ändringar syns på hemsidan **1–2 minuter** efter att du sparat.
+
+## Spara och publicera
+
+**Spara** sparar ändringen, men den syns **inte** på hemsidan än. Gör gärna alla ändringar du vill först.
+Sedan trycker du på den orange knappen **Publicera (3)** längst ner till vänster. Där ser du allt som väntar
+och trycker **Publicera alla**. Ändringarna syns på hemsidan **1–2 minuter** senare.
+
+Varför? Varje publicering kostar lite hos Netlify (webbhotellet). Flera ändringar i en publicering kostar lika
+mycket som en.
 
 > Admin visas på samma språk som webbläsaren. Står det Save, New och Delete i stället för Spara, Ny och Radera är webbläsaren inställd på engelska.
 
