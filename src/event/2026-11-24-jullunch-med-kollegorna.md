@@ -8,7 +8,7 @@ status: platser
 kort: Har ni glömt att boka jul­lunch med kollegorna? Det finns fortfarande tid!
 bild: /uploads/pasted-image-1795520014935.webp
 bildtext: julmeny
-utkast: true
+utkast: false
 ---
 
 Till **tisdag 8 december** kan ni beställa våra julbowls och vår jultallrik för avhämtning . Ingen begränsning för minsta antal utan det går bra att boka **en portion**. Beställ genom orderformuläret **senast 2 december**.
