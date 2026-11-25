@@ -7,6 +7,6 @@ bildtext: Julkorg med italienska delikatesser
 utkast: false
 ---
 
-Vi har fortfarande plats kvar för catering av jullunch, julbord, frukost, mingel osv. Vi har även fortsatt utrymme för julgåvor och julkorgar. Mejla eller lämna en offertförfrågan så återkommer vi.
+Mejla eller lämna en offerfrågan här så återkommer vi. 
 
-Vi har även möjlighet till att köpa julklappar i vår lilla butik- på dagtid är vi nästan alltid på plats men hör gärna av dig innan.
+Vi har även fina julklappar i vår lilla butik- på dagtid är vi nästan alltid på plats men hör gärna av dig innan.
