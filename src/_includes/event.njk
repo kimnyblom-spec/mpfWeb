@@ -21,6 +21,7 @@ layout: base.njk
         <dt>Datum</dt><dd>{{ datum | evdag("lang") }}</dd>
         {% if tid %}<dt>Tid</dt><dd>{{ tid }}</dd>{% endif %}
         {% if pris %}<dt>Pris</dt><dd>{{ pris }}</dd>{% endif %}
+        {% if medverkande %}<dt>Med</dt><dd>{{ medverkande }}</dd>{% endif %}
         {% if kapacitet %}<dt>Platser</dt><dd data-ev-antal>{{ kapacitet }} platser</dd>{% endif %}
         <dt>Plats</dt><dd>{{ plats or (site.gatuadress + ", " + site.ort) }}</dd>
       </dl>

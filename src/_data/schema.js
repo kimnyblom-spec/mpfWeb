@@ -102,7 +102,7 @@ function event(site, d, url) {
       .format(new Date(dag + "T12:00:00Z")).split("GMT")[1] || "+01:00";
     return `${dag}T${h.padStart(2, "0")}:${m}:00${off}`;
   };
-  const pris = parseInt(String(d.pris || "").replace(/\s/g, ""), 10);
+  const pris = parseInt((String(d.pris || "").replace(/\s/g, "").match(/\d+/) || [])[0], 10);
   const tillgang = { platser: "InStock", fa: "LimitedAvailability", fullbokat: "SoldOut" }[d.status || "platser"];
   return {
     "@context": "https://schema.org",
@@ -123,6 +123,8 @@ function event(site, d, url) {
           address: { "@type": "PostalAddress", streetAddress: site.gatuadress, postalCode: site.postnummer, addressLocality: site.ort, addressCountry: "SE" },
         },
         organizer: { "@id": site.url + "/#foretag" },
+        // Den som leder kvällen, annars Mat på Fat själva
+        performer: { "@type": "PerformingGroup", name: d.medverkande || site.namn },
         offers: pris > 0 ? { "@type": "Offer", price: pris, priceCurrency: "SEK", availability: "https://schema.org/" + tillgang, url: abs(site, url), validFrom: oppnade } : undefined,
       },
       brodsmulor(site, [{ namn: "Start", url: "/" }, { namn: "Event", url: "/event/" }, { namn: d.title, url }]),

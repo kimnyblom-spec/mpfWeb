@@ -3,6 +3,7 @@ title: Måla & Skåla – julkort i akvarell
 datum: 2026-12-02
 tid: 18.00 - 20.30
 pris: 500kr/person
+medverkande: Thea Dove
 kapacitet: 30
 status: platser
 kort: Den 2 december bjuder vi in till en kreativ och julig kväll hos Mat på Fat!

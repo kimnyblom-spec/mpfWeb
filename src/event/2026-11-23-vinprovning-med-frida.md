@@ -3,6 +3,7 @@ title: Vinprovning med Frida
 datum: 2027-02-26
 tid: 18.00 - 20.30
 pris: 595kr/person
+medverkande: Sommelier Frida
 kapacitet: 30
 status: platser
 kort: Ge bort en vinprovning i julklapp!

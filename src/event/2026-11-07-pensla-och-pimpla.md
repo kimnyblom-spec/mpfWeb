@@ -3,6 +3,7 @@ title: Pensla & Pimpla
 datum: 2026-12-03
 tid: 18.00–20.30
 pris: 399 kr/person
+medverkande: Lih Keramik
 kapacitet: 20
 status: fullbokat
 kort: Måla din egen keramik tillsammans med Lih Keramik. I priset ingår ett glas vin eller alkoholfritt och plockmat.
