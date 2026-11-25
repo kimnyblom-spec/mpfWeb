@@ -90,6 +90,10 @@ function nyhet(site, d, url, date) {
 
 function event(site, d, url) {
   const dag = new Date(d.datum).toISOString().slice(0, 10);
+  // Admin döper filen efter dagen eventet lades upp, t.ex. 2026-11-23-vinprovning.md.
+  // Det används som datumet då bokningen öppnade (validFrom).
+  const lagdes = (String(d.page?.inputPath || "").split("/").pop().match(/^(\d{4}-\d{2}-\d{2})-/) || [])[1];
+  const oppnade = lagdes && lagdes <= dag ? lagdes : undefined;
   // "18.00–20.30" -> start 18:00, slut 20:30 (svensk tid)
   const tider = String(d.tid || "").match(/(\d{1,2})[.:](\d{2})/g) || [];
   const tz = (t) => {
@@ -119,7 +123,7 @@ function event(site, d, url) {
           address: { "@type": "PostalAddress", streetAddress: site.gatuadress, postalCode: site.postnummer, addressLocality: site.ort, addressCountry: "SE" },
         },
         organizer: { "@id": site.url + "/#foretag" },
-        offers: pris > 0 ? { "@type": "Offer", price: pris, priceCurrency: "SEK", availability: "https://schema.org/" + tillgang, url: abs(site, url) } : undefined,
+        offers: pris > 0 ? { "@type": "Offer", price: pris, priceCurrency: "SEK", availability: "https://schema.org/" + tillgang, url: abs(site, url), validFrom: oppnade } : undefined,
       },
       brodsmulor(site, [{ namn: "Start", url: "/" }, { namn: "Event", url: "/event/" }, { namn: d.title, url }]),
     ],
