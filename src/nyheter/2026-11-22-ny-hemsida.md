@@ -1,7 +1,7 @@
 ---
 title: Välkommen till vår nya hemsida!
 date: 2026-11-22
-ingress: Hemsidan har fått nytt utseende - hål utkik så kommer mer info förhoppningsvis dyka upp allt eftersom.
+ingress: Hemsidan har fått nytt utseende - håll utkik så kommer mer info förhoppningsvis dyka upp allt eftersom.
 bild: /img/hero.jpg
 bildtext: Dukat långbord med smårätter och citroner
 utkast: false
