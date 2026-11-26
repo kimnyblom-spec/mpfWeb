@@ -21,6 +21,8 @@ När formuläret skickas registreras också tekniska uppgifter som IP-adress och
 
 **När du anmäler dig till ett event** behandlar vi namn, e-postadress, telefonnummer (om du anger det), vilket event det gäller, antal platser och det du skriver i meddelandet. Anmälan sparas i vår bokningslista så att vi kan hålla koll på lediga platser och kön.
 
+**När du beställer via vårt avtal med Kungälvs kommun** behandlar vi namn, e-postadress, telefonnummer, förvaltning, referens eller kostnadsställe, leveransuppgifter och det du skriver om allergier och tillägg, för att kunna leverera och fakturera beställningen.
+
 **När du mejlar eller ringer oss** behandlar vi de uppgifter du lämnar, till exempel namn, e-postadress, telefonnummer och innehållet i ditt meddelande.
 
 **När du blir kund** behandlar vi också de uppgifter som behövs för att genomföra uppdraget och fakturera, till exempel leveransadress och fakturauppgifter.

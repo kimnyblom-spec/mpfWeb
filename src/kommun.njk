@@ -1,0 +1,243 @@
+---
+permalink: /kommun/
+eleventyExcludeFromCollections: true
+noindex: true
+---
+{#- Beställning för Kungälvs kommun. Nås på kommun.matpafat.se (se netlify.toml).
+    Artiklar och priser hämtas från appen (Supabase-funktionen kommun-bestallning), där även lösenordet kontrolleras. -#}
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Beställning för Kungälvs kommun – Mat på Fat</title>
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="preload" href="/fonts/fraunces-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .k-head { background: #fff; border-bottom: 1px solid var(--line); }
+    .k-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 72px; }
+    .k-head img { height: 34px; width: auto; display: block; }
+    .k-head a { font-size: .9rem; }
+    .k-main { padding: clamp(28px, 5vw, 56px) 0 80px; }
+    .k-main h1 { font-size: clamp(2rem, 4.5vw, 3rem); margin: 0 0 8px; }
+    .k-lead { color: var(--muted); max-width: 640px; margin: 0 0 28px; }
+    .k-login { max-width: 420px; }
+    .k-fel { margin: 0; padding: 10px 14px; border-radius: var(--radius); background: #f6e3d8; color: #7a3a1c; }
+    .k-grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 32px; align-items: start; }
+    .k-kat { margin: 0 0 22px; }
+    .k-kat h2 { font-size: 1.35rem; margin: 0 0 10px; }
+    .k-art { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; align-items: center; background: #fff; border-radius: var(--radius); padding: 14px 16px; margin-bottom: 8px; }
+    .k-art.vald { outline: 2px solid var(--olive); }
+    .k-art strong { font-weight: 400; font-size: 1.05rem; }
+    .k-art small { display: block; color: var(--muted); font-size: .85rem; line-height: 1.4; }
+    .k-pris { display: block; color: var(--olive-dark); font-size: .95rem; margin-top: 2px; }
+    .k-antal { display: flex; align-items: center; gap: 6px; }
+    .k-antal button { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--cream); font: inherit; font-size: 1.1rem; cursor: pointer; line-height: 1; }
+    .k-antal input { width: 64px; text-align: center; font: inherit; padding: 6px; border: 1px solid var(--line); border-radius: var(--radius); }
+    .k-sum { position: sticky; top: 20px; background: #fff; border-radius: var(--radius); padding: 20px; }
+    .k-sum h2 { font-size: 1.3rem; margin: 0 0 10px; }
+    .k-sum ul { list-style: none; margin: 0 0 10px; padding: 0; font-size: .92rem; }
+    .k-sum li { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; border-bottom: 1px solid var(--line); }
+    .k-total { display: flex; justify-content: space-between; font-size: 1.1rem; margin-top: 8px; }
+    .k-moms { color: var(--muted); font-size: .85rem; text-align: right; }
+    .k-tom { color: var(--muted); font-style: italic; font-size: .92rem; }
+    .k-uppgifter { margin-top: 28px; background: #fff; }
+    .k-uppgifter h2 { font-size: 1.35rem; margin: 0; }
+    .k-klar { background: #fff; border-radius: var(--radius); padding: clamp(24px, 4vw, 40px); max-width: 680px; }
+    .k-klar pre { white-space: pre-wrap; font: inherit; font-size: .95rem; background: var(--cream); padding: 14px; border-radius: var(--radius); }
+    .k-not { font-size: .85rem; color: var(--muted); }
+    [hidden] { display: none !important; }
+    @media (max-width: 860px) {
+      .k-grid { grid-template-columns: 1fr; }
+      .k-sum { position: static; }
+      .k-art { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<header class="k-head"><div class="wrap">
+  <img src="/img/logo-header.png" alt="Mat på Fat" width="720" height="123">
+  <a href="#" id="loggaut" hidden>Logga ut</a>
+</div></header>
+
+<main class="k-main"><div class="wrap">
+  <p class="eyebrow">Kungälvs kommun</p>
+  <h1>Beställ enligt avtal</h1>
+
+  <!-- Inloggning -->
+  <section id="login-vy" hidden>
+    <p class="k-lead">Här beställer anställda i Kungälvs kommun mat från Mat på Fat enligt upphandlat avtal. Skriv lösenordet som du har fått av din kontaktperson.</p>
+    <form class="form k-login" id="login">
+      <p class="k-fel" id="login-fel" hidden></p>
+      <label>Lösenord<input type="password" name="losen" autocomplete="current-password" required></label>
+      <button class="btn" type="submit">Logga in</button>
+    </form>
+  </section>
+
+  <!-- Beställning -->
+  <form id="bestall" hidden novalidate>
+    <p class="k-lead">Välj artiklar enligt avtalet och fyll i leveransuppgifterna. Priserna är avtalspriser exklusive moms. Vi bekräftar beställningen via mejl.</p>
+    <div class="k-grid">
+      <div>
+        <div id="artiklar"><p class="k-tom">Laddar artiklar …</p></div>
+
+        <div class="form k-uppgifter">
+          <h2>Tillägg</h2>
+          <label>Något som inte finns i listan? Beskriv det här, så återkommer vi med pris.
+            <textarea name="fritext" rows="3" placeholder="T.ex. 10 extra kaffe, laktosfri kaka …"></textarea></label>
+
+          <h2>Leverans och fakturering</h2>
+          <div class="row">
+            <label>Förvaltning / enhet *<input name="forvaltning" required autocomplete="organization"></label>
+            <label>Referens / kostnadsställe *<input name="referens" required></label>
+          </div>
+          <div class="row">
+            <label>Ditt namn *<input name="bestallare" required autocomplete="name"></label>
+            <label>E-post *<input name="epost" type="email" required autocomplete="email"></label>
+          </div>
+          <div class="row">
+            <label>Telefon<input name="telefon" type="tel" autocomplete="tel"></label>
+            <label>Antal personer<input name="personer" type="number" min="1" inputmode="numeric"></label>
+          </div>
+          <div class="row">
+            <label>Leveransdatum *<input name="datum" type="date" required></label>
+            <label>Leveranstid<input name="tid" type="time" step="300"></label>
+          </div>
+          <label>Leveransadress *<input name="adress" required autocomplete="street-address" placeholder="Gatuadress, lokal/rum"></label>
+          <label>Allergier och specialkost<textarea name="allergier" rows="2" placeholder="T.ex. 2 glutenfria, 1 vegan"></textarea></label>
+        </div>
+      </div>
+
+      <aside class="k-sum">
+        <h2>Din beställning</h2>
+        <ul id="sum-lista"></ul>
+        <p class="k-tom" id="sum-tom">Inga artiklar valda ännu.</p>
+        <div class="k-total"><span>Summa exkl. moms</span><strong id="sum-ex">0 kr</strong></div>
+        <p class="k-moms" id="sum-inkl"></p>
+        <p class="k-fel" id="bestall-fel" role="alert" hidden></p>
+        <button class="btn" type="submit" id="skicka" style="width:100%; margin-top:8px">Skicka beställning</button>
+        <p class="k-not">När du skickar behandlar vi dina kontaktuppgifter för att leverera och fakturera beställningen. Läs mer i vår <a href="https://www.matpafat.se/integritetspolicy/" target="_blank" rel="noopener">integritetspolicy</a>.</p>
+      </aside>
+    </div>
+  </form>
+
+  <!-- Kvitto -->
+  <section class="k-klar" id="klar-vy" hidden>
+    <h2>Tack för din beställning!</h2>
+    <p>Ordernummer <strong id="klar-nr"></strong>. Vi bekräftar beställningen via mejl. Har du frågor, mejla <a href="mailto:info@matpafat.se">info@matpafat.se</a> eller ring 0303-552 22.</p>
+    <pre id="klar-text"></pre>
+    <button class="btn btn-ghost-dark" type="button" id="ny-bestallning">Gör en ny beställning</button>
+  </section>
+</div></main>
+
+{#- Netlify hittar formuläret här vid bygget, så att beställningen även kommer som mejl till info@ -#}
+<form name="kommun" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input name="bot-field"><input name="ordernr"><input name="forvaltning"><input name="bestallare"><input name="epost">
+  <input name="telefon"><input name="referens"><input name="datum"><input name="adress"><textarea name="sammanfattning"></textarea>
+</form>
+
+<script>
+(() => {
+  const API = 'https://dyaqjnweirddcuztayat.supabase.co/functions/v1/kommun-bestallning';
+  const $ = s => document.querySelector(s);
+  const NYCKEL = 'mpfKommun', DAGAR = 30;
+  const kr = n => new Intl.NumberFormat('sv-SE', { style: 'currency', currency: 'SEK', maximumFractionDigits: 2 }).format(n);
+  const ENHET = { pers: 'per person', st: 'st', timme: 'timme', fast: 'fast pris' };
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  let losen = '', artiklar = [];
+  try { const s = JSON.parse(localStorage.getItem(NYCKEL) || 'null'); if (s && s.t > Date.now()) losen = s.l; } catch {}
+
+  function visa(vy) { ['#login-vy', '#bestall', '#klar-vy'].forEach(v => { $(v).hidden = v !== vy; }); $('#loggaut').hidden = vy === '#login-vy'; window.scrollTo(0, 0); }
+  function loggaUt(msg) {
+    losen = ''; try { localStorage.removeItem(NYCKEL); } catch {}
+    visa('#login-vy'); $('#login-fel').textContent = msg || ''; $('#login-fel').hidden = !msg;
+  }
+
+  async function hamta() {
+    const r = await fetch(API, { headers: { 'x-kommun-losen': losen } });
+    const d = await r.json().catch(() => ({}));
+    if (r.status === 401) return loggaUt(d.fel || 'Fel lösenord.');
+    if (!r.ok) return loggaUt(d.fel || 'Beställningen går inte att nå just nu. Mejla info@matpafat.se.');
+    try { localStorage.setItem(NYCKEL, JSON.stringify({ l: losen, t: Date.now() + DAGAR * 864e5 })); } catch {}
+    artiklar = d.artiklar || [];
+    rita(); visa('#bestall');
+  }
+
+  function rita() {
+    if (!artiklar.length) { $('#artiklar').innerHTML = '<p class="k-tom">Inga artiklar är upplagda ännu. Beskriv vad ni vill beställa under Tillägg.</p>'; return summera(); }
+    const kat = [...new Set(artiklar.map(a => a.category))];
+    $('#artiklar').innerHTML = kat.map(k => `<section class="k-kat"><h2>${esc(k)}</h2>${artiklar.filter(a => a.category === k).map(a => `
+      <div class="k-art" data-id="${esc(a.id)}">
+        <div><strong>${esc(a.name)}</strong>${a.notes ? `<small>${esc(a.notes)}</small>` : ''}
+          <span class="k-pris">${kr(Number(a.price_ex))} ${a.unit === 'fast' ? '' : '/ ' + ENHET[a.unit]} exkl. moms${a.min_qty ? ` · minst ${Number(a.min_qty)}` : ''}</span></div>
+        <div class="k-antal"><button type="button" data-steg="-1" aria-label="Färre">−</button>
+          <input type="number" min="0" step="1" inputmode="numeric" value="0" aria-label="Antal ${esc(a.name)}">
+          <button type="button" data-steg="1" aria-label="Fler">+</button></div>
+      </div>`).join('')}</section>`).join('');
+    summera();
+  }
+
+  function valda() {
+    return [...document.querySelectorAll('.k-art')].map(el => ({ el, a: artiklar.find(x => x.id === el.dataset.id), antal: Math.max(0, Math.floor(Number(el.querySelector('input').value) || 0)) })).filter(r => r.antal > 0);
+  }
+  function summera() {
+    document.querySelectorAll('.k-art').forEach(el => el.classList.toggle('vald', Number(el.querySelector('input').value) > 0));
+    const r = valda();
+    $('#sum-lista').innerHTML = r.map(x => `<li><span>${x.antal} × ${esc(x.a.name)}</span><span>${kr(x.antal * Number(x.a.price_ex))}</span></li>`).join('');
+    $('#sum-tom').hidden = r.length > 0;
+    const ex = r.reduce((s, x) => s + x.antal * Number(x.a.price_ex), 0);
+    const inkl = r.reduce((s, x) => s + x.antal * Number(x.a.price_ex) * (1 + Number(x.a.vat_rate) / 100), 0);
+    $('#sum-ex').textContent = kr(ex);
+    $('#sum-inkl').textContent = ex ? `${kr(inkl)} inkl. moms` : '';
+  }
+
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-steg]'); if (!b) return;
+    const inp = b.parentElement.querySelector('input'), a = artiklar.find(x => x.id === b.closest('.k-art').dataset.id);
+    let v = Math.max(0, (Number(inp.value) || 0) + Number(b.dataset.steg));
+    if (v > 0 && a?.min_qty && v < Number(a.min_qty)) v = Number(b.dataset.steg) > 0 ? Number(a.min_qty) : 0;
+    inp.value = v; summera();
+  });
+  document.addEventListener('input', e => { if (e.target.closest('.k-art')) summera(); });
+
+  $('#login').addEventListener('submit', async e => {
+    e.preventDefault(); losen = e.target.losen.value;
+    const k = e.target.querySelector('button'); k.disabled = true; await hamta().catch(() => loggaUt('Beställningen går inte att nå just nu.')); k.disabled = false;
+  });
+  $('#loggaut').addEventListener('click', e => { e.preventDefault(); loggaUt(); });
+  $('#ny-bestallning').addEventListener('click', () => { $('#bestall').reset(); rita(); visa('#bestall'); });
+  { const d = new Date(), v = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; $('#bestall').datum.min = v; }
+
+  $('#bestall').addEventListener('submit', async e => {
+    e.preventDefault();
+    const f = e.target, fel = $('#bestall-fel'), knapp = $('#skicka');
+    const visaFel = t => { fel.textContent = t; fel.hidden = false; fel.scrollIntoView({ block: 'center', behavior: 'smooth' }); };
+    fel.hidden = true;
+    const rader = valda();
+    for (const x of rader) if (x.a.min_qty && x.antal < Number(x.a.min_qty)) return visaFel(`${x.a.name}: minst ${Number(x.a.min_qty)}.`);
+    if (!rader.length && !f.fritext.value.trim()) return visaFel('Välj minst en artikel eller beskriv beställningen under Tillägg.');
+    const saknas = [...f.querySelectorAll('[required]')].find(i => !i.value.trim());
+    if (saknas) { saknas.focus(); return visaFel('Fyll i ' + saknas.parentElement.firstChild.textContent.replace('*', '').trim().toLowerCase() + '.'); }
+    if (!f.epost.checkValidity()) { f.epost.focus(); return visaFel('Skriv en giltig e-postadress.'); }
+    const data = Object.fromEntries(new FormData(f));
+    knapp.disabled = true; knapp.textContent = 'Skickar …';
+    try {
+      const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json', 'x-kommun-losen': losen }, body: JSON.stringify({ ...data, rader: rader.map(x => ({ id: x.a.id, antal: x.antal })) }) });
+      const svar = await r.json().catch(() => ({}));
+      if (r.status === 401) return loggaUt(svar.fel);
+      if (!r.ok || !svar.ok) throw new Error(svar.fel || 'Något gick fel. Försök igen eller mejla info@matpafat.se.');
+      // Kopia som mejl till info@ (Netlify-formuläret "kommun")
+      const m = new URLSearchParams({ 'form-name': 'kommun', ordernr: svar.ordernr, forvaltning: data.forvaltning, bestallare: data.bestallare, epost: data.epost, telefon: data.telefon || '', referens: data.referens, datum: data.datum + (data.tid ? ' kl. ' + data.tid : ''), adress: data.adress, sammanfattning: svar.sammanfattning });
+      await fetch('/tack/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: m.toString() }).catch(() => {});
+      $('#klar-nr').textContent = svar.ordernr; $('#klar-text').textContent = svar.sammanfattning; visa('#klar-vy');
+    } catch (err) { visaFel(err.message); }
+    finally { knapp.disabled = false; knapp.textContent = 'Skicka beställning'; }
+  });
+
+  if (losen) hamta().catch(() => loggaUt()); else loggaUt();
+})();
+</script>
+</body>
+</html>

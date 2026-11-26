@@ -8,6 +8,14 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# kommun.matpafat.se visar beställningssidan för Kungälvs kommun (startsidan på den adressen).
+# Övriga adresser (bilder, typsnitt, css) fungerar som vanligt på samma domän.
+[[redirects]]
+  from = "https://kommun.matpafat.se/"
+  to = "/kommun/"
+  status = 200
+  force = true
+
 # Gamla Webnode-adresser skickas till rätt ställe på nya sidan
 [[redirects]]
   from = "/catering/"
@@ -25,6 +33,11 @@
   from = "/kontakt/"
   to = "/#kontakt"
   status = 301
+
+[[headers]]
+  for = "/kommun/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
 
 [[headers]]
   for = "/admin/*"
